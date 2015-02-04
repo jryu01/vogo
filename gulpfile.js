@@ -88,7 +88,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('install', function (done) {
-  runSequence(['bower-install', 'cordova-plugin-install'], 'build', done);
+  runSequence('ionic-check', 'bower-install', 'build', done);
 });
 
 gulp.task('bower-install', function () {
@@ -96,12 +96,6 @@ gulp.task('bower-install', function () {
     .on('log', function (data) {
       gutil.log('bower', gutil.colors.cyan(data.id), data.message);
     });
-});
-
-gulp.task('cordova-plugin-install', ['ionic-check'], function () {
-  require('./plugins.json').forEach(function (plugin) {
-    sh.exec('cordova plugin add ' + plugin);
-  });
 });
 
 gulp.task('ionic-check', function (done) {
