@@ -1,0 +1,13 @@
+{
+  "name": "voteit",
+  "app_id": "",
+  "gulpStartupTasks": [
+    "sass",
+    "index",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}

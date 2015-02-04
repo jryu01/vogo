@@ -1,0 +1,12 @@
+{
+  "configModuleName": "voteit.config",
+  "development": {
+    "baseUrl": "http://localhost:3000/api"
+  },
+  "test": {
+    "baseUrl": "http://testserver.com/api"
+  },
+  "production": {
+    "baseUrl": "http://productionserver.com/api"
+  }
+}
