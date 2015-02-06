@@ -1,17 +1,27 @@
 <div class="poll-card">
   <div class="card">
-    <div class="item item-divider">
+    <div class="item item-divider text-center">
       {{ pollData.subject1.text }} vs {{ pollData.subject2.text }}
     </div>
-    <div class="item item-text-wrap">
-      {{ pollData.subject1.text }}
-      <progress max="1" value="{{ getRatioOne(pollData) }}"></progress>
-      {{ pollData.subject1.numVotes }}
+    <div class="item item-text-wrap bar-graph">
+      <div class="col-25 text-center">
+        <strong>{{ pollData.subject1.text }}</strong>
+      </div>
+      <div class="col-67 padding">
+        <progress max="1" value="{{ getRatioOne(pollData) }}">
+        </progress>
+      </div>
+      <div class="col"><strong> {{ pollData.subject1.numVotes }} </strong></div>
     </div>
-    <div class="item item-text-wrap">
-      {{ pollData.subject2.text }}
-      <progress max="1" value="{{ getRatioTwo(pollData) }}"></progress>
-      {{ pollData.subject2.numVotes }}
+    <div class="item item-text-wrap bar-graph">
+      <div class="col-25 text-center">
+        <strong>{{ pollData.subject2.text }}</strong>
+      </div>
+      <div class="col-67 padding">
+        <progress max="1" value="{{ getRatioTwo(pollData) }}">
+        </progress>
+      </div>
+      <div class="col"><strong> {{ pollData.subject2.numVotes }} </strong></div>
     </div>
   </div>
 </div>

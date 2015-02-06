@@ -30,11 +30,8 @@ function ($scope, Restangular) {
   self.polls = [];
   self.noMoreData = false;
 
-  var tk = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NGNhZjNhMjBmMTZjZDY5Njc1MGM5NmMiLCJleHAiOjE0MjgyODI0MzA4Njd9.FHIJ-Hb9msWPQ7aoJ64HNjOwMpfX2S-S6KeOPw5toEA';
-
-
   self.fetchPolls = function (refresh) {
-    var query = {'access_token': tk};
+    var query = {};
     if (!refresh && self.polls.length > 0) {
       query.before = self.polls[self.polls.length -1].updatedAt;
     }

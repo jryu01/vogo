@@ -1,0 +1,39 @@
+<ion-modal-view class="create-poll-modal">
+  <ion-header-bar>
+    <button class="button button-clear button-dark"
+        ng-click="ctrl.closeModal()">Cancel</button>
+    <h1 class="title">New Poll</h1>
+  </ion-header-bar>
+  <ion-content class="padding">
+  
+    <form ng-submit="ctrl.submit()" name="newPollForm">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <input type="text" 
+                  class="text-center" 
+                  ng-model="ctrl.newPoll.subject1.text"
+                  required/>
+          </div>
+        </div>
+        <div class="col-5" class="text-center" style="line-height:86px;">
+          <strong>VS</strong>
+        </div>
+        <div class="col">
+          <div class="card">
+            <input type="text" 
+                  class="text-center" 
+                  ng-model="ctrl.newPoll.subject2.text"
+                  required/>
+          </div>
+        </div>
+      </div>
+
+      <input type="submit" 
+            value="Create"
+            class="button button-block button-dark"
+            ng-disabled="newPollForm.$invalid"/>
+    </form> 
+
+  </ion-content>
+</ion-modal-view>

@@ -29,10 +29,8 @@ function ($scope, Restangular) {
   self.polls = [];
   self.noMoreData = false;
 
-  var tk = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NGNhZjNhMjBmMTZjZDY5Njc1MGM5NmMiLCJleHAiOjE0MjgyODI0MzA4Njd9.FHIJ-Hb9msWPQ7aoJ64HNjOwMpfX2S-S6KeOPw5toEA';
-
   self.fetchVotedPolls = function (refresh) {
-    var query = {'access_token': tk, voterId: '54caf3a20f16cd696750c96c' };
+    var query = {voterId: '54caf3a20f16cd696750c96c' };
     if (!refresh && self.polls.length > 0) {
       query.votedBefore = self.polls[self.polls.length -1].votes[0].createdAt;
     }
