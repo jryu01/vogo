@@ -1,0 +1,17 @@
+<div class="poll-card">
+  <div class="card">
+    <div class="item item-divider">
+      {{ pollData.subject1.text }} vs {{ pollData.subject2.text }}
+    </div>
+    <div class="item item-text-wrap">
+      {{ pollData.subject1.text }}
+      <progress max="1" value="{{ getRatioOne(pollData) }}"></progress>
+      {{ pollData.subject1.numVotes }}
+    </div>
+    <div class="item item-text-wrap">
+      {{ pollData.subject2.text }}
+      <progress max="1" value="{{ getRatioTwo(pollData) }}"></progress>
+      {{ pollData.subject2.numVotes }}
+    </div>
+  </div>
+</div>

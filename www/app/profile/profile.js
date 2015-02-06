@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('voteit.profile', [
-  'ionic'
+  'ionic',
+  'voteit.profile.recentPolls',
+  'voteit.profile.recentVotes'
 ])
 
 .config(function ($stateProvider) {

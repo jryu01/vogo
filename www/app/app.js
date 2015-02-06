@@ -2,6 +2,7 @@
 
 angular.module('voteit', [
   'ionic',
+  'restangular',
   'voteit.config',
   'voteit.home',
   'voteit.profile',
@@ -20,7 +21,7 @@ angular.module('voteit', [
   });
 })
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, RestangularProvider, config) {
 
   $stateProvider
 
@@ -31,4 +32,6 @@ angular.module('voteit', [
   });
 
   $urlRouterProvider.otherwise('/tab/home');
+
+  RestangularProvider.setBaseUrl(config.baseUrl);
 });
