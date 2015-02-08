@@ -1,12 +1,15 @@
 {
   "configModuleName": "voteit.config",
   "development": {
-    "baseUrl": "http://localhost:3000/api"
+    "baseUrl": "http://localhost:3000/api",
+    "fbAppId": "790356791001298"
   },
   "test": {
-    "baseUrl": "http://testserver.com/api"
+    "baseUrl": "http://testserver.com/api",
+    "fbAppId": "790356791001298"
   },
   "production": {
-    "baseUrl": "http://productionserver.com/api"
+    "baseUrl": "http://productionserver.com/api",
+    "fbAppId": "790356791001298"
   }
 }

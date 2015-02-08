@@ -1,32 +1,43 @@
-<ion-view view-title="Home">
+<ion-view view-title="Home" class="home">
   <ion-nav-buttons side="right">
     <a class="button button-icon icon ion-plus-round"
       ng-click="ctrl.openModal()"></a>
   </ion-nav-buttons>
-  <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Recent Updates</div>
-      <div class="item item-body">
-        <div>
-          You created ionic app
+
+  <ion-pane>
+    <swipe-cards>
+      <swipe-card ng-repeat="card in ctrl.msgCards"
+                  on-destroy="ctrl.cardDestroyed($index, true)"
+                  on-card-swipe="ctrl.cardSwiped($index)" 
+                  class="msg-card"
+                  ng-bind-html="card.message">
+      </swipe-card>
+      <swipe-card ng-repeat="poll in ctrl.polls" 
+                  on-destroy="ctrl.cardDestroyed($index)" 
+                  on-card-swipe="ctrl.cardSwiped()">
+        <div ng-controller="CardCtrl as cardCtrl" class="card poll-box">
+          <div class="row">
+            <div class="col">
+              <br>
+              <h3 class="text-center" ng-bind="poll.subject1.text"></h3>
+              <div class="text-center">
+                <br><br><br><br><br>
+                <button class="button button-icon icon ion-heart" ng-click="cardCtrl.vote(poll, 1)">
+                </button>
+              </div>
+            </div>
+            <div class="col">
+              <br>
+              <h3 class="text-center" ng-bind="poll.subject2.text"></h3>
+              <div class="text-center">
+                <br><br><br><br><br>
+                <button class="button button-icon icon ion-heart" ng-click="cardCtrl.vote(poll, 2)">
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Featured</div>
-      <div class="item item-body">
-        <div>
-          Start coding!
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          Make beautifual app
-        </div>
-      </div>
-    </div>
-  </ion-content>
+      </swipe-card>
+    </swipe-cards>
+  </ion-pane>
 </ion-view>

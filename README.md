@@ -15,7 +15,6 @@ This is an starter project for ionic project. So, it requires ionic and cordova.
 
 ```bash
 $ sudo npm install -g ionic cordova
-$ ionic start myApp tabs
 ```
 Then, to install, simply run: 
 

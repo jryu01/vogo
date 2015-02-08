@@ -1,10 +1,13 @@
 {
   // Enforcing options
   "globals": {
-      "angular": false
+      "angular": false,
+      "inject": false,
+      "module": false,
+      "sinon": false,
+      "expect": false
   },
   "bitwise": true,
-  "camelcase": true,
   "curly": true,
   "eqeqeq": true,
   "forin": true,

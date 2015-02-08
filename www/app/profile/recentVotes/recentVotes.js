@@ -24,7 +24,7 @@ angular.module('voteit.profile.recentVotes', [
 function ($scope, Restangular) {
 
   var self = this;
-  var polls = Restangular.all('polls');
+  var Polls = Restangular.all('polls');
 
   self.polls = [];
   self.noMoreData = false;
@@ -34,7 +34,7 @@ function ($scope, Restangular) {
     if (!refresh && self.polls.length > 0) {
       query.votedBefore = self.polls[self.polls.length -1].votes[0].createdAt;
     }
-    polls.getList(query).then(function (polls) {
+    Polls.getList(query).then(function (polls) {
       self.noMoreData = (polls.length === 0);
       if (refresh) {
         self.polls = polls;

@@ -4,6 +4,8 @@ angular.module('voteit', [
   'ionic',
   'restangular',
   'voteit.config',
+  'voteit.auth',
+  'voteit.login',
   'voteit.home',
   'voteit.profile',
 ])
@@ -35,6 +37,6 @@ angular.module('voteit', [
 
   RestangularProvider.setBaseUrl(config.baseUrl);
 
-  //will be removed
-  RestangularProvider.setDefaultHeaders({ 'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NGNhZjNhMjBmMTZjZDY5Njc1MGM5NmMiLCJleHAiOjE0MjgyODI0MzA4Njd9.FHIJ-Hb9msWPQ7aoJ64HNjOwMpfX2S-S6KeOPw5toEA' });
+  // //will be removed
+  // RestangularProvider.setDefaultHeaders({ 'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NGNhZjNhMjBmMTZjZDY5Njc1MGM5NmMiLCJleHAiOjE0MjgyODI0MzA4Njd9.FHIJ-Hb9msWPQ7aoJ64HNjOwMpfX2S-S6KeOPw5toEA' });
 });

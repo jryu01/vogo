@@ -1,0 +1,61 @@
+.home {
+}
+
+.home .swipe-cards {
+  position: fixed;
+}
+
+swipe-card {
+  display: none;
+  position: fixed;
+  -webkit-transform: scale(1,1);
+  left: 50%;
+  top: 50%;
+  width: 90%;
+  height: 300px;
+  margin-left: -45%;
+  margin-top: -150px;
+  box-sizing: border-box;
+  background-color: rgb(255,255,255);
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-animation-fill-mode: forwards;
+}
+
+.poll-box {
+  height: 275px;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+}
+
+.msg-card {
+  color: #fff;
+  background-color: #30BD8A;
+  line-height: 300px;
+  word-wrap: break-word;
+  border: 6px solid #4CD68E;
+  text-align: center;
+}
+.msg-card span {
+  display: inline-block;
+  line-height: 40px;
+  // width: 200px;
+  font-size: 30px;
+  vertical-align: middle;
+}
+
+@-webkit-keyframes bounceIn {
+  0% {
+    -webkit-transform: scale(0,0);
+  }
+  70% {
+    -webkit-transform: scale(1.2,1.2);
+  }
+  100% {
+    -webkit-transform: scale(1,1);
+  }
+}
+
+swipe-card.pop-in {
+  -webkit-animation: bounceIn 0.4s ease-out;
+}

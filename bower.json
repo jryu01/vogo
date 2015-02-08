@@ -6,6 +6,8 @@
     "ionic-ion-swipe-cards": "*"
   },
   "dependencies": {
-    "restangular": "~1.4.0"
+    "restangular": "~1.4.0",
+    "angular-local-storage": "~0.1.5",
+    "ngCordova": "~0.1.12-alpha"
   }
 }

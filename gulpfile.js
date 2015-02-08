@@ -20,7 +20,7 @@ var _ = require('lodash'),
 var paths = {
   sass: ['./www/app/**/*.scss'],
   scripts: {
-    app: ['./www/app/**/*.js'] 
+    app: ['./www/app/**/*.js', '!./www/app/**/*.spec.js']
   }
 };
 
@@ -70,7 +70,7 @@ gulp.task('sass', function () {
 
 gulp.task('index', function () {
   var target = gulp.src('./www/index.html'),
-      sources = gulp.src('./www/app/**/*.js', { read: false });
+      sources = gulp.src(paths.scripts.app, { read: false });
   return target
     .pipe(inject(sources, { relative: true }))
     .pipe(gulp.dest('./www'));
