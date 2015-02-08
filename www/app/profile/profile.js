@@ -2,6 +2,7 @@
 
 angular.module('voteit.profile', [
   'ionic',
+  'voteit.auth',
   'voteit.profile.recentPolls',
   'voteit.profile.recentVotes'
 ])
@@ -18,6 +19,18 @@ angular.module('voteit.profile', [
   });
 })
 
-.controller('ProfileCtrl', [function () {
-
+.controller('ProfileCtrl', [
+  'auth',
+  '$state',
+  '$ionicHistory',
+function (auth, $state, $ionicHistory) {
+  var self = this;
+  self.signout = function () {
+    auth.logout();
+    $ionicHistory.nextViewOptions({ 
+      disableBack: true,
+      disableAnimate: true
+    });
+    $state.go('login', {}, {location: 'replace', reload: true});
+  };
 }]);
