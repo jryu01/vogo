@@ -19,7 +19,6 @@ angular.module('voteit.login', [
   '$ionicHistory',
   '$state',
   '$http',
-  'config',
   'auth',
   'config',
 function ($cordovaOauth, $ionicHistory, $state, $http, auth, config) {
