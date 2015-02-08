@@ -10,6 +10,8 @@ angular.module('voteit', [
   'voteit.profile',
 ])
 .run(function ($ionicPlatform) {
+// .run(function ($ionicPlatform, auth) {
+//   auth.authenticate({}, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NGNhZjNhMjBmMTZjZDY5Njc1MGM5NmMiLCJleHAiOjE0MjgyODI0MzA4Njd9.FHIJ-Hb9msWPQ7aoJ64HNjOwMpfX2S-S6KeOPw5toEA');
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,6 +23,7 @@ angular.module('voteit', [
       window.StatusBar.styleDefault();
     }
   });
+
 })
 
 .config(function ($stateProvider, $urlRouterProvider, RestangularProvider, config) {
@@ -30,13 +33,13 @@ angular.module('voteit', [
   .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'app/tab.html'
+    templateUrl: 'app/tab.html',
+    data: {
+      requiresLogin: true
+    }
   });
 
   $urlRouterProvider.otherwise('/tab/home');
 
   RestangularProvider.setBaseUrl(config.baseUrl);
-
-  // //will be removed
-  // RestangularProvider.setDefaultHeaders({ 'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NGNhZjNhMjBmMTZjZDY5Njc1MGM5NmMiLCJleHAiOjE0MjgyODI0MzA4Njd9.FHIJ-Hb9msWPQ7aoJ64HNjOwMpfX2S-S6KeOPw5toEA' });
 });

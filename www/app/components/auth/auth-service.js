@@ -17,6 +17,8 @@ angular.module('voteit.auth.service', ['LocalStorageModule'])
     authenticate: function (user, token) {
       userProfile = user;
       accessToken = token;
+      localStorageService.set('user', userProfile); //NEEDS TEST
+      localStorageService.set('token', accessToken); //NEEDS TEST
       return this;
     },
     logout: function () {
