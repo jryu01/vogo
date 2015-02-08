@@ -4,5 +4,6 @@
 angular.module('voteit.config', [])
 
 .constant('config', {
-  "baseUrl": "http://localhost:3000/api"
+  "baseUrl": "http://localhost:3000/api",
+  "fbAppId": "790356791001298"
 });
