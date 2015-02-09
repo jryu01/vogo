@@ -55,6 +55,7 @@ function ($scope, $ionicModal, Restangular) {
   self.createPoll = function () {
     Polls.post(self.newPoll).then(function (poll) {
       self.closeModal();
+      self.msgCards = [];
       self.polls = [poll];
     }).catch(function () {});
   };
