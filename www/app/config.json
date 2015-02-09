@@ -5,7 +5,7 @@
     "fbAppId": "794909417212702"
   },
   "test": {
-    "baseUrl": "http://testserver.com/api",
+    "baseUrl": "https://voteit-test.herokuapp.com/api",
     "fbAppId": "794909633879347"
   },
   "production": {

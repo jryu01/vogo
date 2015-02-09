@@ -35,7 +35,7 @@ function ($scope, Restangular, auth) {
   self.fetchVotedPolls = function (refresh) {
     var query = { voterId: currentUser.id };
     if (!refresh && self.polls.length > 0) {
-      query.votedBefore = self.polls[self.polls.length -1].votes[0].createdAt;
+      query.votedBefore = self.polls[self.polls.length -1 ].votes[0].createdAt;
     }
     Polls.getList(query).then(function (polls) {
       self.noMoreData = (polls.length === 0);
