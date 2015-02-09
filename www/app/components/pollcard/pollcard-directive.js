@@ -14,13 +14,13 @@ angular.module('voteit.pollCard', [])
           if (poll.totalNumVotes === 0) {
             return 0;
           }
-          return poll.subject1.numVotes / poll.totalNumVotes;
+          return poll.subject1.numVotes / poll.totalNumVotes * 100;
         };
         $scope.getRatioTwo = function (poll) {
           if (poll.totalNumVotes === 0) {
             return 0;
           }
-          return poll.subject2.numVotes / poll.totalNumVotes;
+          return poll.subject2.numVotes / poll.totalNumVotes * 100;
         };
       }
     };

@@ -1,9 +1,16 @@
 .poll-card {
 
 }
-.poll-card .bar-graph {
+.poll-card .bar-graph-container {
   display: -webkit-flex;
-  display: flex;
   -webkit-align-items: center;
-  align-items: center;
+}
+.poll-card .bar-graph {
+  height: 20px;
+  border: 1px solid #DDDDDD;
+  background-color: $stable;
+}
+.poll-card .bar-graph-bar {
+  height: 100%;
+  background-color: $dark;
 }

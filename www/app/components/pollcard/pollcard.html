@@ -3,23 +3,29 @@
     <div class="item item-divider text-center">
       {{ pollData.subject1.text }} vs {{ pollData.subject2.text }}
     </div>
-    <div class="item item-text-wrap bar-graph">
+    <div class="item item-text-wrap bar-graph-container">
       <div class="col-25 text-center">
         <strong>{{ pollData.subject1.text }}</strong>
       </div>
       <div class="col-67 padding">
-        <progress max="1" value="{{ getRatioOne(pollData) }}">
-        </progress>
+        <div class="bar-graph">
+          <div class="bar-graph-bar" 
+              style="width: {{ getRatioOne(pollData) }}%;">
+          </div>
+        </div>
       </div>
       <div class="col"><strong> {{ pollData.subject1.numVotes }} </strong></div>
     </div>
-    <div class="item item-text-wrap bar-graph">
+    <div class="item item-text-wrap bar-graph-container">
       <div class="col-25 text-center">
         <strong>{{ pollData.subject2.text }}</strong>
       </div>
       <div class="col-67 padding">
-        <progress max="1" value="{{ getRatioTwo(pollData) }}">
-        </progress>
+        <div class="bar-graph">
+          <div class="bar-graph-bar" 
+                style="width: {{ getRatioTwo(pollData) }}%;">
+          </div>
+        </div>
       </div>
       <div class="col"><strong> {{ pollData.subject2.numVotes }} </strong></div>
     </div>
