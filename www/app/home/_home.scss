@@ -22,9 +22,12 @@ swipe-card {
   -webkit-animation-fill-mode: forwards;
 }
 
-.poll-box {
-  height: 275px;
-  display: -webkit-flex;
+.poll-box .subject{
+  height: 220px;
+  -webkit-align-items: center;
+}
+.poll-box .heart{
+  height: 60px;
   -webkit-align-items: center;
 }
 
