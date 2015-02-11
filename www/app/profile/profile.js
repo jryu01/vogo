@@ -26,6 +26,9 @@ angular.module('voteit.profile', [
   '$ionicHistory',
 function (auth, $state, $ionicHistory) {
   var self = this;
+  
+  self.profileName = auth.getUser().name;
+
   self.signout = function () {
     auth.logout();
     $ionicHistory.nextViewOptions({ 
