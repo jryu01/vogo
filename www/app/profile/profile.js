@@ -10,6 +10,7 @@ angular.module('voteit.profile', [
 .config(function ($stateProvider) {
   $stateProvider.state('tab.profile', {
     url: '/profile',
+    abstract: true, // default to recent-votes view
     views: {
       'tab-profile': {
         templateUrl: 'app/profile/profile.html',

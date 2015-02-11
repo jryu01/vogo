@@ -8,14 +8,10 @@ angular.module('voteit.profile.recentPolls', [
 
 .config(function ($stateProvider) {
   
-  $stateProvider.state('tab.profile-recent-polls', {
+  $stateProvider.state('tab.profile.recent-polls', {
     url: '/recent-polls',
-    views: {
-      'tab-profile': {
-        templateUrl: 'app/profile/recentPolls/recentPolls.html',
-        controller: 'RecentPollsCtrl as ctrl'
-      }
-    }
+      templateUrl: 'app/profile/recentPolls/recentPolls.html',
+      controller: 'RecentPollsCtrl as ctrl'
   });
 })
 
@@ -46,5 +42,5 @@ function ($scope, Restangular) {
       }
     });
   };
-
+  self.fetchPolls(true);
 }]);

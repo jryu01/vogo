@@ -8,14 +8,10 @@ angular.module('voteit.profile.recentVotes', [
 ])
 
 .config(function ($stateProvider) {
-  $stateProvider.state('tab.profile-recent-votes', {
-    url: '/recent-votes',
-    views: {
-      'tab-profile': {
-        templateUrl: 'app/profile/recentVotes/recentVotes.html',
-        controller: 'RecentVotesCtrl as ctrl'
-      }
-    }
+  $stateProvider.state('tab.profile.recent-votes', {
+    url: '',
+    templateUrl: 'app/profile/recentVotes/recentVotes.html',
+    controller: 'RecentVotesCtrl as ctrl'
   });
 })
 
@@ -48,4 +44,5 @@ function ($scope, Restangular, auth) {
       }
     });
   };
+  self.fetchVotedPolls(true);
 }]);

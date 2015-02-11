@@ -1,15 +1,14 @@
-<ion-view view-title="My recent votes" class="recentVotes">
-  <ion-content>
-    <ion-refresher on-refresh="ctrl.fetchVotedPolls(true)">
-    </ion-refresher>
-  
-    <div ng-repeat="poll in ctrl.polls">
-      <vo-poll-card poll-data="poll"></vo-poll-card>
-    </div>
-    
-    <ion-infinite-scroll
-        ng-if="!ctrl.noMoreData"
-        on-infinite="ctrl.fetchVotedPolls()">
-    </ion-infinite-scroll>
-  </ion-content>
-</ion-view>
+<ion-refresher on-refresh="ctrl.fetchVotedPolls(true)">
+</ion-refresher>
+
+<vo-spinner ng-if="ctrl.polls.length === 0 && !ctrl.noMoreData">
+</vo-spinner>
+
+<div ng-repeat="poll in ctrl.polls">
+  <vo-poll-card poll-data="poll"></vo-poll-card>
+</div>
+
+<ion-infinite-scroll
+    ng-if="ctrl.polls.length > 0 && !ctrl.noMoreData"
+    on-infinite="ctrl.fetchVotedPolls()">
+</ion-infinite-scroll>

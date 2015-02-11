@@ -3,8 +3,14 @@
 angular.module('voteit', [
   'ionic',
   'restangular',
+
+  //components
   'voteit.config',
   'voteit.auth',
+  'voteit.pollCard',
+  'voteit.spinner',
+
+  //subsections
   'voteit.login',
   'voteit.home',
   'voteit.profile',

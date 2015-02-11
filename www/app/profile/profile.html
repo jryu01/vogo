@@ -1,27 +1,36 @@
-<ion-view view-title="Profile">
+<ion-view class="profile" view-title="Profile">
+  <div class="bar bar-subheader">
+    <div class="button-bar">
+      <a class="button button-clear button-dark"
+        href="#/tab/profile" >My Votes</a>
+      <a class="button button-clear button-dark"
+        href="#/tab/profile/recent-polls">My Polls</a> 
+    </div>
+  </div>
   <ion-content>
-<div class="list">
-  <div class="item item-divider">
-    VoteIt
-  </div>
-  <a class="item" href="#/tab/recent-votes">
-    My recent votes
-  </a>
-  <a class="item" href="#/tab/recent-polls">
-    My recent polls 
-  </a>
-  <div class="item item-divider">
-    General
-  </div>
-  <a class="item" onclick="window.open('http://apache.org', '_blank', 'location=yes');">
-    About
-  </a>
-  <a class="item" href="mailto:jaehwan.ryu@icloud.com">
-    Help & Feedback
-  </a>
-  <a class="item" ng-click="ctrl.signout()">
-    Sign Out
-  </a>
-</div>
-  </ion-content>
+    <ui-view></ui-view>
+<!--     <div class="list">
+      <div class="item item-divider">
+        VoteIt
+      </div>
+      <a class="item" href="#/tab/recent-votes">
+        My recent votes
+      </a>
+      <a class="item" href="#/tab/recent-polls">
+        My recent polls 
+      </a>
+      <div class="item item-divider">
+        General
+      </div>
+      <a class="item" onclick="window.open('http://apache.org', '_blank', 'location=yes');">
+        About
+      </a>
+      <a class="item" href="mailto:jaehwan.ryu@icloud.com">
+        Help & Feedback
+      </a>
+      <a class="item" ng-click="ctrl.signout()">
+        Sign Out
+      </a>
+    </div>
+ -->  </ion-content>
 </ion-view>
