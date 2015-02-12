@@ -7,12 +7,12 @@
 
 
 
-<div class="tabs-striped tabs-top tabs-color-dark">
+<!-- <div class="tabs-striped tabs-top tabs-color-dark">
   <div class="tabs">
     <a class="tab-item" 
       ng-class="{active: ctrl.selectedTab === 'myVotes'}"
       ng-click="ctrl.selectTab('myVotes')">
-      My votes
+      My votes Hello Hello
     </a>
     <a class="tab-item" 
       ng-class="{active: ctrl.selectedTab === 'myPolls'}"
@@ -21,27 +21,19 @@
     </a>
   </div>
 </div>
-
-
-
-
-<!--   <div class="bar bar-subheader row sub-tab-bar">
-    <div class="col text-center">
-    <a class=""
-      ng-click="ctrl.selectTab('myVotes')">
-      <strong>My Votes</strong>
-    </a>
-      
-    </div>
-    <div class="col text-center">
-    <a class=""
-      ng-click="ctrl.selectTab('myPolls')">
-      <strong>My Polls</strong>
-    </a> 
-      
-    </div>
-  </div>
  -->
+
+  <div class="bar bar-subheader sub-tab-bar">
+    <a ng-click="ctrl.selectTab('myVotes')"
+      ng-class="{active: ctrl.selectedTab === 'myVotes'}">
+      My Votes
+    </a>
+    <a ng-click="ctrl.selectTab('myPolls')"
+      ng-class="{active: ctrl.selectedTab === 'myPolls'}">
+      My Polls
+    </a> 
+  </div>
+
 
 
   <div ng-if="ctrl.selectedTab === 'myVotes'" 
