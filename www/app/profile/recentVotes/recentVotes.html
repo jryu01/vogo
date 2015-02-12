@@ -2,7 +2,7 @@
   <ion-content>
     <ion-refresher on-refresh="ctrl.fetchVotedPolls(true)">
     </ion-refresher>
-
+    
     <vo-spinner ng-if="ctrl.polls.length === 0 && !ctrl.noMoreData">
     </vo-spinner>
 

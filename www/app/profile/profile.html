@@ -4,14 +4,46 @@
         href="#/tab/settings">
     </a>
   </ion-nav-buttons>
-  <div class="bar bar-subheader">
-    <div class="button-bar">
-      <a class="button button-clear button-dark"
-        ng-click="ctrl.selectTab('myVotes')">My Votes</a>
-      <a class="button button-clear button-dark"
-        ng-click="ctrl.selectTab('myPolls')">My Polls</a> 
+
+
+
+<div class="tabs-striped tabs-top tabs-color-dark">
+  <div class="tabs">
+    <a class="tab-item" 
+      ng-class="{active: ctrl.selectedTab === 'myVotes'}"
+      ng-click="ctrl.selectTab('myVotes')">
+      My votes
+    </a>
+    <a class="tab-item" 
+      ng-class="{active: ctrl.selectedTab === 'myPolls'}"
+      ng-click="ctrl.selectTab('myPolls')">
+      My polls
+    </a>
+  </div>
+</div>
+
+
+
+
+<!--   <div class="bar bar-subheader row sub-tab-bar">
+    <div class="col text-center">
+    <a class=""
+      ng-click="ctrl.selectTab('myVotes')">
+      <strong>My Votes</strong>
+    </a>
+      
+    </div>
+    <div class="col text-center">
+    <a class=""
+      ng-click="ctrl.selectTab('myPolls')">
+      <strong>My Polls</strong>
+    </a> 
+      
     </div>
   </div>
+ -->
+
+
   <div ng-if="ctrl.selectedTab === 'myVotes'" 
       ng-include="'app/profile/recentVotes/recentVotes.html'">
   </div>
