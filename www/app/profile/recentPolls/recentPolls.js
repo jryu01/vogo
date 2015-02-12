@@ -6,15 +6,6 @@ angular.module('voteit.profile.recentPolls', [
   'voteit.pollCard'
 ])
 
-.config(function ($stateProvider) {
-  
-  $stateProvider.state('tab.profile.recent-polls', {
-    url: '/recent-polls',
-      templateUrl: 'app/profile/recentPolls/recentPolls.html',
-      controller: 'RecentPollsCtrl as ctrl'
-  });
-})
-
 .controller('RecentPollsCtrl', [
   '$scope', 
   'Restangular', 

@@ -7,14 +7,6 @@ angular.module('voteit.profile.recentVotes', [
   'voteit.auth'
 ])
 
-.config(function ($stateProvider) {
-  $stateProvider.state('tab.profile.recent-votes', {
-    url: '',
-    templateUrl: 'app/profile/recentVotes/recentVotes.html',
-    controller: 'RecentVotesCtrl as ctrl'
-  });
-})
-
 .controller('RecentVotesCtrl', [
   '$scope',
   'Restangular',

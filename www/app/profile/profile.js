@@ -4,13 +4,13 @@ angular.module('voteit.profile', [
   'ionic',
   'voteit.auth',
   'voteit.profile.recentPolls',
-  'voteit.profile.recentVotes'
+  'voteit.profile.recentVotes',
+  'voteit.profile.settings'
 ])
 
 .config(function ($stateProvider) {
   $stateProvider.state('tab.profile', {
     url: '/profile',
-    abstract: true, // default to recent-votes view
     views: {
       'tab-profile': {
         templateUrl: 'app/profile/profile.html',
@@ -22,19 +22,13 @@ angular.module('voteit.profile', [
 
 .controller('ProfileCtrl', [
   'auth',
-  '$state',
-  '$ionicHistory',
-function (auth, $state, $ionicHistory) {
+function (auth) {
   var self = this;
-  
-  self.profileName = auth.getUser().name;
 
-  self.signout = function () {
-    auth.logout();
-    $ionicHistory.nextViewOptions({ 
-      disableBack: true,
-      disableAnimate: true
-    });
-    $state.go('login', {}, {location: 'replace', reload: true});
+  self.profileName = auth.getUser().name;
+  self.selectedTab = 'myVotes';
+
+  self.selectTab = function (tabName) {
+    self.selectedTab = tabName;
   };
 }]);
