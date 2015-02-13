@@ -73,8 +73,12 @@ function ($scope, $ionicModal, Restangular) {
     }
   };
 
+  self.setVotedPollId = function (pollId) {
+    self.votedPollId = pollId;
+  };
+
   self.addCard = function() {
-    Polls.get('random').then(function (poll) {
+    Polls.get('random', {exclude: [self.votedPollId]}).then(function (poll) {
       if (!poll) {
         self.msgCards.push({
           message: '<span>No more polls.<br>Try again later.</span>'
