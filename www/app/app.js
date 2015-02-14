@@ -15,14 +15,27 @@ angular.module('voteit', [
   'voteit.home',
   'voteit.profile',
 ])
-
-.config(function ($stateProvider, $urlRouterProvider, RestangularProvider, config) {
+// Platform specific settings
+.config([
+  'config',
+  '$ionicConfigProvider',
+function (config, $ionicConfigProvider) {
 
   // If it is running on android and dev mode, change localhost to 10.0.2.2
   if (config.env === 'development' && ionic.Platform.isAndroid()) {
     config.baseUrl = 'http://10.0.2.2:3000/api';
   }
   
+  $ionicConfigProvider.platform.android.tabs.style('striped');
+  
+  // $ionicConfigProvider.tabs.style('striped');
+  // $ionicConfigProvider.tabs.style('top');
+
+}])
+
+
+.config(function ($stateProvider, $urlRouterProvider, RestangularProvider, config) {
+
   $stateProvider
 
   .state('tab', {
