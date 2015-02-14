@@ -5,7 +5,8 @@
       "inject": false,
       "module": false,
       "sinon": false,
-      "expect": false
+      "expect": false,
+      "ionic": false
   },
   "bitwise": true,
   "curly": true,

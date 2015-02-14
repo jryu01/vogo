@@ -34,10 +34,11 @@ angular.module('voteit', [
 
 .config(function ($stateProvider, $urlRouterProvider, RestangularProvider, config) {
 
-  if (config.env === "development") {
-    console.log("dev mode");  
+  // If it is running on android and dev mode, change localhost to 10.0.2.2
+  if (config.env === 'development' && ionic.Platform.isAndroid()) {
+    config.baseUrl = 'http://10.0.2.2:3000/api';
   }
-
+  
   $stateProvider
 
   .state('tab', {
