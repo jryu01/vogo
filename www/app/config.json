@@ -1,14 +1,17 @@
 {
   "configModuleName": "voteit.config",
   "development": {
+    "env": "development",
     "baseUrl": "http://localhost:3000/api",
     "fbAppId": "794909417212702"
   },
   "test": {
+    "env": "test",
     "baseUrl": "https://voteit-test.herokuapp.com/api",
     "fbAppId": "794909633879347"
   },
   "production": {
+    "env": "production",
     "baseUrl": "http://productionserver.com/api",
     "fbAppId": "790356791001298"
   }
