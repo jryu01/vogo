@@ -18,12 +18,24 @@ angular.module('voteit.profile.settings', [
 })
 
 .controller('SettingsCtrl', [
+  '$scope',
   'auth',
   '$state',
   '$ionicHistory',
-function (auth, $state, $ionicHistory) {
+function ($scope, auth, $state, $ionicHistory) {
   var self = this;
 
+  $scope.$on('$ionicView.beforeEnter', function () {
+    if (ionic.Platform.isAndroid()) {
+      $scope.$emit('tab.hide');
+    }
+  });
+  $scope.$on('$ionicView.beforeLeave', function () {
+    if (ionic.Platform.isAndroid()) {
+      $scope.$emit('tab.show');
+    }
+  });
+  
   self.signout = function () {
     auth.logout();
     $ionicHistory.nextViewOptions({ 

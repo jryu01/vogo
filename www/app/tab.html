@@ -1,4 +1,6 @@
-<ion-tabs class="tabs-icon-only tabs-color-active">
+<ion-tabs class="tabs-icon-only tabs-color-active" 
+          ng-class="{ 'tabs-item-hide': tabCtrl.hideTab }"
+          ng-controller="TabController as tabCtrl">
 
   <!-- Home Tab -->
   <ion-tab title="Home" icon-off="ion-home" icon-on="ion-home" href="#/tab/home">

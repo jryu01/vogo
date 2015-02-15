@@ -27,9 +27,19 @@ function (config, $ionicConfigProvider) {
   }
   
   $ionicConfigProvider.platform.android.tabs.style('striped');
-  
+
+  // comment out when test as android on browser 
+  //[ =======
+  // setTimeout(function () {
+  //   var bodyClass = document.querySelector('body').className
+  //     .replace('platform-browser', 'platform-android');
+  //   document.querySelector('body').className = bodyClass;
+  // }, 500);
   // $ionicConfigProvider.tabs.style('striped');
-  // $ionicConfigProvider.tabs.style('top');
+  // $ionicConfigProvider.tabs.position('top');
+  // $ionicConfigProvider.views.transition('android');
+  // ionic.Platform.isAndroid = function () { return true; };
+  // ======== ]
 
 }])
 
@@ -72,4 +82,18 @@ function (config, $ionicConfigProvider) {
   if (config.env === 'development') {
     auth.authenticate({id: '54caf3a20f16cd696750c96c', name: 'Jaehwan Ryu'}, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NGNhZjNhMjBmMTZjZDY5Njc1MGM5NmMiLCJleHAiOjE0MjgyODI0MzA4Njd9.FHIJ-Hb9msWPQ7aoJ64HNjOwMpfX2S-S6KeOPw5toEA');
   }
-});
+})
+
+.controller('TabController', ['$scope', function ($scope) {
+  var self = this;  
+
+  self.hideTab = false;
+
+  $scope.$on('tab.hide', function () {
+    self.hideTab = true;
+  });
+  $scope.$on('tab.show', function () {
+    self.hideTab = false;
+  });
+  
+}]);
