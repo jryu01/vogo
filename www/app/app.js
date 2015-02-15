@@ -69,7 +69,7 @@ function (config, $ionicConfigProvider) {
 
 .run(function (config, auth) {
   // login with predefined user on development
-  if (config.env === 'developmetn') {
+  if (config.env === 'development') {
     auth.authenticate({id: '54caf3a20f16cd696750c96c', name: 'Jaehwan Ryu'}, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NGNhZjNhMjBmMTZjZDY5Njc1MGM5NmMiLCJleHAiOjE0MjgyODI0MzA4Njd9.FHIJ-Hb9msWPQ7aoJ64HNjOwMpfX2S-S6KeOPw5toEA');
   }
 });
