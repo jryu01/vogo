@@ -3,7 +3,7 @@
 }
 
 .profile .sub-tab-bar{
-  margin-top: 44px;
+  // margin-top: 44px;
   color: grey;
   padding: 0;
   justify-content: center;
@@ -19,6 +19,7 @@
 }
 // when tabs are top (android)
 .tabs-top .profile .sub-tab-bar {
+  top: 0;
   margin-top: 93px;
 }
 
