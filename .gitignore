@@ -7,6 +7,7 @@ voteit-release-key.keystore
 node_modules/
 platforms/
 plugins/
+engine/
 
 www/lib/
 www/css/
