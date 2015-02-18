@@ -3,8 +3,10 @@
     <ion-refresher on-refresh="ctrl.fetchVotedPolls(true)">
     </ion-refresher>
     
-    <vo-spinner ng-if="ctrl.polls.length === 0 && !ctrl.noMoreData">
-    </vo-spinner>
+    <div class="spinner-wrapper"
+        ng-if="ctrl.polls.length === 0 && !ctrl.noMoreData">
+      <ion-spinner></ion-spinner>
+    </div>
 
     <div ng-repeat="poll in ctrl.polls">
       <vo-poll-card poll-data="poll"></vo-poll-card>
