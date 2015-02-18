@@ -111,6 +111,13 @@ function ($scope, $ionicSwipeCardDelegate) {
 
   self.goAway = function() {
     var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
+    // NOTE: when card moves upward, negative y value is set and remains
+    // unchanged after card moves back to original position. This seems to
+    // prevent card go away. so set x and y value to neatural position before
+    // swipe called. This behaviour should be fixed in the swipe-card module
+    // eventually.
+    card.x = 0;
+    card.y = 0;
     card.swipe();
   };
 }]);
