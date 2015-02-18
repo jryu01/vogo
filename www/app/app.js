@@ -8,10 +8,12 @@ angular.module('voteit', [
   'voteit.auth',
   'voteit.config',
   'voteit.pollCard',
-  'voteit.spinner',
 
   //subsections
   'voteit.login',
+
+  // inside tabs
+  'voteit.tab',
   'voteit.home',
   'voteit.profile',
 ])
@@ -45,26 +47,18 @@ function (config, $ionicConfigProvider) {
 
 }])
 
-
-.config(function ($stateProvider, $urlRouterProvider, RestangularProvider, config) {
-
-  $stateProvider
-
-  .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'app/tab.html',
-    data: {
-      requiresLogin: true
-    }
-  });
+.config([
+  '$urlRouterProvider', 
+  'RestangularProvider', 
+  'config', 
+function ($urlRouterProvider, RestangularProvider, config) {
 
   $urlRouterProvider.otherwise('/tab/home');
 
   RestangularProvider.setBaseUrl(config.baseUrl);
-})
+}])
 
-.run(function ($ionicPlatform) {
+.run(['$ionicPlatform', function ($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -77,25 +71,11 @@ function (config, $ionicConfigProvider) {
     }
   });
 
-})
+}])
 
-.run(function (config, auth) {
+.run(['config', 'auth', function (config, auth) {
   // login with predefined user on development
   if (config.env === 'development') {
     auth.authenticate({id: '54caf3a20f16cd696750c96c', name: 'Jaehwan Ryu'}, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NGNhZjNhMjBmMTZjZDY5Njc1MGM5NmMiLCJleHAiOjE0MjgyODI0MzA4Njd9.FHIJ-Hb9msWPQ7aoJ64HNjOwMpfX2S-S6KeOPw5toEA');
   }
-})
-
-.controller('TabController', ['$scope', function ($scope) {
-  var self = this;  
-
-  self.hideTab = false;
-
-  $scope.$on('tab.hide', function () {
-    self.hideTab = true;
-  });
-  $scope.$on('tab.show', function () {
-    self.hideTab = false;
-  });
-  
 }]);
