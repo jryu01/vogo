@@ -27,6 +27,7 @@ function ($scope, $ionicModal, Restangular) {
 
   self.polls = [];
   self.msgCards = [];
+  self.loading = false;
   self.createPollModal = '';
   self.newPoll = { 
     subject1: { text: '' },
@@ -78,19 +79,23 @@ function ($scope, $ionicModal, Restangular) {
   };
 
   self.addCard = function() {
+    self.loading = true;
     Polls.get('random', {exclude: [self.votedPollId]}).then(function (poll) {
       if (!poll) {
         self.msgCards.push({
           message: '<span>No more polls.<br>Try again later.</span>'
         });
+        self.loading = false;
         return;
       }
       self.polls.push(poll);
+      self.loading = false;
     }).catch(function (e) {
       console.log(e);
       self.msgCards.push({
         message: '<span>Something wrong happend.<br>Try again.</span>'
       });
+      self.loading = false;
     });
   };
   // init card

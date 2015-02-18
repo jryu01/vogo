@@ -6,16 +6,20 @@
 
   <ion-pane>
     <swipe-cards>
-      <swipe-card ng-repeat="card in ctrl.msgCards"
+      <div class="spinner-wrapper" ng-if="ctrl.loading">
+        <ion-spinner></ion-spinner>
+      </div>
+      <swipe-card class="msg-card"
+                  ng-repeat="card in ctrl.msgCards"
                   on-destroy="ctrl.cardDestroyed($index, true)"
                   on-card-swipe="ctrl.cardSwiped($index)" 
-                  class="msg-card"
                   ng-bind-html="card.message">
       </swipe-card>
-      <swipe-card ng-repeat="poll in ctrl.polls" 
+      <swipe-card class="poll-card" 
+                  ng-repeat="poll in ctrl.polls" 
                   on-destroy="ctrl.cardDestroyed($index)" 
                   on-card-swipe="ctrl.cardSwiped()">
-        <div ng-controller="CardCtrl as cardCtrl" class="card poll-box">
+        <div ng-controller="CardCtrl as cardCtrl">
           <div class="subject row">
             <div class="col">
               <h3 class="text-center" ng-bind="poll.subject1.text"></h3>

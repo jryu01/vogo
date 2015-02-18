@@ -50,7 +50,9 @@
 
 .profile .spinner-wrapper {
   display: flex;
+  display: -webkit-flex;
   align-items: center;
-  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
   height: 100px;  
 }
