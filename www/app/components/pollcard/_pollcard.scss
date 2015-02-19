@@ -1,5 +1,4 @@
 .poll-card {
-
 }
 .poll-card .bar-graph-container {
   display: -webkit-box;
@@ -14,10 +13,18 @@
   -moz-align-items: center;
   align-items: center;
 }
+.poll-card .card {
+  margin-bottom: 1px;
+}
+.poll-card .bar-graph-container,
+.poll-card .item-divider {
+  padding: 8px 8px;
+}
+.poll-card .bar-graph-container {
+  height: 84px
+}
 .poll-card .bar-graph {
   height: 20px;
-  // border: 1px solid #DDDDDD;
-  // background-color: $stable;
 }
 .poll-card .bar-graph-bar {
   height: 100%;

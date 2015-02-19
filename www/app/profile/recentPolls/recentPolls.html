@@ -8,7 +8,15 @@
       <ion-spinner></ion-spinner>
     </div>
     
-    <div ng-repeat="poll in ctrl.polls">
+<!--     <div ng-repeat="poll in ctrl.polls">
+      <vo-poll-card poll-data="poll"></vo-poll-card>
+    </div>
+ -->
+ 
+    <div collection-repeat="poll in ctrl.polls"
+        collection-item-width="'100%'"
+        collection-item-height="220"
+        ng-style="{height: 220}">
       <vo-poll-card poll-data="poll"></vo-poll-card>
     </div>
 
