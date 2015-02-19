@@ -5,6 +5,7 @@ angular.module('voteit', [
   'restangular',
 
   //components
+  'mm.dataService',
   'voteit.auth',
   'voteit.config',
   'voteit.pollCard',

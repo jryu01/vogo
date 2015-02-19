@@ -8,8 +8,9 @@ angular.module('voteit.profile.recentPolls', [
 
 .controller('RecentPollsCtrl', [
   '$scope', 
-  'Restangular', 
-function ($scope, Restangular) {
+  'Restangular',
+  'dataService', 
+function ($scope, Restangular, dataService) {
 
   var self = this;
   var MyPolls = Restangular.all('me/polls');
@@ -31,7 +32,16 @@ function ($scope, Restangular) {
         self.polls = self.polls.concat(polls);
         $scope.$broadcast('scroll.infiniteScrollComplete');
       }
+      dataService.setData('myPolls', self.polls);
     });
   };
-  self.fetchPolls(true);
+  var init = function () {
+    self.polls = dataService.getData('myPolls') || [];
+    if (self.polls.length === 0) {
+      self.fetchPolls(true);
+    } else {
+      self.polls.length = 10; // limit to 10 items
+    }
+  };
+  init();
 }]);

@@ -21,7 +21,8 @@ angular.module('voteit.home', [
   '$scope', 
   '$ionicModal',
   'Restangular',
-function ($scope, $ionicModal, Restangular) {
+  'dataService',
+function ($scope, $ionicModal, Restangular, dataService) {
   var self = this,
       Polls = Restangular.all('polls');
 
@@ -58,6 +59,11 @@ function ($scope, $ionicModal, Restangular) {
       self.closeModal();
       self.msgCards = [];
       self.polls = [poll];
+
+      var myPolls = dataService.getData('myPolls');
+      if (myPolls) {
+        myPolls.unshift(poll);
+      }
     }).catch(function () {});
   };
   /////////////////////////////////////////////////////////////////////////////
@@ -105,12 +111,19 @@ function ($scope, $ionicModal, Restangular) {
 .controller('CardCtrl', [
   '$scope', 
   '$ionicSwipeCardDelegate',
-function ($scope, $ionicSwipeCardDelegate) {
+  'dataService',
+function ($scope, $ionicSwipeCardDelegate, dataService) {
 
   var self = this;
 
   self.vote = function (poll, subjectId) {
-    poll.post('votes', { subjectId: subjectId });
+    poll.post('votes', { subjectId: subjectId }).then(function (votedPoll) {
+      // if polls for my votes are loaded already
+      var votedPolls = dataService.getData('myVotes');
+      if (votedPolls) {
+        votedPolls.unshift(votedPoll);
+      }
+    });
     self.goAway();
   };
 
