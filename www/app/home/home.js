@@ -20,11 +20,11 @@ angular.module('voteit.home', [
 .controller('HomeCtrl', [
   '$scope', 
   '$ionicModal',
-  'Restangular',
   'dataService',
-function ($scope, $ionicModal, Restangular, dataService) {
-  var self = this,
-      Polls = Restangular.all('polls');
+  'Polls',
+  '$timeout',
+function ($scope, $ionicModal, dataService, Polls, $timeout) {
+  var self = this;
 
   self.polls = [];
   self.msgCards = [];
@@ -55,10 +55,11 @@ function ($scope, $ionicModal, Restangular, dataService) {
 
   //TODO: handle erros
   self.createPoll = function () {
-    Polls.post(self.newPoll).then(function (poll) {
+    Polls.create(self.newPoll).then(function (poll) {
       self.closeModal();
       self.msgCards = [];
-      self.polls = [poll];
+      self.polls = [];
+      self.addCard();
 
       var myPolls = dataService.getData('myPolls');
       if (myPolls) {
@@ -69,7 +70,9 @@ function ($scope, $ionicModal, Restangular, dataService) {
   /////////////////////////////////////////////////////////////////////////////
   // Handle poll cards
   self.cardSwiped = function() {
-    self.addCard();
+    $timeout(function () {
+      self.addCard();
+    }, 300);
   };
 
   self.cardDestroyed = function(index, isMsgCard) {
@@ -80,44 +83,38 @@ function ($scope, $ionicModal, Restangular, dataService) {
     }
   };
 
-  self.setVotedPollId = function (pollId) {
-    self.votedPollId = pollId;
+  self.addCard = function () {
+    var poll = Polls.getNextPoll();
+    if (!poll) {
+      self.msgCards.push({
+        message: '<span>No more polls.<br>Try again later.</span>'
+      });
+      return;
+    }
+    self.polls.push(poll);
   };
 
-  self.addCard = function() {
+  self.init = function () {
     self.loading = true;
-    Polls.get('random', {exclude: [self.votedPollId]}).then(function (poll) {
-      if (!poll) {
-        self.msgCards.push({
-          message: '<span>No more polls.<br>Try again later.</span>'
-        });
-        self.loading = false;
-        return;
-      }
-      self.polls.push(poll);
-      self.loading = false;
-    }).catch(function (e) {
-      console.log(e);
-      self.msgCards.push({
-        message: '<span>Something wrong happend.<br>Try again.</span>'
-      });
+    Polls.getNextPolls().then(function () {
+      self.addCard();
       self.loading = false;
     });
   };
-  // init card
-  self.addCard();
+  self.init();
 }])
 
 .controller('CardCtrl', [
   '$scope', 
   '$ionicSwipeCardDelegate',
   'dataService',
-function ($scope, $ionicSwipeCardDelegate, dataService) {
+  'Polls',
+function ($scope, $ionicSwipeCardDelegate, dataService, Polls) {
 
   var self = this;
 
   self.vote = function (poll, subjectId) {
-    poll.post('votes', { subjectId: subjectId }).then(function (votedPoll) {
+    Polls.vote(poll, subjectId).then(function (votedPoll) {
       // if polls for my votes are loaded already
       var votedPolls = dataService.getData('myVotes');
       if (votedPolls) {
