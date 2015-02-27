@@ -57,14 +57,13 @@ swipe-card {
   font-size: 45px;
   color: red;
   opacity: 0.7;
-   -webkit-transition: opacity 0.2s, font-size 0.2s;
+   -webkit-transition: all 0.2s cubic-bezier(0, 1.8, 1, 1.8);
 }
 
 .poll-card .heart-button.activated
  {
   font-size: 90px;
   opacity: 1;
-  color: red;
 }
 
 .msg-card {
