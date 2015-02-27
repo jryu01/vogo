@@ -46,10 +46,25 @@ swipe-card {
   -webkit-align-items: center;
   align-items: center;
 }
+
 .poll-card .heart{
   height: 60px;
   -webkit-align-items: center;
   align-items: center;
+}
+
+.poll-card .heart-button {
+  font-size: 45px;
+  color: red;
+  opacity: 0.7;
+   -webkit-transition: opacity 0.2s, font-size 0.2s;
+}
+
+.poll-card .heart-button.activated
+ {
+  font-size: 90px;
+  opacity: 1;
+  color: red;
 }
 
 .msg-card {
