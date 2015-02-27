@@ -20,12 +20,17 @@
 // when tabs are top (android)
 
 /// added
+.profile ion-content {
+  bottom: 49px;
+  height: auto;
+}
 .platform-android {
   .profile .sub-tabs .tabs {
     top: 93px;
   }
   .profile ion-content{
     top: 142px;
+    bottom: 0;
   }
   .tabs-item-hide .profile .sub-tabs .tabs {
     top: 44px;
