@@ -23,7 +23,17 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 //---- Custom styling for the app ----
 
-  // EX. changing default color goes here
+.platform-android {
+  .bar-header {
+    border-bottom-width: 0;
+    background-image: none;
+  }
+  .tabs-main > .tabs{
+    background-color: $stable;
+  } 
+
+}
+
 
 //---- end custom styling for the app ----
 
