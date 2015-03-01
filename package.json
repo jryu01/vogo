@@ -26,6 +26,6 @@
     "com.ionic.keyboard",
     "org.apache.cordova.console",
     "org.apache.cordova.inappbrowser",
-    "./engine/cordova-crosswalk-engine-c0.6.1"
+    "./engine/cordova-crosswalk-engine-c0.6.2"
   ]
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.voteit" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>VoteIt</name>
+<widget id="com.vogoteam.vogo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Vogo</name>
   <description>
-        An Ionic Framework and Cordova project.
+      Fun votting
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="jaehwan.ryu@icloud.com" href="https://github.com/jryu01">
+      Jaehwan Ryu
     </author>
   <content src="index.html"/>
   <access origin="*"/>
