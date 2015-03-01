@@ -2,28 +2,12 @@
 
 }
 
-// .profile .sub-tab-bar{
-//   // margin-top: 44px;
-//   color: grey;
-//   padding: 0;
-//   justify-content: center;
-//   -webkit-justify-content: center;
-//   display: flex;
-//   display: -webkit-flex;
-// }
-
-// .profile ion-content{
-//   margin-top: 44px;
-//   transition: margin-top 0.3s; 
-//   -webkit-transition: margin-top 0.3s; 
-// }
-// when tabs are top (android)
-
 /// added
 .profile ion-content {
   bottom: 49px;
   height: auto;
 }
+
 .platform-android {
   .profile .sub-tabs .tabs {
     top: 93px;
@@ -39,37 +23,6 @@
     top: 93px;
   }
 }
-/////
-
-// .tabs-top .profile .sub-tab-bar {
-//   top: 0;
-//   margin-top: 93px;
-// }
-
-// .tabs-top.tabs-item-hide .profile .sub-tab-bar {
-//   margin-top: -2px;
-// }
-
-// .tabs-top.tabs-item-hide .profile ion-content{
-//   margin-top: 0;
-// }
-
-
-// .profile .sub-tab-bar a {
-//   cursor: pointer;
-//   display: block;
-//   text-align: center;
-//   width: 150px;
-//   height: 44px;
-//   line-height: 49px;
-// }
-// .profile .sub-tab-bar a.active,
-// .profile .sub-tab-bar a.activated {
-//   border-bottom-color: #444444;
-//   border-bottom-style: solid;
-//   border-bottom-width: 2px;
-//   color: #444444;
-// }
 
 .profile .spinner-wrapper {
   display: flex;
