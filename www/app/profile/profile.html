@@ -5,25 +5,6 @@
     </a>
   </ion-nav-buttons>
 
-<!--   <div class="bar bar-subheader sub-tab-bar">
-    <a ng-click="ctrl.selectTab('myVotes')"
-      ng-class="{active: ctrl.selectedTab === 'myVotes'}">
-      My Votes
-    </a>
-    <a ng-click="ctrl.selectTab('myPolls')"
-      ng-class="{active: ctrl.selectedTab === 'myPolls'}">
-      My Polls
-    </a> 
-  </div>
-
-  <div ng-if="ctrl.selectedTab === 'myVotes'" 
-      ng-include="'app/profile/recentVotes/recentVotes.html'">
-  </div>
-  <div ng-if="ctrl.selectedTab === 'myPolls'"
-      ng-include="'app/profile/recentPolls/recentPolls.html'">
-  </div>
- -->
-
   <ion-tabs class="sub-tabs tabs-striped tabs-top tabs-icon-only"
             delegate-handle="myhandle">
     <ion-tab title="My Votes">
@@ -80,17 +61,5 @@
       </ion-content>
     </ion-tab>
   </ion-tabs>
-  
-<!--   <ion-tabs class="sub-tabs tabs-striped tabs-top tabs-icon-only"
-            delegate-handle="myhandle">
-    <ion-tab title="My Votes"
-              href="#/tab/profile/votes">
-              <ion-content>Home 1</ion-content>
-    </ion-tab>
-    <ion-tab title="My Polls"
-              href="#/tab/profile/polls">
-              <ion-content>Home 2</ion-content>
-    </ion-tab>
-  </ion-tabs>
- --> 
+
  </ion-view>
