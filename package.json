@@ -26,6 +26,7 @@
     "com.ionic.keyboard",
     "org.apache.cordova.console",
     "org.apache.cordova.inappbrowser",
-    "./engine/cordova-crosswalk-engine-c0.6.2"
+    "./engine/cordova-crosswalk-engine-c0.6.2",
+    "https://github.com/katzer/cordova-plugin-email-composer.git"
   ]
 }
