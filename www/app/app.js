@@ -2,6 +2,7 @@
 
 angular.module('voteit', [
   'ionic',
+  'ngCordova',
   'restangular',
 
   //components
@@ -18,6 +19,7 @@ angular.module('voteit', [
   'voteit.tab',
   'voteit.home',
   'voteit.profile',
+  'voteit.settings',
 ])
 // Platform specific settings
 .config([

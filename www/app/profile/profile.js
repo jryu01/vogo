@@ -4,8 +4,7 @@ angular.module('voteit.profile', [
   'ionic',
   'voteit.auth',
   'voteit.profile.recentPolls',
-  'voteit.profile.recentVotes',
-  'voteit.profile.settings'
+  'voteit.profile.recentVotes'
 ])
 
 .config(function ($stateProvider) {
@@ -26,9 +25,5 @@ function (auth) {
   var self = this;
 
   self.profileName = auth.getUser().name;
-  self.selectedTab = 'myVotes';
-
-  self.selectTab = function (tabName) {
-    self.selectedTab = tabName;
-  };
+  
 }]);

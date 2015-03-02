@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('voteit.profile.settings', [
+angular.module('voteit.settings', [
   'ionic',
   'restangular',
 ])
@@ -10,7 +10,7 @@ angular.module('voteit.profile.settings', [
     url: '/settings',
     views: {
       'tab-profile': {
-        templateUrl: 'app/profile/settings/settings.html',
+        templateUrl: 'app/settings/settings.html',
         controller: 'SettingsCtrl as ctrl'
       }
     }
@@ -22,7 +22,8 @@ angular.module('voteit.profile.settings', [
   'auth',
   '$state',
   '$ionicHistory',
-function ($scope, auth, $state, $ionicHistory) {
+  '$cordovaEmailComposer',
+function ($scope, auth, $state, $ionicHistory, $cordovaEmailComposer) {
   var self = this;
 
   $scope.$on('$ionicView.beforeEnter', function () {
@@ -35,6 +36,20 @@ function ($scope, auth, $state, $ionicHistory) {
       $scope.$emit('tab.show');
     }
   });
+
+
+  self.openEmailComposer = function () {
+    var email = {
+      to: 'jaehwan.ryu@icloud.com',
+      cc: '',
+      subject: '',
+      body: '',
+      isHtml: true
+    };
+    $cordovaEmailComposer.open(email).then(null, function () {
+      // user cancelled email
+    });
+  };
   
   self.signout = function () {
     auth.logout();
