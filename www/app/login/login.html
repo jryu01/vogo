@@ -4,11 +4,17 @@
           style="padding-top: 150px">
       <h1>Vogo</h1>
       <div style="height: 100px"></div>
-      <div>
-        <button class="button button-outline button-positive" ng-click="ctrl.facebookLogin()">
-        Login with facebook
-       </button>
-        
+      <div class="button-wrapper">
+        <button class="button button-block button-clear icon-left ion-social-facebook" 
+                ng-click="ctrl.facebookLogin()">
+          <span ng-show="!ctrl.loading">Sign in with Facebook</span>
+          <div class="spinner-box">
+            <ion-spinner ng-show="ctrl.loading" 
+                          icon="ios-small" 
+                          style="stroke: #FFFFFF;">
+            </ion-spinner>
+          </div>
+        </button>
       </div>
     </div>
   </ion-content>

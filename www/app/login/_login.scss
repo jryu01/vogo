@@ -1,0 +1,25 @@
+.login {
+}
+
+.login .button-wrapper {
+  width: 250px;
+  margin: auto;
+}
+
+.login button.ion-social-facebook {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff; 
+  background: #4c66a4;
+}
+.login button.ion-social-facebook.activated {
+  color: #fff; 
+  opacity: 1;
+  background: #3b5998;
+}
+
+.login button .spinner-box {
+  height: 0;
+  top: 7px;
+  position: relative;  
+}

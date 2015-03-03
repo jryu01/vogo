@@ -40,4 +40,5 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all sub scss files for the app
 @import "home/home";
 @import "profile/profile";
+@import "login/login";
 @import "components/pollcard/pollcard";

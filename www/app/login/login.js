@@ -25,10 +25,13 @@ function ($cordovaOauth, $ionicHistory, $state, $http, auth, config) {
 
   var self = this;
 
+  self.loading = false;
+
   self.facebookLogin = function () {
     $cordovaOauth
       .facebook(config.fbAppId, ['email','user_friends'])
       .then(function (result) {
+        self.loading = true;
         return $http.post(config.baseUrl + '/login', {
           grantType: 'facebook',
           facebookAccessToken: result.access_token
@@ -39,8 +42,8 @@ function ($cordovaOauth, $ionicHistory, $state, $http, auth, config) {
           disableBack: true,
           disableAnimate: true
         });
+        self.loading = false;
         $state.go('tab.home', {}, { location: 'replace', reload: true });
       });
-        //TODO: handle error
   };
 }]);
