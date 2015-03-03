@@ -5,8 +5,80 @@
     </a>
   </ion-nav-buttons>
 
-  <ion-tabs class="sub-tabs tabs-striped tabs-top tabs-icon-only"
-            delegate-handle="myhandle">
+  <ion-header-bar class="bar-subheader bar-light">
+    <div class="button-bar center">
+      <a class="button button-outline button-dark active"
+          ng-class="{active: ctrl.tabs.selected === 0}"
+          ng-click="ctrl.selectTab(0)">
+        My votes
+      </a>
+      <a class="button button-outline button-dark"
+          ng-class="{active: ctrl.tabs.selected === 1}"
+          ng-click="ctrl.selectTab(1)">
+        My polls
+      </a>
+    </div>
+  </ion-header-bar>
+
+  <ion-tabs class="has-custom-control" 
+            delegate-handle="custom-tabs-handle">
+    <ion-tab title="My votes">
+    <ion-content ng-controller="RecentVotesCtrl as ctrl">
+        <ion-refresher on-refresh="ctrl.fetchVotedPolls(true)">
+        </ion-refresher>
+
+        <div class="spinner-wrapper"
+            ng-if="ctrl.polls.length === 0 && !ctrl.noMoreData">
+          <ion-spinner></ion-spinner>
+        </div>
+     
+        <div class="list">
+          <div class=""
+                collection-repeat="poll in ctrl.polls"
+                collection-item-width="'100%'"
+                collection-item-height="220"
+                ng-style="{height: 220}">
+            <vo-poll-card poll-data="poll"></vo-poll-card>
+          </div>
+        </div>
+
+        <ion-infinite-scroll
+            ng-if="ctrl.polls.length > 0 && !ctrl.noMoreData"
+            on-infinite="ctrl.fetchVotedPolls()">
+        </ion-infinite-scroll>
+
+      </ion-content>
+    </ion-tab>
+    <ion-tab title="My polls">
+      <ion-content ng-controller="RecentPollsCtrl as ctrl">
+        <ion-refresher on-refresh="ctrl.fetchPolls(true)">
+        </ion-refresher>
+
+        <div class="spinner-wrapper"
+            ng-if="ctrl.polls.length === 0 && !ctrl.noMoreData">
+          <ion-spinner></ion-spinner>
+        </div>
+
+        <div class="list">
+          <div class=""
+                collection-repeat="poll in ctrl.polls"
+                collection-item-width="'100%'"
+                collection-item-height="220"
+                ng-style="{height: 220}">
+            <vo-poll-card poll-data="poll"></vo-poll-card>
+          </div>
+        </div>
+
+        <ion-infinite-scroll
+            ng-if="ctrl.polls.length > 0 && !ctrl.noMoreData"
+            on-infinite="ctrl.fetchPolls()">
+        </ion-infinite-scroll>
+      </ion-content>
+    </ion-tab>
+  </ion-tabs>
+
+  <!-- <ion-tabs class="sub-tabs tabs-striped tabs-top tabs-icon-only">
+  <ion-tabs class="sub-tabs tabs-top">
     <ion-tab title="My Votes">
     <ion-content ng-controller="RecentVotesCtrl as ctrl">
         <ion-refresher on-refresh="ctrl.fetchVotedPolls(true)">
@@ -60,6 +132,7 @@
         </ion-infinite-scroll>
       </ion-content>
     </ion-tab>
-  </ion-tabs>
+  </ion-tabs> -->
+
 
  </ion-view>
