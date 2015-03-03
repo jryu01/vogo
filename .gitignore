@@ -12,3 +12,5 @@ engine/
 www/lib/
 www/css/
 .DS_Store
+resources/android/
+resources/ios/
