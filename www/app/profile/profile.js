@@ -21,9 +21,16 @@ angular.module('voteit.profile', [
 
 .controller('ProfileCtrl', [
   'auth',
-function (auth) {
+  '$scope',
+function (auth, $scope) {
   var self = this;
 
   self.profileName = auth.getUser().name;
-  
+
+  $scope.$on('$ionicView.beforeEnter', function () {
+    if (ionic.Platform.isAndroid()) {
+      $scope.$emit('tab.show');
+    }
+  });
+
 }]);

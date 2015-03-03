@@ -3,6 +3,7 @@
 angular.module('voteit.settings', [
   'ionic',
   'restangular',
+  'voteit.settings.about'
 ])
 
 .config(function ($stateProvider) {
@@ -31,12 +32,6 @@ function ($scope, auth, $state, $ionicHistory, $cordovaEmailComposer) {
       $scope.$emit('tab.hide');
     }
   });
-  $scope.$on('$ionicView.beforeLeave', function () {
-    if (ionic.Platform.isAndroid()) {
-      $scope.$emit('tab.show');
-    }
-  });
-
 
   self.openEmailComposer = function () {
     var email = {
