@@ -15,6 +15,9 @@ $royal:                           #8a6de9 !default;
 $dark:                            #444 !default;
 */
 
+// our app theme color
+$royal:                           #0e116e !default;
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
@@ -24,16 +27,28 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 //---- Custom styling for the app ----
 
 .platform-android {
-  .bar-header {
-    border-bottom-width: 0;
-    background-image: none;
+  .tabs-top.tabs-striped .tab-item.tab-item-active, 
+  .tabs-top.tabs-striped .tab-item.active, 
+  .tabs-top.tabs-striped .tab-item.activated {
+    margin-top: 1px;
   }
-  .tabs-main > .tabs{
-    background-color: $stable;
-  } 
-
+}
+.bar.bar-light .title {
+  color: $royal; 
 }
 
+.platform-ios {
+  .tabs-royal > .tabs, .tabs.tabs-royal {
+    border-color: #b2b2b2;
+    background-color: #f8f8f8;
+    background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
+    color: $royal; 
+  }
+  .tabs-royal > .tabs .tab-item .badge, .tabs.tabs-royal .tab-item .badge {
+    background-color: $royal;
+    color: #f8f8f8; 
+  }
+}
 
 //---- end custom styling for the app ----
 

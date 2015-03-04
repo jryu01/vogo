@@ -6,6 +6,10 @@
   display: none;
 }
 
+.profile .bar-subheader {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+}
+
 .profile .button-bar.center {
   text-align:center ;
   -webkit-box-flex: 0 1 auto ; 
@@ -19,7 +23,7 @@
 }
 
 .profile .button-bar .button.activated {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(9, 12, 74, 0.3)
 }
 .profile .button-bar .button.active {
   -webkit-transition: background .1s ease-out;
