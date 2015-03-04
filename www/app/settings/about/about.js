@@ -21,7 +21,7 @@ function ($cordovaEmailComposer) {
 
   self.openEmailComposer = function () {
     var email = {
-      to: 'jaehwan.ryu@icloud.com',
+      to: 'letsvogo@gmail.com',
       cc: '',
       subject: '',
       body: '',
