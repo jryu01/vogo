@@ -8,9 +8,10 @@ angular.module('voteit.auth', ['voteit.auth.service'])
 
 .run([
   '$rootScope', 
+  '$window',
   '$state', 
   'auth', 
-function ($rootScope, $state, auth) {
+function ($rootScope, $window, $state, auth) {
   $rootScope.$on('$stateChangeStart', 
     function (event, toState, toParams, fromState, fromParams) {
 
@@ -22,7 +23,7 @@ function ($rootScope, $state, auth) {
     if (toState.data && toState.data.requiresLogin) {
       if (!auth.isAuthenticated()) {
         event.preventDefault();
-        $state.go('login');
+        $window.location.href = 'index.html';
       }
     }
   });

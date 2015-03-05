@@ -22,9 +22,9 @@ angular.module('voteit.settings', [
   '$scope',
   'auth',
   '$state',
-  '$ionicHistory',
   '$cordovaEmailComposer',
-function ($scope, auth, $state, $ionicHistory, $cordovaEmailComposer) {
+  '$window',
+function ($scope, auth, $state, $cordovaEmailComposer, $window) {
   var self = this;
 
   $scope.$on('$ionicView.beforeEnter', function () {
@@ -48,10 +48,6 @@ function ($scope, auth, $state, $ionicHistory, $cordovaEmailComposer) {
   
   self.signout = function () {
     auth.logout();
-    $ionicHistory.nextViewOptions({ 
-      disableBack: true,
-      disableAnimate: true
-    });
-    $state.go('login', {}, {location: 'replace', reload: true});
+    $window.location.href = 'index.html';
   };
 }]);
