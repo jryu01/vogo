@@ -16,14 +16,17 @@ angular.module('voteit.login', [
 })
 
 .controller('LoginCtrl', [
+  '$ionicPlatform',
   '$cordovaOauth', 
   '$ionicHistory',
   '$state',
   '$http',
   'auth',
   'config',
-function ($cordovaOauth, $ionicHistory, $state, $http, auth, config) {
-  window.StatusBar.hide();
+function ($ionicPlatform, $cordovaOauth, $ionicHistory, $state, $http, auth, config) {
+  $ionicPlatform.ready(function() {
+    window.StatusBar.hide();
+  });
   var self = this;
 
   self.loading = false;
