@@ -44,14 +44,14 @@ function ($scope, $ionicModal, dataService, Polls, $timeout) {
   });
 
   self.openModal = function () {
-    window.StatusBar.styleDefault();
+    if (window.StatusBar) { window.StatusBar.styleDefault(); }
     self.newPoll.subject1.text = '';
     self.newPoll.subject2.text = '';
     self.createPollModal.show();
   };
 
   self.closeModal = function() {
-    window.StatusBar.styleLightContent();
+    if (window.StatusBar) { window.StatusBar.styleLightContent(); }
     self.createPollModal.hide();
   };
 

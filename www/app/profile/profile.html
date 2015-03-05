@@ -33,11 +33,9 @@
         </div>
      
         <div class="list">
-          <div class=""
-                collection-repeat="poll in ctrl.polls"
-                collection-item-width="'100%'"
-                collection-item-height="220"
-                ng-style="{height: 220}">
+          <div class="item"
+                style="border: 0; padding: 0; margin: 0" 
+                collection-repeat="poll in ctrl.polls">
             <vo-poll-card poll-data="poll"></vo-poll-card>
           </div>
         </div>
@@ -60,11 +58,9 @@
         </div>
 
         <div class="list">
-          <div class=""
-                collection-repeat="poll in ctrl.polls"
-                collection-item-width="'100%'"
-                collection-item-height="220"
-                ng-style="{height: 220}">
+          <div class="item"
+                style="border: 0; padding: 0; margin: 0"
+                collection-repeat="poll in ctrl.polls">
             <vo-poll-card poll-data="poll"></vo-poll-card>
           </div>
         </div>
