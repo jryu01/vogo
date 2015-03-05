@@ -41,7 +41,7 @@ function (config) {
   'config', 
 function ($urlRouterProvider, RestangularProvider, config) {
 
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/');
 
   RestangularProvider.setBaseUrl(config.baseUrl);
 }])

@@ -14,6 +14,11 @@ function ($rootScope, $state, auth) {
   $rootScope.$on('$stateChangeStart', 
     function (event, toState, toParams, fromState, fromParams) {
 
+    if (toState.name === 'login' && auth.isAuthenticated()) {
+      event.preventDefault();
+      $state.go('tab.home');
+    }
+    
     if (toState.data && toState.data.requiresLogin) {
       if (!auth.isAuthenticated()) {
         event.preventDefault();

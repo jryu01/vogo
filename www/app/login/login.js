@@ -8,7 +8,8 @@ angular.module('voteit.login', [
 
 .config(function ($stateProvider) {
   $stateProvider.state('login', {
-    url: '/login',
+    // url: '/login',
+    url: '/',
     templateUrl: 'app/login/login.html',
     controller: 'LoginCtrl as ctrl'
   });
