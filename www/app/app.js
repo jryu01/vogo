@@ -24,8 +24,7 @@ angular.module('voteit', [
 // Platform specific settings
 .config([
   'config',
-  '$ionicConfigProvider',
-function (config, $ionicConfigProvider) {
+function (config) {
 
   // If it is running on android and dev mode, change localhost to 10.0.2.2
   if (config.env === 'development' && (ionic.Platform.isAndroid() || ionic.Platform.isIOS())) {
@@ -33,21 +32,6 @@ function (config, $ionicConfigProvider) {
     // config.baseUrl = 'http://10.0.3.2:3000/api'; //genymotion
     config.baseUrl = 'http://192.168.2.17:3000/api'; //ios or android device
   }
-
-  $ionicConfigProvider.platform.android.tabs.style('striped');
-
-  // comment out when test as android on browser 
-  //[ =======
-  // setTimeout(function () {
-  //   var bodyClass = document.querySelector('body').className
-  //     .replace('platform-browser', 'platform-android');
-  //   document.querySelector('body').className = bodyClass;
-  // }, 500);
-  // $ionicConfigProvider.tabs.style('striped');
-  // $ionicConfigProvider.tabs.position('top');
-  // $ionicConfigProvider.views.transition('android');
-  // ionic.Platform.isAndroid = function () { return true; };
-  // ======== ]
 
 }])
 
@@ -70,8 +54,7 @@ function ($urlRouterProvider, RestangularProvider, config) {
       window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
     if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      window.StatusBar.styleDefault();
+      window.StatusBar.styleLightContent();
     }
   });
 

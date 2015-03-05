@@ -27,6 +27,7 @@
     "org.apache.cordova.console",
     "org.apache.cordova.inappbrowser",
     "./engine/cordova-crosswalk-engine-c0.6.2",
-    "https://github.com/katzer/cordova-plugin-email-composer.git"
+    "https://github.com/katzer/cordova-plugin-email-composer.git",
+    "org.apache.cordova.statusbar"
   ]
 }
