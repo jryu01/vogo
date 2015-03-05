@@ -11,13 +11,13 @@ angular.module('voteit.pollCard', [])
       },
       link: function ($scope, $element, $attr) {
         $scope.getRatioOne = function (poll) {
-          if (poll.totalNumVotes === 0) {
+          if (!poll || poll.totalNumVotes === 0) {
             return 0;
           }
           return poll.subject1.numVotes / poll.totalNumVotes * 100;
         };
         $scope.getRatioTwo = function (poll) {
-          if (poll.totalNumVotes === 0) {
+          if (!poll || poll.totalNumVotes === 0) {
             return 0;
           }
           return poll.subject2.numVotes / poll.totalNumVotes * 100;

@@ -36,8 +36,15 @@
   }
   .profile ion-content{
     top: 137px;
+    height: auto;
     bottom: 0;
   }
+}
+
+.profile .list .poll-card-wrapper {
+  margin: 0;
+  padding: 0;
+  border-color: #fff; // removing border casues error(c-r) so hide with color
 }
 
 .profile .spinner-wrapper {
