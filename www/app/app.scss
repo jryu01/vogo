@@ -27,18 +27,19 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 //---- Custom styling for the app ----
 
-.platform-android {
-  .tabs-top.tabs-striped .tab-item.tab-item-active, 
-  .tabs-top.tabs-striped .tab-item.active, 
-  .tabs-top.tabs-striped .tab-item.activated {
-    margin-top: 1px;
-  }
-}
+// .platform-android {
+//   .tabs-top.tabs-striped .tab-item.tab-item-active, 
+//   .tabs-top.tabs-striped .tab-item.active, 
+//   .tabs-top.tabs-striped .tab-item.activated {
+//     margin-top: 1px;
+//   }
+// }
+
 .bar.bar-light .title {
   color: $royal; 
 }
 
-.platform-ios {
+.platform-ios, .platform-android {
   .tabs-royal > .tabs, .tabs.tabs-royal {
     border-color: #b2b2b2;
     background-color: #f8f8f8;

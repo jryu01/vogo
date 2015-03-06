@@ -31,14 +31,21 @@
   transition: background .1s ease-out;
 }
 
+
 .platform-android {
-  .profile .bar-subheader.has-tabs-top {
-    top: 93px;
-  }
+  // when tabs are on top
+  // .profile .bar-subheader.has-tabs-top {
+  //   top: 93px;
+  // }
+  // .profile ion-content{
+  //   top: 137px;
+  //   height: auto;
+  //   bottom: 0;
+  // }
   .profile ion-content{
-    top: 137px;
+    top: 87px;
     height: auto;
-    bottom: 0;
+    bottom: 49px;
   }
 }
 
