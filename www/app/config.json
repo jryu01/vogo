@@ -12,7 +12,7 @@
   },
   "production": {
     "env": "production",
-    "baseUrl": "http://productionserver.com/api",
+    "baseUrl": "http://vogo-api-production.elasticbeanstalk.com/api",
     "fbAppId": "790356791001298"
   }
 }
