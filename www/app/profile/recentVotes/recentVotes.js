@@ -12,7 +12,8 @@ angular.module('voteit.profile.recentVotes', [
   'Restangular',
   'auth',
   'dataService',
-function ($scope, Restangular, auth, dataService) {
+  '$timeout',
+function ($scope, Restangular, auth, dataService, $timeout) {
 
   var self = this;
   var Polls = Restangular.all('polls');
@@ -26,11 +27,15 @@ function ($scope, Restangular, auth, dataService) {
     if (!refresh && self.polls.length > 0) {
       query.votedBefore = self.polls[self.polls.length -1 ].votes[0].createdAt;
     }
+    var start = Date.now();
     Polls.getList(query).then(function (polls) {
+      var queryTime = Date.now() - start;
       self.noMoreData = (polls.length === 0);
       if (refresh) {
-        self.polls = polls;
-        $scope.$broadcast('scroll.refreshComplete');
+        $timeout(function () {
+          self.polls = polls;
+          $scope.$broadcast('scroll.refreshComplete');
+        }, queryTime > 700 ? 0 : 700 - queryTime); // wait atleast 700 ms
       } else {
         self.polls = self.polls.concat(polls);
         $scope.$broadcast('scroll.infiniteScrollComplete');
