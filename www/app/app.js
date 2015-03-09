@@ -11,6 +11,8 @@ angular.module('voteit', [
   'voteit.config',
   'voteit.pollCard',
   'voteit.polls',
+  'voteit.user',
+
 
   //subsections
   'voteit.login',
