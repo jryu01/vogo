@@ -32,12 +32,13 @@ function ($scope, Restangular, dataService, $timeout) {
         $timeout(function () {
           self.polls = polls;
           $scope.$broadcast('scroll.refreshComplete');
+          dataService.setData('myPolls', self.polls);
         }, queryTime > 700 ? 0 : 700 - queryTime); // wait atleast 700 ms
       } else {
         self.polls = self.polls.concat(polls);
         $scope.$broadcast('scroll.infiniteScrollComplete');
+        dataService.setData('myPolls', self.polls);
       }
-      dataService.setData('myPolls', self.polls);
     });
   };
   var init = function () {

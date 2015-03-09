@@ -35,12 +35,13 @@ function ($scope, Restangular, auth, dataService, $timeout) {
         $timeout(function () {
           self.polls = polls;
           $scope.$broadcast('scroll.refreshComplete');
+          dataService.setData('myVotes', self.polls);
         }, queryTime > 700 ? 0 : 700 - queryTime); // wait atleast 700 ms
       } else {
         self.polls = self.polls.concat(polls);
         $scope.$broadcast('scroll.infiniteScrollComplete');
+        dataService.setData('myVotes', self.polls);
       }
-      dataService.setData('myVotes', self.polls);
     });
   };
 

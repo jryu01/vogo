@@ -2,7 +2,7 @@
   "name": "voteit",
   "private": "true",
   "devDependencies": {
-    "ionic": "driftyco/ionic-bower#master",
+    "ionic": "driftyco/ionic-bower#v1.0.0-rc.0",
     "ionic-ion-swipe-cards": "*"
   },
   "dependencies": {
