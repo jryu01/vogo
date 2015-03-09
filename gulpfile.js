@@ -33,6 +33,7 @@ gulp.task('build', function (done) {
 gulp.task('config', function (done) {
   var env = (argv.production && 'production') || (argv.test && 'test'),
       config = require('./www/app/config.json'),
+      configObj,
       newFile,
       compiled;
 
@@ -42,9 +43,9 @@ gulp.task('config', function (done) {
     'angular.module(\'<%= moduleName %>\', [])\n\n' +
     '.constant(\'config\', <%= config %>);'
   );
-
+  configObj = _.merge(config.common, config[env ||'development']);
   newFile = compiled({
-    'config': JSON.stringify(config[env ||'development'], null, 2),
+    'config': JSON.stringify(configObj, null, 2),
     'moduleName': config.configModuleName
   });
   

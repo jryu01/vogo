@@ -16,9 +16,11 @@ angular.module('voteit.settings.about', [])
 
 .controller('AboutCtrl', [
   '$cordovaEmailComposer',
-function ($cordovaEmailComposer) {
+  'config',
+function ($cordovaEmailComposer, config) {
   var self = this;
 
+  self.version = config.version;
   self.openEmailComposer = function () {
     var email = {
       to: 'letsvogo@gmail.com',

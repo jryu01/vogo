@@ -1,5 +1,8 @@
 {
   "configModuleName": "voteit.config",
+  "common": {
+    "version": "0.0.2"
+  },
   "development": {
     "env": "development",
     "baseUrl": "http://localhost:3000/api",
