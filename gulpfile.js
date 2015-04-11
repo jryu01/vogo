@@ -60,7 +60,7 @@ gulp.task('config', function (done) {
 
 gulp.task('sass', function () {
   return gulp.src('./www/app/*.scss')
-    .pipe(sass())
+    .pipe(sass({errLogToConsole: true}))
     .pipe(gulp.dest('./www/css/'))
     .pipe(minifyCss({
       keepSpecialComments: 0
