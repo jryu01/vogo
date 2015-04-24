@@ -20,11 +20,11 @@ angular.module('voteit.settings', [
 
 .controller('SettingsCtrl', [
   '$scope',
-  'auth',
+  'User',
   '$state',
   '$cordovaEmailComposer',
   '$window',
-function ($scope, auth, $state, $cordovaEmailComposer, $window) {
+function ($scope, User, $state, $cordovaEmailComposer, $window) {
   var self = this;
 
   $scope.$on('$ionicView.beforeEnter', function () {
@@ -47,7 +47,7 @@ function ($scope, auth, $state, $cordovaEmailComposer, $window) {
   };
   
   self.signout = function () {
-    auth.logout();
+    User.signout();
     $window.location.href = 'index.html';
   };
 }]);

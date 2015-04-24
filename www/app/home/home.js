@@ -11,6 +11,7 @@ angular.module('voteit.home', [
     views: {
       'tab-home': {
         templateUrl: 'app/home/home.html',
+        // templateUrl: 'app/home/create-poll-modal.html',
         controller: 'HomeCtrl as ctrl'
       }
     }
@@ -22,18 +23,46 @@ angular.module('voteit.home', [
   '$ionicModal',
   'dataService',
   'Polls',
+  'User', 
   '$timeout',
-function ($scope, $ionicModal, dataService, Polls, $timeout) {
+  '$cordovaCamera',
+  '$cordovaFileTransfer',
+function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamera, $cordovaFileTransfer) {
+
   var self = this;
 
   self.polls = [];
   self.msgCards = [];
   self.loading = false;
+
   self.createPollModal = '';
   self.newPoll = { 
-    subject1: { text: '' },
-    subject2: { text: '' }
+    question: '',
+    answer1: { text: '', picture: '' },
+    answer2: { text: '', picture: '' }
   };
+
+  //   document.addEventListener('deviceready', function () {
+  //   var options = {
+  //     quality: 50,
+  //     destinationType: Camera.DestinationType.DATA_URL,
+  //     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+  //     allowEdit: true,
+  //     encodingType: Camera.EncodingType.JPEG,
+  //     targetWidth: 100,
+  //     targetHeight: 100,
+  //     popoverOptions: CameraPopoverOptions,
+  //     saveToPhotoAlbum: false
+  //   };
+
+  //   $cordovaCamera.getPicture(options).then(function(imageData) {
+  //     var image = document.getElementById('myImage');
+  //     image.src = "data:image/jpeg;base64," + imageData;
+  //   }, function(err) {
+  //     // error
+  //   });
+
+  // }, false);
 
   $ionicModal
   .fromTemplateUrl('app/home/create-poll-modal.html', {
@@ -45,14 +74,56 @@ function ($scope, $ionicModal, dataService, Polls, $timeout) {
 
   self.openModal = function () {
     if (window.StatusBar) { window.StatusBar.styleDefault(); }
-    self.newPoll.subject1.text = '';
-    self.newPoll.subject2.text = '';
+    self.newPoll.question = '';
+    self.newPoll.answer1.text = '';
+    self.newPoll.answer2.text = '';
+    self.newPoll.answer1.picture = '';
+    self.newPoll.answer2.picture = '';
     self.createPollModal.show();
   };
 
   self.closeModal = function() {
     if (window.StatusBar) { window.StatusBar.styleLightContent(); }
     self.createPollModal.hide();
+  };
+
+  self.getPhoto = function () {
+    var options = {
+      quality: 50,
+      // destinationType: window.Camera.DestinationType.DATA_URL,
+      destinationType: window.Camera.DestinationType.FILE_URI,
+      sourceType: window.Camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true,
+      encodingType: window.Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 300,
+      popoverOptions: window.CameraPopoverOptions,
+      saveToPhotoAlbum: false
+    };
+
+    $cordovaCamera.getPicture(options).then(function (imageUri) {
+      var user = User.getMe();
+      var s3Info = User.getS3Info();
+      var options = {};
+      options.params = {
+        'key': user.id + '/' + Date.now() + '.jpeg',
+        'AWSAccessKeyId': s3Info.accessKey,
+        'acl': 'public-read',
+        'policy': s3Info.policy,
+        'signature': s3Info.signature,
+        'Content-Type': 'image/jpeg'
+      };
+     return $cordovaFileTransfer.upload(s3Info.uploadUrl, imageUri, options);
+    }).then(function (result) {
+      if (!self.newPoll.answer1.picture) {
+        self.newPoll.answer1.picture = result.headers.Location;
+      } else {
+        self.newPoll.answer2.picture = result.headers.Location;
+      }
+      console.log('result: ', result);
+    }).catch(function (err) {
+      console.log(err);
+    });
   };
 
   //TODO: handle erros
@@ -104,6 +175,10 @@ function ($scope, $ionicModal, dataService, Polls, $timeout) {
     });
   };
   self.init();
+}])
+
+.controller('createPollModalCtrl', [function () {
+
 }])
 
 .controller('CardCtrl', [

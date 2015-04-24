@@ -7,26 +7,52 @@
   <ion-content class="padding">
   
     <form ng-submit="ctrl.createPoll()" name="newPollForm">
+      <div class="item item-input">
+        <input type="text" 
+                placeholder="what's your question?"
+                ng-model="ctrl.newPoll.question"
+                required>
+      </div>
+
+      <vo-card-img 
+        height="300px"
+        src1="{{ctrl.newPoll.answer1.picture}}"
+        src2="{{ctrl.newPoll.answer2.picture}}">
+      </vo-card-img>
+      <div class="card">
+        <div class="row buttons" ng-if="!ctrl.newPoll.answer2.picture">
+          <a class="tab-item" href="#">
+            <i class="icon ion-ios-camera"></i>
+          </a>
+          <a class="tab-item" href="#" ng-click='ctrl.getPhoto()'>
+            <i class="icon ion-images"></i>
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-share"></i>
+          </a>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col">
           <div class="card">
             <input type="text" 
                   class="text-center" 
                   style="width: 100%"
-                  ng-model="ctrl.newPoll.subject1.text"
+                  ng-model="ctrl.newPoll.answer1.text"
                   maxlength="30"
                   required/>
           </div>
         </div>
-        <div class="col-5" class="text-center" style="line-height:86px;">
+<!--         <div class="col-5" class="text-center" style="line-height:86px;">
           <strong>VS</strong>
         </div>
-        <div class="col">
+ -->        <div class="col">
           <div class="card">
             <input type="text" 
                   class="text-center" 
                   style="width: 100%"
-                  ng-model="ctrl.newPoll.subject2.text"
+                  ng-model="ctrl.newPoll.answer2.text"
                   maxlength="30"
                   required/>
           </div>

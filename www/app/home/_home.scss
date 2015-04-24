@@ -43,8 +43,12 @@ swipe-card {
    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+.poll-card .question{
+  height: 40px;
+}
+
 .poll-card .subject{
-  height: 220px;
+  height: 180px;
   -webkit-align-items: center;
   align-items: center;
 }

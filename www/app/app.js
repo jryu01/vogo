@@ -12,7 +12,7 @@ angular.module('voteit', [
   'voteit.pollCard',
   'voteit.polls',
   'voteit.user',
-
+  'voCardImg',
 
   //subsections
   'voteit.login',
@@ -34,6 +34,8 @@ function (config, $ionicConfigProvider) {
     // config.baseUrl = 'http://10.0.2.2:3000/api'; //android emulator
     // config.baseUrl = 'http://10.0.3.2:3000/api'; //genymotion
     config.baseUrl = 'http://192.168.2.17:3000/api'; //ios or android device
+
+    // config.baseUrl = 'http://localhost:3000/api'; //ios emulator
   }
 
   $ionicConfigProvider.platform.android.tabs.style('standard');
@@ -72,7 +74,7 @@ function ($urlRouterProvider, RestangularProvider, config) {
 
 .run(['config', 'auth', function (config, auth) {
   // login with predefined user on development
-  if (config.env === 'development') {
-    auth.authenticate({id: '54caf3a20f16cd696750c96c', name: 'Jaehwan Ryu'}, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NGNhZjNhMjBmMTZjZDY5Njc1MGM5NmMiLCJleHAiOjE0MjgyODI0MzA4Njd9.FHIJ-Hb9msWPQ7aoJ64HNjOwMpfX2S-S6KeOPw5toEA');
-  }
+  // if (config.env === 'development') {
+  //   auth.authenticate({id: '55258c7b6b2b0ffc5cc58e24', name: 'Jaehwan Ryu'}, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTI1OGM3YjZiMmIwZmZjNWNjNThlMjQiLCJleHAiOjE0MzQyNTY4ODA4NzB9.povaneYCvXu_EbTOU627m6SBBDSyj81IqQAX3jhBFQ4');
+  // }
 }]);

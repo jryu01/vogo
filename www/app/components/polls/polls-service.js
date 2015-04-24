@@ -12,11 +12,13 @@ angular.module('voteit.polls', [])
   var Polls = Restangular.all('polls');
 
   that.getNextPolls = function (exclude) {
-    var query = {
-      random: true
-    };
+    var query = {};
     if (exclude) {
       query.exclude = exclude;
+    }
+    if (that.queue.length > 0) {
+      var lastPoll = that.queue[that.queue.length - 1].id;
+      query.before = lastPoll;
     }
     return Polls.getList(query).then(function (polls) {
       that.queue = that.queue.concat(polls);
@@ -37,7 +39,7 @@ angular.module('voteit.polls', [])
     });
   };
 
-  that.vote = function (poll, subjectId) {
+  that.vote = function (poll, answerNum) {
     that.lastVotedPollId = poll.id;
     // remove voted poll from the queue if one exists
     that.queue.forEach(function (value, index, array) {
@@ -45,7 +47,7 @@ angular.module('voteit.polls', [])
         array.splice(index, 1);
       }
     });
-    return poll.post('votes', { subjectId: subjectId });
+    return poll.post('votes', { answer: answerNum });
   };
 
   return that;
