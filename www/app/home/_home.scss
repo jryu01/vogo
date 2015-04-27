@@ -2,8 +2,7 @@
 }
 
 .spinner-wrapper {
-  z-index: 0; 
-  position: fixed;
+  position: absolute;
   left: 50%;
   top: 50%;
   width: 100%;
@@ -18,55 +17,29 @@
   -webkit-justify-content: center;
 }
 
-// .poll-card, .msg-card {
-  // z-index: 1; 
-  // position: fixed;
-  // background-color: #fff;
-  // -webkit-transform: scale(1,1);
-  // left: 50%;
-  // top: 50%;
-  // width: 96%;
-  // height: 100px;
-  // margin-left: -48%;
-  // margin-top: 50px;
-  // box-sizing: border-box;
-  // border-radius: 4px;
-  // overflow: hidden;
-  // -webkit-animation-fill-mode: forwards;
-  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  // -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  //  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  //  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-// }
+.home swipe-card {
+  z-index: 1; 
+  position: absolute;
+  -webkit-transform: scale(1,1);
+  width: 96%;
+  left: 50%;
+  top: 50%;
+  height: 420px;
+  margin-left: -48%;
+  margin-top: -210px;
+  -webkit-animation-fill-mode: forwards;
+}
 
-// .poll-card .question{
-//   height: 40px;
-// }
+.platform-ios .home swipe-card {
+  margin-top: -200px;
+}
 
-// .poll-card .subject{
-//   height: 180px;
-//   -webkit-align-items: center;
-//   align-items: center;
-// }
-
-// .poll-card .heart{
-//   height: 60px;
-//   -webkit-align-items: center;
-//   align-items: center;
-// }
-
-// .poll-card .heart-button {
-//   font-size: 45px;
-//   color: red;
-//   opacity: 0.7;
-//    -webkit-transition: all 0.2s cubic-bezier(0, 1.8, 1, 1.8);
-// }
-
-// .poll-card .heart-button.activated
-//  {
-//   font-size: 90px;
-//   opacity: 1;
-// }
+@media (min-width: 680px) {
+  .home swipe-card {
+    width: 60%;
+    margin-left: -30%;
+  }
+}
 
 .msg-card {
   color: #fff;

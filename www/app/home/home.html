@@ -4,7 +4,7 @@
       ng-click="ctrl.openModal()"></a>
   </ion-nav-buttons>
 
-  <ion-pane class="has-header has-tabs">
+  <ion-pane>
     <swipe-cards>
       <div class="spinner-wrapper" ng-if="ctrl.loading">
         <ion-spinner></ion-spinner>
@@ -26,7 +26,7 @@
             {{poll.answer1.mumVotes + poll.answer2.numVotes}} hits
           </span>
           <h2 ng-bind="::poll.createdBy.name"></h2>
-          <h3 ng-bind="::poll.question"></h3>
+          <p ng-bind="::poll.question"></p>
         </div>
 
         <div class="item item-image">
@@ -35,7 +35,7 @@
                         height="250px">
           </vo-card-img>
         </div>
-        
+
         <div class="item" style="padding: 0;">
           <div class="row">
             <h3 class="col text-center" 
