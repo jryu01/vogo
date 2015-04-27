@@ -192,15 +192,18 @@ function ($scope, $ionicSwipeCardDelegate, dataService, Polls) {
 
   var self = this;
 
-  self.vote = function (poll, subjectId) {
-    Polls.vote(poll, subjectId).then(function (votedPoll) {
-      // if polls for my votes are loaded already
-      var votedPolls = dataService.getData('myVotes');
-      if (votedPolls) {
-        votedPolls.unshift(votedPoll);
-      }
-    });
-    self.goAway();
+  self.vote = function (poll, answerNum) {
+    if(!poll.voted) {
+      poll['answer' + answerNum].numVotes += 1;
+      poll.voted = true;
+      Polls.vote(poll, answerNum).then(function (vote) {
+        // if polls for my votes are loaded already
+        var votes = dataService.getData('myVotes');
+        if (votes) {
+          votes.unshift(vote);
+        }
+      });
+    }
   };
 
   self.goAway = function() {
