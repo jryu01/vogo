@@ -4,26 +4,81 @@
       ng-click="ctrl.openModal()"></a>
   </ion-nav-buttons>
 
-  <ion-pane>
+  <ion-pane class="has-header has-tabs">
     <swipe-cards>
       <div class="spinner-wrapper" ng-if="ctrl.loading">
         <ion-spinner></ion-spinner>
       </div>
-      <swipe-card class="msg-card"
+      <swipe-card class="msg-card card"
                   ng-repeat="card in ctrl.msgCards"
                   on-destroy="ctrl.cardDestroyed($index, true)"
                   on-card-swipe="ctrl.cardSwiped($index)" 
                   ng-bind-html="card.message">
       </swipe-card>
-      <swipe-card class="poll-card" 
+      <swipe-card class="poll-card card list" 
                   ng-repeat="poll in ctrl.polls" 
                   on-destroy="ctrl.cardDestroyed($index)" 
                   on-card-swipe="ctrl.cardSwiped()">
-        <div ng-controller="CardCtrl as cardCtrl">
-          <div class="row question">
+
+        <div class="item item-avatar">
+          <img ng-src="{{poll.createdBy.picture}}">
+          <span class="item-note">
+            {{poll.answer1.mumVotes + poll.answer2.numVotes}} hits
+          </span>
+          <h2 ng-bind="::poll.createdBy.name"></h2>
+          <h3 ng-bind="::poll.question"></h3>
+        </div>
+
+        <div class="item item-image">
+          <vo-card-img src1="{{::poll.answer1.picture}}"
+                        src2="{{::poll.answer2.picture}}"
+                        height="250px">
+          </vo-card-img>
+        </div>
+        
+        <div class="item" style="padding: 0;">
+          <div class="row">
+            <h3 class="col text-center" 
+                style="white-space: normal;"
+                ng-bind="::poll.answer1.text"></h3>
+            <h3 class="col text-center" 
+                style="white-space: normal;"
+                ng-bind="::poll.answer2.text"></h3>
+          </div>
+          <div class="row" ng-init="poll.voted=false">
+            <h3 class="col text-center" 
+                style="white-space: normal;">
+              <span style="opacity: 0">s</span>
+              <span ng-show="poll.voted">
+                {{poll.answer1.numVotes}} hits
+              </span>
+            </h3>
+            <h3 class="col text-center" 
+                style="white-space: normal;">
+              <span style="opacity: 0">s</span>
+              <span ng-show="poll.voted">
+                {{poll.answer2.numVotes}} hits
+              </span>
+            </h3>
+          </div>
+          <p>
+            <a style="opacity: 0">s</a>
+            <a href="#" class="subdued" ng-show="poll.voted">
+              {{poll.numComments }} Comments
+            </a>
+          </p>
+        </div>
+
+        <!-- <div ng-controller="CardCtrl as cardCtrl"> -->
+<!--           <div class="row question">
             <h3 class="text-center" ng-bind="::poll.question"></h3>
           </div>
-          <div class="subject row">
+          <vo-card-img src1="{{::poll.answer1.picture}}"
+                        src2="{{::poll.answer2.picture}}">
+          </vo-card-img>
+
+ -->          
+<!--           <div class="row">
             <div class="col">
               <h3 class="text-center" ng-bind="::poll.answer1.text"></h3>
             </div>
@@ -31,7 +86,8 @@
               <h3 class="text-center" ng-bind="::poll.answer2.text"></h3>
             </div>
           </div>
-          <div class="heart row">
+ -->
+<!--           <div class="heart row">
             <div class="col">
               <div class="text-center">
                 <i class="icon ion-ios-heart heart-button"
@@ -45,7 +101,10 @@
               </div>
             </div> 
           </div>
-        </div>  
+ -->          
+        <!-- </div>   -->
+
+
       </swipe-card>
     </swipe-cards>
   </ion-pane>

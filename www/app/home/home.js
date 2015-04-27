@@ -87,12 +87,13 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
     self.createPollModal.hide();
   };
 
-  self.getPhoto = function () {
+  self.getPhoto = function (sourceType) {
+    // sourcetype PHOTOLIBRARY or 
     var options = {
       quality: 50,
       // destinationType: window.Camera.DestinationType.DATA_URL,
       destinationType: window.Camera.DestinationType.FILE_URI,
-      sourceType: window.Camera.PictureSourceType.PHOTOLIBRARY,
+      sourceType: window.Camera.PictureSourceType[sourceType],
       allowEdit: true,
       encodingType: window.Camera.EncodingType.JPEG,
       targetWidth: 300,
@@ -165,6 +166,7 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
       return;
     }
     self.polls.push(poll);
+    console.log(poll);
   };
 
   self.init = function () {
