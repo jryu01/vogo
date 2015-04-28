@@ -21,6 +21,7 @@ angular.module('voteit', [
   'voteit.tab',
   'voteit.home',
   'voteit.profile',
+  'voteit.comments',
   'voteit.settings',
 ])
 // Platform specific settings

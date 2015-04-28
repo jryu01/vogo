@@ -17,7 +17,7 @@ function ($rootScope, $window, $state, auth) {
 
     if (toState.name === 'login' && auth.isAuthenticated()) {
       event.preventDefault();
-      $state.go('tab.home');
+      $state.go('tab.tab-home-home');
     }
     
     if (toState.data && toState.data.requiresLogin) {

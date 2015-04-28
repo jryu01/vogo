@@ -39,7 +39,7 @@ function ($ionicPlatform, $cordovaOauth, $ionicHistory, $state, $http, User) {
       });
       self.loading = false;
       window.StatusBar.show();
-      $state.go('tab.home', {}, { location: 'replace', reload: true });
+      $state.go('tab.tab-home-home', {}, { location: 'replace', reload: true });
     });
   };
 }]);

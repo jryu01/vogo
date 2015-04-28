@@ -7,8 +7,8 @@ angular.module('voteit.settings', [
 ])
 
 .config(function ($stateProvider) {
-  $stateProvider.state('tab.settings', {
-    url: '/settings',
+  $stateProvider.state('tab.tab-profile-settings', {
+    url: '/tab-profile/settings',
     views: {
       'tab-profile': {
         templateUrl: 'app/settings/settings.html',

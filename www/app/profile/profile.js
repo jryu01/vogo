@@ -8,8 +8,8 @@ angular.module('voteit.profile', [
 ])
 
 .config(function ($stateProvider) {
-  $stateProvider.state('tab.profile', {
-    url: '/profile',
+  $stateProvider.state('tab.tab-profile-profile', {
+    url: '/tab-profile/profile/:id',
     views: {
       'tab-profile': {
         templateUrl: 'app/profile/profile.html',
@@ -31,6 +31,7 @@ function (auth, $scope, $ionicTabsDelegate) {
   self.tabs = {
     selected: 0
   };
+
   self.selectTab = function (index) {
     $ionicTabsDelegate.$getByHandle('custom-tabs-handle').select(index);
     self.tabs.selected = index;

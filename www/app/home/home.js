@@ -6,12 +6,11 @@ angular.module('voteit.home', [
 ])
 
 .config(function ($stateProvider) {
-  $stateProvider.state('tab.home', {
-    url: '/home',
+  $stateProvider.state('tab.tab-home-home', {
+    url: '/tab-home/home',
     views: {
       'tab-home': {
         templateUrl: 'app/home/home.html',
-        // templateUrl: 'app/home/create-poll-modal.html',
         controller: 'HomeCtrl as ctrl'
       }
     }
@@ -42,28 +41,6 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
     answer2: { text: '', picture: '' }
   };
 
-  //   document.addEventListener('deviceready', function () {
-  //   var options = {
-  //     quality: 50,
-  //     destinationType: Camera.DestinationType.DATA_URL,
-  //     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-  //     allowEdit: true,
-  //     encodingType: Camera.EncodingType.JPEG,
-  //     targetWidth: 100,
-  //     targetHeight: 100,
-  //     popoverOptions: CameraPopoverOptions,
-  //     saveToPhotoAlbum: false
-  //   };
-
-  //   $cordovaCamera.getPicture(options).then(function(imageData) {
-  //     var image = document.getElementById('myImage');
-  //     image.src = "data:image/jpeg;base64," + imageData;
-  //   }, function(err) {
-  //     // error
-  //   });
-
-  // }, false);
-
   $ionicModal
   .fromTemplateUrl('app/home/create-poll-modal.html', {
     scope: $scope,
@@ -91,7 +68,6 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
     // sourcetype PHOTOLIBRARY or 
     var options = {
       quality: 50,
-      // destinationType: window.Camera.DestinationType.DATA_URL,
       destinationType: window.Camera.DestinationType.FILE_URI,
       sourceType: window.Camera.PictureSourceType[sourceType],
       allowEdit: true,
@@ -121,9 +97,8 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
       } else {
         self.newPoll.answer2.picture = result.headers.Location;
       }
-      console.log('result: ', result);
     }).catch(function (err) {
-      console.log(err);
+
     });
   };
 
@@ -139,7 +114,9 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
       if (myPolls) {
         myPolls.unshift(poll);
       }
-    }).catch(function () {});
+    }).catch(function (err) {
+
+    });
   };
   /////////////////////////////////////////////////////////////////////////////
   // Handle poll cards
@@ -166,7 +143,6 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
       return;
     }
     self.polls.push(poll);
-    console.log(poll);
   };
 
   self.init = function () {
@@ -204,17 +180,5 @@ function ($scope, $ionicSwipeCardDelegate, dataService, Polls) {
         }
       });
     }
-  };
-
-  self.goAway = function() {
-    var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
-    // NOTE: when card moves upward, negative y value is set and remains
-    // unchanged after card moves back to original position. This seems to
-    // prevent card go away. so set x and y value to neatural position before
-    // swipe called. This behaviour should be fixed in the swipe-card module
-    // eventually.
-    card.x = 0;
-    card.y = 0;
-    card.swipe();
   };
 }]);
