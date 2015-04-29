@@ -1,11 +1,14 @@
 <ion-view class="comments" view-title="Comments">
   <ion-content>
     <div class="list">
+
       <div class="item item-avatar" 
           ng-repeat="comment in ctrl.comments">
-        <img ng-src="{{ comment.createdBy.picture }}">
-        <h3 ng-bind="comment.createdBy.name"></h3>
-        <p ng-bind="comment.text"></p>
+        <img ng-src="{{ ::comment.createdBy.picture }}">
+        <h3 ng-bind="::comment.createdBy.name"></h3>
+        <p ng-bind="::comment.text"
+          style="white-space: normal">
+        </p>
       </div>
     </div>
 
@@ -14,8 +17,8 @@
 
     <form name="sendCommentForm" ng-submit="ctrl.addComment(sendCommentForm)" novalidate>
       <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
-        <label class="item-input-wrapper">
-          <textarea ng-model="ctrl.newComment" value="" placeholder="Add a comment..." required minlength="1" maxlength="1500" msd-elastic style="width: 100%"></textarea>
+        <label class="item-input-wrapper" style="padding:0">
+          <textarea ng-focus="ctrl.bt()" ng-blur="ctrl.bt()" ng-model="ctrl.newComment" value="" placeholder="Add a comment..." required minlength="1" maxlength="1500" msd-elastic style="width: 100%"></textarea>
         </label>
         <div class="footer-btn-wrap">
           <button class="button button-small button-royal" 

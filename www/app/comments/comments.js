@@ -19,13 +19,14 @@ angular.module('voteit.comments', [])
   '$scope',
   'Polls',
   '$stateParams', 
-function ($scope, Polls, $stateParams) {
+  '$ionicScrollDelegate',
+function ($scope, Polls, $stateParams, $ionicScrollDelegate) {
   var self = this,
       poll = $stateParams.poll;
   self.comments = [];
   self.newComment = '';
 
-  poll.getList('comments').then(function (comments) {
+  poll.getList('comments', {limit: 1000}).then(function (comments) {
     self.comments = comments;
   });
 
@@ -34,9 +35,13 @@ function ($scope, Polls, $stateParams) {
       poll.post('comments', {text: self.newComment}).then(function (c) {
         poll.numComments += 1;
         self.comments.push(c); 
+        $ionicScrollDelegate.scrollBottom(true);
       });
       self.newComment = '';
     }
+  };
+  self.bt = function () {
+    $ionicScrollDelegate.scrollBottom(true);
   };
 
   $scope.$on('$ionicView.beforeEnter', function () {
