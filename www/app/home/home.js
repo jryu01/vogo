@@ -153,7 +153,7 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
     });
   };
   self.init();
-  $scope.$on('$ionicView.afterEnter', function () {
+  $scope.$on('$ionicView.enter', function () {
     $scope.$emit('tab.show');
   });
 }])
