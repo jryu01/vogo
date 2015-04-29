@@ -29,6 +29,7 @@ function ($scope, $ionicHistory, $state) {
   self.hideTab = false;
 
   self.go = function (to, params, options) {
+    console.log(params);
     var stateName = $ionicHistory.currentView().stateName,
         tabName = stateName.substring(4, stateName.indexOf('-', 8));
 

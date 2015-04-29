@@ -61,6 +61,7 @@ function ($urlRouterProvider, RestangularProvider, config) {
     // for form inputs)
 
     if (window.cordova && window.cordova.plugins.Keyboard) {
+      window.cordova.plugins.Keyboard.disableScroll(true); //ios only
       window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
     if (window.StatusBar) {

@@ -40,7 +40,6 @@ angular.module('voteit.polls', [])
   };
 
   that.vote = function (poll, answerNum) {
-    that.lastVotedPollId = poll.id;
     // remove voted poll from the queue if one exists
     that.queue.forEach(function (value, index, array) {
       if (value.id === poll.id) {
@@ -48,6 +47,14 @@ angular.module('voteit.polls', [])
       }
     });
     return poll.post('votes', { answer: answerNum });
+  };
+
+  that.comment = function (poll, text) {
+    return poll.post('comments', { text: text });
+  };
+
+  that.getComments = function (poll, skip, limit) {
+    return poll.getList('comments', {skip: skip, limit: limit});
   };
 
   return that;
