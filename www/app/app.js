@@ -34,7 +34,7 @@ function (config, $ionicConfigProvider) {
   if (config.env === 'development' && (ionic.Platform.isAndroid() || ionic.Platform.isIOS())) {
     // config.baseUrl = 'http://10.0.2.2:3000/api'; //android emulator
     // config.baseUrl = 'http://10.0.3.2:3000/api'; //genymotion
-    config.baseUrl = 'http://192.168.2.17:3000/api'; //ios or android device
+    config.baseUrl = 'http://192.168.0.26:3000/api'; //ios or android device
 
     // config.baseUrl = 'http://localhost:3000/api'; //ios emulator
   }
@@ -76,7 +76,13 @@ function ($urlRouterProvider, RestangularProvider, config) {
 
 .run(['config', 'auth', function (config, auth) {
   // login with predefined user on development
-  // if (config.env === 'development') {
-  //   auth.authenticate({id: '55258c7b6b2b0ffc5cc58e24', name: 'Jaehwan Ryu'}, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTI1OGM3YjZiMmIwZmZjNWNjNThlMjQiLCJleHAiOjE0MzQyNTY4ODA4NzB9.povaneYCvXu_EbTOU627m6SBBDSyj81IqQAX3jhBFQ4');
-  // }
+  if (config.env === 'development') {
+  //   auth.authenticate({id: '55258c7b6b2b0ffc5cc58e24', name: 'JH R'}, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTI1OGM3YjZiMmIwZmZjNWNjNThlMjQiLCJleHAiOjE0MzQyNTY4ODA4NzB9.povaneYCvXu_EbTOU627m6SBBDSyj81IqQAX3jhBFQ4');
+    auth.authenticate({
+      'email': 'testuser1@test.com',
+      'name': 'Test User1',
+      'picture': 'http://lorempixel.com/100/100/',
+      'id': '554be56e11a864e3832decd1'
+    }, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTRiZTU2ZTExYTg2NGUzODMyZGVjZDEiLCJleHAiOjE0MzYyMjE5OTcxMDB9.4evSv0naOQxDRr1r4V0hqhoeyERYPMi5oNGZMGI00XA');
+  }
 }]);

@@ -33,23 +33,17 @@ function ($rootScope, $window, $state, auth) {
 .factory('authIntercepter', [
   'auth', 
   '$q', 
-  '$injector', 
-function (auth, $q, $injector) {
+  '$window',
+function (auth, $q, $window) {
   return {
     request: function (config) {
       config.headers['x-access-token'] = auth.getToken();
       return config;
     },
     responseError: function (rejection) {
-      var $state = $injector.get('$state');
-      var $ionicHistory = $injector.get('$ionicHistory');
-
       if (rejection.status === 401) {
-        $ionicHistory.nextViewOptions({ 
-          disableBack: true,
-          disableAnimate: true
-        });
-        $state.go('login', {}, {location: 'replace', reload: true});
+        auth.logout();
+        $window.location.href = 'index.html';
       }
       return $q.reject(rejection);
     } 

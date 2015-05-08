@@ -9,7 +9,7 @@
                 ng-click="ctrl.facebookLogin()">
           <span ng-show="!ctrl.loading">Sign in with Facebook</span>
           <div class="spinner-box">
-            <ion-spinner ng-show="ctrl.loading" 
+            <ion-spinner ng-if="ctrl.loading" 
                           icon="ios-small" 
                           style="stroke: #FFFFFF;">
             </ion-spinner>

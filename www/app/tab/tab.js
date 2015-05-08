@@ -23,19 +23,19 @@ angular.module('voteit.tab', [
   '$scope', 
   '$ionicHistory',
   '$state',
-function ($scope, $ionicHistory, $state) {
+  'User',
+function ($scope, $ionicHistory, $state, User) {
   var self = this;  
 
   self.hideTab = false;
 
   self.go = function (to, params, options) {
-    console.log(params);
+    // stateName in the form of tab.tab-name-toStateName
     var stateName = $ionicHistory.currentView().stateName,
         tabName = stateName.substring(4, stateName.indexOf('-', 8));
 
     $state.go(to = 'tab.' + tabName + '-' + to, params, options);
   };
-
 
   $scope.$on('tab.hide', function () {
     self.hideTab = true;

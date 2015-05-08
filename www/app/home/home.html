@@ -20,7 +20,7 @@
                   on-destroy="ctrl.cardDestroyed($index)" 
                   on-card-swipe="ctrl.cardSwiped()">
 
-        <div class="item item-avatar">
+        <div class="item item-avatar" ng-click="tabCtrl.go('profile', { user: poll.createdBy })">
           <img ng-src="{{poll.createdBy.picture}}">
           <span class="item-note">
             {{poll.answer1.numVotes + poll.answer2.numVotes}} hits

@@ -40,7 +40,7 @@ function ($scope, Polls, $stateParams, $ionicScrollDelegate) {
       self.newComment = '';
     }
   };
-  self.bt = function () {
+  self.scrollBottom = function () {
     $ionicScrollDelegate.scrollBottom(true);
   };
 

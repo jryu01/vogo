@@ -9,9 +9,19 @@ angular.module('voteit.profile', [
 
 .config(function ($stateProvider) {
   $stateProvider.state('tab.tab-profile-profile', {
-    url: '/tab-profile/profile/:id',
+    url: '/tab-profile/profile/:me',
+    params: {user: null},
     views: {
       'tab-profile': {
+        templateUrl: 'app/profile/profile.html',
+        controller: 'ProfileCtrl as ctrl'
+      }
+    }
+  });
+  $stateProvider.state('tab.tab-home-profile', {
+    params: {user: null},
+    views: {
+      'tab-home': {
         templateUrl: 'app/profile/profile.html',
         controller: 'ProfileCtrl as ctrl'
       }
@@ -21,26 +31,42 @@ angular.module('voteit.profile', [
 
 .controller('ProfileCtrl', [
   'auth',
+  'User',
   '$scope',
+  '$stateParams',
   '$ionicTabsDelegate',
-function (auth, $scope, $ionicTabsDelegate) {
+function (auth, User, $scope, $stateParams, $ionicTabsDelegate) {
   var self = this;
 
-  self.profileName = auth.getUser().name;
+  self.profileName = '';
+  self.showSetting = false;
+  self.isMyProfile = false;
 
-  self.tabs = {
-    selected: 0
-  };
+  console.log($stateParams);
 
-  self.selectTab = function (index) {
-    $ionicTabsDelegate.$getByHandle('custom-tabs-handle').select(index);
-    self.tabs.selected = index;
-  };
+  if ($stateParams.me === 'me') {
+    self.profileName = User.getMe().name;
+    self.showSetting = true;
+    self.isMyProfile = true;
+  } else {
+    self.profileName = $stateParams.user.name;
+    self.isMyProfile = 
+      ($stateParams.user.id === User.getMe().id) ? true : false;
+  }
 
-  $scope.$on('$ionicView.beforeEnter', function () {
-    if (ionic.Platform.isAndroid()) {
-      $scope.$emit('tab.show');
-    }
-  });
+  // self.tabs = {
+  //   selected: 0
+  // };
+
+  // self.selectTab = function (index) {
+  //   $ionicTabsDelegate.$getByHandle('custom-tabs-handle').select(index);
+  //   self.tabs.selected = index;
+  // };
+
+  // $scope.$on('$ionicView.beforeEnter', function () {
+  //   if (ionic.Platform.isAndroid()) {
+  //     $scope.$emit('tab.show');
+  //   }
+  // });
 
 }]);

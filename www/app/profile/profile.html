@@ -1,12 +1,13 @@
 <ion-view class="profile" view-title="{{ctrl.profileName}}">
   <ion-nav-buttons side="right">
     <a class="button button-icon icon ion-gear-a"
+        ng-if="ctrl.showSetting"
         href="#"
         ng-click="tabCtrl.go('settings')">
     </a>
   </ion-nav-buttons>
 
-  <ion-header-bar class="bar-subheader bar-light">
+<!--   <ion-header-bar class="bar-subheader bar-light">
     <div class="button-bar center">
       <a class="button button-outline button-royal active"
           ng-class="{active: ctrl.tabs.selected === 0}"
@@ -20,8 +21,9 @@
       </a>
     </div>
   </ion-header-bar>
+ -->
 
-  <ion-tabs class="has-custom-control" 
+<!--   <ion-tabs class="has-custom-control" 
             delegate-handle="custom-tabs-handle">
     <ion-tab title="My votes">
       <ion-pane> 
@@ -75,4 +77,6 @@
       </ion-pane>
     </ion-tab>
   </ion-tabs>
+ -->
+
  </ion-view>
