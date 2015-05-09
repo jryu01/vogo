@@ -36,23 +36,39 @@ angular.module('voteit.profile', [
   '$stateParams',
   '$ionicTabsDelegate',
 function (auth, User, $scope, $stateParams, $ionicTabsDelegate) {
-  var self = this;
+  var self = this, 
+      me = User.getMe(),
+      uid = '';
 
-  self.profileName = '';
+  self.profile = {};
   self.showSetting = false;
   self.isMyProfile = false;
 
-  console.log($stateParams);
+  var init = function () {
+    if ($stateParams.me === 'me') {
+      // entered by clicking profile tab
+      uid = me.id;
+      self.profile.name = me.name;
+      self.profile.picture = me.picture;
+      self.showSetting = true;
+      self.isMyProfile = true;
+    } else {
+      uid = $stateParams.user.userId;
+      self.profile.name = $stateParams.user.name;
+      self.profile.picture = $stateParams.user.picture;
+      self.isMyProfile = 
+        ($stateParams.user.userId === User.getMe().id) ? true : false;
+    }
 
-  if ($stateParams.me === 'me') {
-    self.profileName = User.getMe().name;
-    self.showSetting = true;
-    self.isMyProfile = true;
-  } else {
-    self.profileName = $stateParams.user.name;
-    self.isMyProfile = 
-      ($stateParams.user.id === User.getMe().id) ? true : false;
-  }
+    User.getProfileByUserId(uid).then(function (profile) {
+      self.profile = profile;
+    });
+  };
+  init();
+
+  // .then(function (user) {
+  //   // self.user = user;
+  // });
 
   // self.tabs = {
   //   selected: 0
@@ -69,4 +85,47 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate) {
   //   }
   // });
 
+}])
+.directive('profileShrink', [function () {
+
+  var shrink = function(header, amt, max) {
+    amt = Math.min(max, amt);
+    ionic.requestAnimationFrame(function () {
+      header.style[ionic.CSS.TRANSFORM] = 'translate3d(0, -' + amt + 'px, 0)';
+    });
+  };
+  var getParentIonContent = function (elem) {
+    var node = elem[0].parentNode;
+    while (node.nodeName.toLowerCase() !== 'ion-content') {
+      node = node.parentNode;
+    }
+    return node;
+  };
+  return {
+    restrict: 'A',
+    link: function($scope, $element, $attr) {
+      var starty = $scope.$eval($attr.profileShrink) || 0,
+          shrinkAmt,
+          maxShrinkAmt = 220,
+          ionContent = getParentIonContent($element),
+          header = ionContent.querySelector('.profile-info'),
+          headerHeight = header.offsetHeight;
+      
+      $element.bind('scroll', function (e) {
+        var scrollTop = null;
+        if (e.detail) {
+          scrollTop = e.detail.scrollTop;
+        } else if (e.target) {
+          scrollTop = e.target.scrollTop;
+        }
+        if (scrollTop > starty) {
+          // Start shrinking
+          shrinkAmt = headerHeight - Math.max(0, (starty + headerHeight) - scrollTop);
+          shrink(header, shrinkAmt, maxShrinkAmt);
+        } else {
+          shrink(header, 0, maxShrinkAmt);
+        }
+      });
+    }
+  };
 }]);

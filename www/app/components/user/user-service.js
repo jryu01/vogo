@@ -7,12 +7,14 @@ angular.module('voteit.user', ['voteit.config'])
   'Restangular',
   'config',
   '$http', 
+  '$q',
   'auth',
   '$cordovaOauth',
   'localStorageService',
-function (Restangular, config, $http, auth, $cordovaOauth, localStorageService) {
+function (Restangular, config, $http, $q, auth, $cordovaOauth, localStorageService) {
 
   var that = {};
+  var Users = Restangular.all('users');
 
   that.signin = function () {
     return $cordovaOauth
@@ -42,10 +44,25 @@ function (Restangular, config, $http, auth, $cordovaOauth, localStorageService) 
     return localStorageService.get('s3Info');
   };
 
-  that.getProfile = auth.getUser;
+  that.getProfileByUserId = function (id) {
+    var getUser = Users.get(id),
+        getFollowingCount = Users.one(id).customGET('following-count'),
+        getFollowersCount = Users.one(id).customGET('followers-count');
+    return $q.all([getUser, getFollowingCount, getFollowersCount])
+      .then(function (result) {
+        var profile = {
+          userId: id,
+          name: result[0].name,
+          picture: result[0].picture,
+          numFollowing: result[1].numberOfFollowing,
+          numFollowers: result[2].numberOfFollowers
+        };
+        return profile;
+      });
+  };
 
   that.getVotes = function () {
-    var id = that.getProfile().id;
+    var id = that.getMe().id;
     var query = { voterId: id };
     return $http.get(config.baseUrl + '/polls', {params: query});
   };

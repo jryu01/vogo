@@ -1,4 +1,4 @@
-<ion-view class="profile" view-title="{{ctrl.profileName}}">
+<ion-view class="profile" view-title="{{ctrl.profile.name}}">
   <ion-nav-buttons side="right">
     <a class="button button-icon icon ion-gear-a"
         ng-if="ctrl.showSetting"
@@ -6,28 +6,64 @@
         ng-click="tabCtrl.go('settings')">
     </a>
   </ion-nav-buttons>
-
-<!--   <ion-header-bar class="bar-subheader bar-light">
-    <div class="button-bar center">
-      <a class="button button-outline button-royal active"
-          ng-class="{active: ctrl.tabs.selected === 0}"
-          ng-click="ctrl.selectTab(0)">
-        My votes
-      </a>
-      <a class="button button-outline button-royal"
-          ng-class="{active: ctrl.tabs.selected === 1}"
-          ng-click="ctrl.selectTab(1)">
-        My polls
-      </a>
+  <ion-content scroll="false">
+    <div class="profile-info">
+      <img class="profile-picture" ng-src="{{ctrl.profile.picture}}">
+      <h3 class="profile-name" ng-bind="ctrl.profile.name"></h3>
+      <div class="profile-actions">
+        <p> {{ctrl.profile.numFollowing}} <a href="#">Following</a></p>
+        <p> {{ctrl.profile.numFollowers}} <a href="#">Followers</a></p>
+      </div>
+      <div class="button-bar center">
+        <a class="button button-outline button-royal active"
+            ng-class="{active: ctrl.tabs.selected === 0}"
+            ng-click="ctrl.selectTab(0)">
+          My votes
+        </a>
+        <a class="button button-outline button-royal"
+            ng-class="{active: ctrl.tabs.selected === 1}"
+            ng-click="ctrl.selectTab(1)">
+          My polls
+        </a>
+      </div>
     </div>
-  </ion-header-bar>
- -->
 
-<!--   <ion-tabs class="has-custom-control" 
+  <ion-tabs class="has-custom-control" 
             delegate-handle="custom-tabs-handle">
     <ion-tab title="My votes">
       <ion-pane> 
-        <ion-content ng-controller="RecentVotesCtrl as vctrl">
+        <ion-content class="nested" profile-shrink scroll-event-interval="5">
+          <div style="height: 270px"></div>
+            {{ ctrl.profile }}
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+            <p>Test Content1</p> 
+          </div>
+
+        </ion-content>
+
+<!--         <ion-content ng-controller="RecentVotesCtrl as vctrl">
           <ion-refresher on-refresh="vctrl.fetchVotedPolls(true)">
           </ion-refresher>
 
@@ -49,11 +85,20 @@
           </ion-infinite-scroll>
 
         </ion-content>
+ -->
+
       </ion-pane>
     </ion-tab>
     <ion-tab title="My polls">
       <ion-pane>
-        <ion-content ng-controller="RecentPollsCtrl as pctrl">
+
+        <ion-content class="nested">
+      {{ ctrl.profile }}
+          Test Content2
+        </ion-content>
+
+
+<!--         <ion-content ng-controller="RecentPollsCtrl as pctrl">
           <ion-refresher on-refresh="pctrl.fetchPolls(true)">
           </ion-refresher>
 
@@ -74,9 +119,13 @@
               on-infinite="pctrl.fetchPolls()">
           </ion-infinite-scroll>
         </ion-content>
+ -->
+
       </ion-pane>
     </ion-tab>
   </ion-tabs>
- -->
+
+
+  </ion-content>
 
  </ion-view>
