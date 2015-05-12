@@ -13,7 +13,8 @@ angular.module('voteit.profile.recentVotes', [
   'auth',
   'dataService',
   '$timeout',
-function ($scope, Restangular, auth, dataService, $timeout) {
+  '$ionicScrollDelegate',
+function ($scope, Restangular, auth, dataService, $timeout, $ionicScrollDelegate) {
 
   var self = this;
   var Polls = Restangular.all('polls');

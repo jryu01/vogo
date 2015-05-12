@@ -32,35 +32,27 @@
             delegate-handle="custom-tabs-handle">
     <ion-tab title="My votes">
       <ion-pane> 
-        <ion-content class="nested" profile-shrink scroll-event-interval="5">
+        <ion-content class="nested" 
+                      profile-shrink 
+                      delegate-handle="voteScroll"
+                      scroll-event-interval="5"
+                      ng-controller="RecentPollsCtrl as pctrl">
           <div style="height: 270px"></div>
-            {{ ctrl.profile }}
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-            <p>Test Content1</p> 
-          </div>
-
+        {{ ctrl.profile }}
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
+          <p>t1</p>
         </ion-content>
 
 <!--         <ion-content ng-controller="RecentVotesCtrl as vctrl">
@@ -91,10 +83,27 @@
     </ion-tab>
     <ion-tab title="My polls">
       <ion-pane>
-
-        <ion-content class="nested">
-      {{ ctrl.profile }}
-          Test Content2
+        <ion-content class="nested" 
+                      profile-shrink 
+                      delegate-handle="pollScroll"
+                      scroll-event-interval="5"
+                      ng-controller="RecentPollsCtrl as pctrl">
+          <div style="height: 270px"></div>
+        {{ ctrl.profile }}
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
+        <p>t2</p>
         </ion-content>
 
 

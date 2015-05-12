@@ -35,7 +35,8 @@ angular.module('voteit.profile', [
   '$scope',
   '$stateParams',
   '$ionicTabsDelegate',
-function (auth, User, $scope, $stateParams, $ionicTabsDelegate) {
+  '$ionicScrollDelegate',
+function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDelegate) {
   var self = this, 
       me = User.getMe(),
       uid = '';
@@ -43,6 +44,9 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate) {
   self.profile = {};
   self.showSetting = false;
   self.isMyProfile = false;
+  self.tabs = {
+    selected: 0
+  };
 
   var init = function () {
     if ($stateParams.me === 'me') {
@@ -64,34 +68,40 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate) {
       self.profile = profile;
     });
   };
+
+  var setScrollPosition = function (tabIndex) {
+    var pollScroll = $ionicScrollDelegate.$getByHandle('pollScroll'),
+        pollScrollPosition = pollScroll.getScrollPosition() || {},
+        pollScrollTop = pollScrollPosition.top || 0,
+        voteScroll = $ionicScrollDelegate.$getByHandle('voteScroll'),
+        voteScrollPosition = voteScroll.getScrollPosition() || {},
+        voteScrollTop = voteScrollPosition.top || 0,
+        maxShrinkAmt = 220;
+
+    // if (tabIndex === 0 && voteScrollTop <= maxShrinkAmt) {
+    //   voteScroll.scrollTo(0, Math.min(maxShrinkAmt, pollScrollTop));
+    // } else if (tabIndex === 1 && pollScrollTop <= maxShrinkAmt) {
+    //   pollScroll.scrollTo(0, Math.min(maxShrinkAmt, voteScrollTop));
+    // }
+      voteScroll.scrollTop();
+      pollScroll.scrollTop();
+  };
+
+  self.selectTab = function (index) {
+    setScrollPosition(index);
+    $ionicTabsDelegate.$getByHandle('custom-tabs-handle').select(index);
+    self.tabs.selected = index;
+  };
+
   init();
-
-  // .then(function (user) {
-  //   // self.user = user;
-  // });
-
-  // self.tabs = {
-  //   selected: 0
-  // };
-
-  // self.selectTab = function (index) {
-  //   $ionicTabsDelegate.$getByHandle('custom-tabs-handle').select(index);
-  //   self.tabs.selected = index;
-  // };
-
-  // $scope.$on('$ionicView.beforeEnter', function () {
-  //   if (ionic.Platform.isAndroid()) {
-  //     $scope.$emit('tab.show');
-  //   }
-  // });
 
 }])
 .directive('profileShrink', [function () {
 
-  var shrink = function(header, amt, max) {
+  var shrink = function(shrinkElem, amt, max) {
     amt = Math.min(max, amt);
     ionic.requestAnimationFrame(function () {
-      header.style[ionic.CSS.TRANSFORM] = 'translate3d(0, -' + amt + 'px, 0)';
+      shrinkElem.style[ionic.CSS.TRANSFORM] = 'translate3d(0, -' + amt + 'px, 0)';
     });
   };
   var getParentIonContent = function (elem) {
@@ -108,8 +118,11 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate) {
           shrinkAmt,
           maxShrinkAmt = 220,
           ionContent = getParentIonContent($element),
-          header = ionContent.querySelector('.profile-info'),
-          headerHeight = header.offsetHeight;
+          shrinkElem = ionContent.querySelector('.profile-info'),
+          shrinkElemHeight = shrinkElem.offsetHeight;
+          // contentHeight = $element[0].offsetHeight;
+
+      // $element[0].querySelector('.scroll').style['min-height'] = (contentHeight + maxShrinkAmt) + 'px';
       
       $element.bind('scroll', function (e) {
         var scrollTop = null;
@@ -120,10 +133,10 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate) {
         }
         if (scrollTop > starty) {
           // Start shrinking
-          shrinkAmt = headerHeight - Math.max(0, (starty + headerHeight) - scrollTop);
-          shrink(header, shrinkAmt, maxShrinkAmt);
+          shrinkAmt = shrinkElemHeight - Math.max(0, (starty + shrinkElemHeight) - scrollTop);
+          shrink(shrinkElem, shrinkAmt, maxShrinkAmt);
         } else {
-          shrink(header, 0, maxShrinkAmt);
+          shrink(shrinkElem, 0, maxShrinkAmt);
         }
       });
     }

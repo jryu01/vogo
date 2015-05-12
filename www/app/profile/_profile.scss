@@ -1,11 +1,13 @@
 .profile {
 
 }
+
 .profile .profile-info {
   background-color: #fff;
   position: relative;
   z-index: 1000;
 }
+
 .profile .profile-picture {
   // display: block;
   border-radius: 100px;
@@ -17,16 +19,26 @@
   box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
 }
 
-
 .profile ion-tabs.has-custom-control .tabs {
   display: none;
 }
+
 .profile ion-pane {
   background: transparent;
 }
+
 .profile ion-content.nested {
   bottom: 0;
 }
+
+.profile ion-content.nested .padding {
+  height: 270px;
+}
+
+// .profile ion-content.nested .scroll-refresher {
+//   top:  210px; // -60px(default) + 270px(padding)
+// }
+
 // .profile .bar-subheader {
 //   box-shadow: 0 2px 5px rgba(0,0,0,0.26);
 // }
