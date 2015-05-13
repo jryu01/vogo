@@ -71,12 +71,12 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDele
 
   var setScrollPosition = function (tabIndex) {
     var pollScroll = $ionicScrollDelegate.$getByHandle('pollScroll'),
-        pollScrollPosition = pollScroll.getScrollPosition() || {},
-        pollScrollTop = pollScrollPosition.top || 0,
-        voteScroll = $ionicScrollDelegate.$getByHandle('voteScroll'),
-        voteScrollPosition = voteScroll.getScrollPosition() || {},
-        voteScrollTop = voteScrollPosition.top || 0,
-        maxShrinkAmt = 220;
+        // pollScrollPosition = pollScroll.getScrollPosition() || {},
+        // pollScrollTop = pollScrollPosition.top || 0,
+        voteScroll = $ionicScrollDelegate.$getByHandle('voteScroll');
+        // voteScrollPosition = voteScroll.getScrollPosition() || {},
+        // voteScrollTop = voteScrollPosition.top || 0,
+        // maxShrinkAmt = 220;
 
     // if (tabIndex === 0 && voteScrollTop <= maxShrinkAmt) {
     //   voteScroll.scrollTo(0, Math.min(maxShrinkAmt, pollScrollTop));
