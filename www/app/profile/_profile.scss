@@ -35,9 +35,19 @@
   height: 270px;
 }
 
-// .profile ion-content.nested .scroll-refresher {
-//   top:  210px; // -60px(default) + 270px(padding)
-// }
+.profile ion-content.nested .scroll-refresher {
+  top:  210px; // -60px(default) + 270px(padding)
+}
+
+.profile ion-content.nested .list .thumbnail {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  max-width: 80px;
+  max-height: 80px;
+  width: 100%;
+  height: 100%; 
+}
 
 // .profile .bar-subheader {
 //   box-shadow: 0 2px 5px rgba(0,0,0,0.26);

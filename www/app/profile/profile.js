@@ -69,7 +69,7 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDele
     });
   };
 
-  var setScrollPosition = function (tabIndex) {
+  var setScrollPosition = function () {
     var pollScroll = $ionicScrollDelegate.$getByHandle('pollScroll'),
         // pollScrollPosition = pollScroll.getScrollPosition() || {},
         // pollScrollTop = pollScrollPosition.top || 0,

@@ -18,12 +18,12 @@
         <a class="button button-outline button-royal active"
             ng-class="{active: ctrl.tabs.selected === 0}"
             ng-click="ctrl.selectTab(0)">
-          My votes
+          Votes
         </a>
         <a class="button button-outline button-royal"
             ng-class="{active: ctrl.tabs.selected === 1}"
             ng-click="ctrl.selectTab(1)">
-          My polls
+          Polls
         </a>
       </div>
     </div>
@@ -36,99 +36,66 @@
                       profile-shrink 
                       delegate-handle="voteScroll"
                       scroll-event-interval="5"
-                      ng-controller="RecentPollsCtrl as pctrl">
+                      ng-controller="RecentVotesCtrl as vctrl">
           <div class="padding"></div>
-        {{ ctrl.profile }}
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-          <p>t1</p>
-        </ion-content>
-
-<!--         <ion-content ng-controller="RecentVotesCtrl as vctrl">
-          <ion-refresher on-refresh="vctrl.fetchVotedPolls(true)">
+          <ion-refresher on-refresh="vctrl.fetchVotes(true)">
           </ion-refresher>
 
-          <div class="spinner-wrapper"
-              ng-if="vctrl.polls.length === 0 && !vctrl.noMoreData">
-            <ion-spinner></ion-spinner>
-          </div>
-       
           <div class="list">
-            <div class="item poll-card-wrapper"
-                  collection-repeat="poll in vctrl.polls">
-              <vo-poll-card poll-data="poll"></vo-poll-card>
-            </div>
+            <a class="item item-thumbnail-left" 
+                href="#" 
+                collection-repeat="vote in vctrl.votes">
+              <vo-card-img class="thumbnail" 
+                            src1="{{vote._poll.answer1.picture}}"
+                            src2="{{vote._poll.answer2.picture}}">
+              </vo-card-img>
+              <h2>{{ vote._poll.question }}</h2>
+              <p>
+                {{vote._poll.answer1.numVotes + vote._poll.answer2.numVotes}} hits
+              </p>
+            </a>
           </div>
 
           <ion-infinite-scroll
-              ng-if="vctrl.polls.length > 0 && !vctrl.noMoreData"
-              on-infinite="vctrl.fetchVotedPolls()">
+              ng-if="!vctrl.noMoreData"
+              on-infinite="vctrl.fetchVotes()">
           </ion-infinite-scroll>
 
         </ion-content>
- -->
 
       </ion-pane>
     </ion-tab>
     <ion-tab title="My polls">
       <ion-pane>
+
         <ion-content class="nested" 
                       profile-shrink 
                       delegate-handle="pollScroll"
                       scroll-event-interval="5"
                       ng-controller="RecentPollsCtrl as pctrl">
           <div class="padding"></div>
-        {{ ctrl.profile }}
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        <p>t2</p>
-        </ion-content>
-
-
-<!--         <ion-content ng-controller="RecentPollsCtrl as pctrl">
           <ion-refresher on-refresh="pctrl.fetchPolls(true)">
           </ion-refresher>
 
-          <div class="spinner-wrapper"
-              ng-if="pctrl.polls.length === 0 && !pctrl.noMoreData">
-            <ion-spinner></ion-spinner>
-          </div>
-
           <div class="list">
-            <div class="item poll-card-wrapper"
-                  collection-repeat="poll in pctrl.polls">
-              <vo-poll-card poll-data="poll"></vo-poll-card>
-            </div>
+            <a class="item item-thumbnail-left" href="#" collection-repeat="poll in pctrl.polls">
+              <vo-card-img class="thumbnail" 
+                            src1="{{poll.answer1.picture}}"
+                            src2="{{poll.answer2.picture}}">
+              </vo-card-img>
+              <h2>{{ poll.question }}</h2>
+              <p>
+                {{poll.answer1.numVotes + poll.answer2.numVotes}} hits
+              </p>
+            </a>
           </div>
 
           <ion-infinite-scroll
-              ng-if="pctrl.polls.length > 0 && !pctrl.noMoreData"
+              ng-if="!pctrl.noMoreData"
               on-infinite="pctrl.fetchPolls()">
           </ion-infinite-scroll>
+
         </ion-content>
- -->
 
       </ion-pane>
     </ion-tab>

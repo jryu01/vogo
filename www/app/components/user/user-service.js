@@ -67,5 +67,17 @@ function (Restangular, config, $http, $q, auth, $cordovaOauth, localStorageServi
     return $http.get(config.baseUrl + '/polls', {params: query});
   };
 
+  that.getVotesById = function (id, before) {
+    var query = {};
+    query.before = before; // before is vote id
+    return Users.one(id).getList('votes', query);
+  };
+  
+  that.getPollsById = function (id, before) {
+    var query = {};
+    query.before = before; // before is poll id
+    return Users.one(id).getList('polls', query);
+  };
+
   return that;
 }]);

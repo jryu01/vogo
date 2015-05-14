@@ -8,46 +8,26 @@ angular.module('voteit.profile.recentPolls', [
 
 .controller('RecentPollsCtrl', [
   '$scope', 
-  'Restangular',
-  'dataService', 
-  '$timeout',
-function ($scope, Restangular, dataService, $timeout) {
+  '$stateParams',
+  'User',
+function ($scope, $stateParams, User) {
 
-  var self = this;
-  var MyPolls = Restangular.all('me/polls');
+  var self = this,
+      user = $stateParams.user || User.getMe(),
+      uid =  user.userId || user.id;
 
   self.polls = [];
   self.noMoreData = false;
 
   self.fetchPolls = function (refresh) {
-    var query = {};
-    if (!refresh && self.polls.length > 0) {
-      query.before = self.polls[self.polls.length -1].updatedAt;
-    }
-    var start = Date.now();
-    MyPolls.getList(query).then(function (polls) {
-      var queryTime = Date.now() - start;
+    var lastVote = (!refresh && self.polls[self.polls.length - 1]) || {},
+        done = (refresh) ? 'scroll.refreshComplete' : 
+                           'scroll.infiniteScrollComplete';
+    User.getPollsById(uid, lastVote.id).then(function (polls) {
       self.noMoreData = (polls.length === 0);
-      if (refresh) {
-        $timeout(function () {
-          self.polls = polls;
-          $scope.$broadcast('scroll.refreshComplete');
-          dataService.setData('myPolls', self.polls);
-        }, queryTime > 700 ? 0 : 700 - queryTime); // wait atleast 700 ms
-      } else {
-        self.polls = self.polls.concat(polls);
-        $scope.$broadcast('scroll.infiniteScrollComplete');
-        dataService.setData('myPolls', self.polls);
-      }
+      self.polls = (refresh) ? polls : self.polls.concat(polls);
+      $scope.$broadcast(done);
     });
   };
-  var init = function () {
-    self.polls = dataService.getData('myPolls') || [];
-    if (self.polls.length === 0) {
-      self.fetchPolls(true);
-    } else {
-      self.polls.length = 10; // limit to 10 items
-    }
-  };
-  init();
+
 }]);
