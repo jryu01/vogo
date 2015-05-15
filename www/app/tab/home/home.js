@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('voteit.home', [
-  'ionic',
+angular.module('voteit.tab.home', [
   'ionic.contrib.ui.cards'
 ])
 
@@ -10,7 +9,7 @@ angular.module('voteit.home', [
     url: '/tab-home/home',
     views: {
       'tab-home': {
-        templateUrl: 'app/home/home.html',
+        templateUrl: 'app/tab/home/home.html',
         controller: 'HomeCtrl as ctrl'
       }
     }
@@ -42,7 +41,7 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
   };
 
   $ionicModal
-  .fromTemplateUrl('app/home/create-poll-modal.html', {
+  .fromTemplateUrl('app/tab/home/create-poll-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function (modal) {

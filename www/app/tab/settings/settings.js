@@ -1,9 +1,7 @@
 'use strict';
 
-angular.module('voteit.settings', [
-  'ionic',
-  'restangular',
-  'voteit.settings.about'
+angular.module('voteit.tab.settings', [
+  'restangular'
 ])
 
 .config(function ($stateProvider) {
@@ -11,7 +9,7 @@ angular.module('voteit.settings', [
     url: '/tab-profile/settings',
     views: {
       'tab-profile': {
-        templateUrl: 'app/settings/settings.html',
+        templateUrl: 'app/tab/settings/settings.html',
         controller: 'SettingsCtrl as ctrl'
       }
     }

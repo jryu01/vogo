@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('voteit.profile.recentPolls', [
+angular.module('voteit.tab.profile.recentPolls', [
   'ionic',
   'restangular',
   'voteit.pollCard'

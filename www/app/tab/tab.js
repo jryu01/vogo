@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('voteit.tab', [
-  'ionic',
+  'voteit.tab.comments',
+  'voteit.tab.home',
+  'voteit.tab.profile',
+  'voteit.tab.settings',
+  'voteit.tab.about'
 ])
 
 .config(['$stateProvider', function ($stateProvider) {
@@ -23,8 +27,7 @@ angular.module('voteit.tab', [
   '$scope', 
   '$ionicHistory',
   '$state',
-  'User',
-function ($scope, $ionicHistory, $state, User) {
+function ($scope, $ionicHistory, $state) {
   var self = this;  
 
   self.hideTab = false;

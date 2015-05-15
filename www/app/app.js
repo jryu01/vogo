@@ -16,13 +16,7 @@ angular.module('voteit', [
 
   //subsections
   'voteit.login',
-
-  // inside tabs
   'voteit.tab',
-  'voteit.home',
-  'voteit.profile',
-  'voteit.comments',
-  'voteit.settings',
 ])
 // Platform specific settings
 .config([

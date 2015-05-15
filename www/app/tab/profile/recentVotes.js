@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('voteit.profile.recentVotes', [
+angular.module('voteit.tab.profile.recentVotes', [
   'ionic',
   'restangular',
   'voteit.pollCard',
@@ -26,7 +26,6 @@ function ($scope, auth, User, $stateParams) {
         done = (refresh) ? 'scroll.refreshComplete' : 
                            'scroll.infiniteScrollComplete';
     User.getVotesById(uid, lastVote.id).then(function (votes) {
-      console.log(votes[0]._poll);
       self.noMoreData = (votes.length === 0);
       self.votes = (refresh) ? votes : self.votes.concat(votes);
       $scope.$broadcast(done);

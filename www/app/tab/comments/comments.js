@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('voteit.comments', [])
+angular.module('voteit.tab.comments', [])
 
 .config(function ($stateProvider) {
   $stateProvider.state('tab.tab-home-comments', {
@@ -8,7 +8,7 @@ angular.module('voteit.comments', [])
     params: {poll: null},
     views: {
       'tab-home': {
-        templateUrl: 'app/comments/comments.html',
+        templateUrl: 'app/tab/comments/comments.html',
         controller: 'CommentsCtrl as ctrl'
       }
     }

@@ -1,0 +1,50 @@
+.profile {
+
+}
+
+.profile .profile-info {
+  background-color: #fff;
+  position: relative;
+  z-index: 1000;
+}
+
+.profile .profile-picture {
+  // display: block;
+  border-radius: 100px;
+  border: 1px solid #fff;
+  width: 80px;
+  height: 80px;
+  margin: 10px 0 0 10px;
+  // margin: 30px auto 0;
+  box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+}
+
+.profile ion-tabs.has-custom-control .tabs {
+  display: none;
+}
+
+.profile ion-pane {
+  background: transparent;
+}
+
+.profile ion-content.nested {
+  bottom: 0;
+}
+
+.profile ion-content.nested .padding {
+  height: 270px;
+}
+
+.profile ion-content.nested .scroll-refresher {
+  top:  210px; // -60px(default) + 270px(padding)
+}
+
+.profile ion-content.nested .list .thumbnail {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  max-width: 80px;
+  max-height: 80px;
+  width: 100%;
+  height: 100%; 
+}

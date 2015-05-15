@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('voteit.settings.about', [])
+angular.module('voteit.tab.about', [])
 
 .config(function ($stateProvider) {
   $stateProvider.state('tab.about', {
     url: '/about',
     views: {
       'tab-profile': {
-        templateUrl: 'app/settings/about/about.html',
+        templateUrl: 'app/tab/about/about.html',
         controller: 'AboutCtrl as ctrl'
       }
     }

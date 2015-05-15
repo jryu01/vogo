@@ -1,0 +1,106 @@
+<ion-view class="profile" view-title="{{ctrl.profile.name}}">
+  <ion-nav-buttons side="right">
+    <a class="button button-icon icon ion-gear-a"
+        ng-if="ctrl.showSetting"
+        href="#"
+        ng-click="tabCtrl.go('settings')">
+    </a>
+  </ion-nav-buttons>
+  <ion-content scroll="false">
+    <div class="profile-info">
+      <img class="profile-picture" ng-src="{{ctrl.profile.picture}}">
+      <h3 class="profile-name" ng-bind="ctrl.profile.name"></h3>
+      <div class="profile-actions">
+        <p> {{ctrl.profile.numFollowing}} <a href="#">Following</a></p>
+        <p> {{ctrl.profile.numFollowers}} <a href="#">Followers</a></p>
+      </div>
+      <div class="button-bar center">
+        <a class="button button-outline button-royal active"
+            ng-class="{active: ctrl.tabs.selected === 0}"
+            ng-click="ctrl.selectTab(0)">
+          Votes
+        </a>
+        <a class="button button-outline button-royal"
+            ng-class="{active: ctrl.tabs.selected === 1}"
+            ng-click="ctrl.selectTab(1)">
+          Polls
+        </a>
+      </div>
+    </div>
+
+    <ion-tabs class="has-custom-control" 
+              delegate-handle="custom-tabs-handle">
+      <ion-tab title="My votes">
+        <ion-pane> 
+          <ion-content class="nested" 
+                        profile-shrink 
+                        delegate-handle="voteScroll"
+                        scroll-event-interval="5"
+                        ng-controller="RecentVotesCtrl as vctrl">
+            <div class="padding"></div>
+            <ion-refresher on-refresh="vctrl.fetchVotes(true)">
+            </ion-refresher>
+
+            <div class="list">
+              <a class="item item-thumbnail-left" 
+                  href="#" 
+                  collection-repeat="vote in vctrl.votes">
+                <vo-card-img class="thumbnail" 
+                              src1="{{vote._poll.answer1.picture}}"
+                              src2="{{vote._poll.answer2.picture}}">
+                </vo-card-img>
+                <h2>{{ vote._poll.question }}</h2>
+                <p>
+                  {{vote._poll.answer1.numVotes + vote._poll.answer2.numVotes}} hits
+                </p>
+              </a>
+            </div>
+
+            <ion-infinite-scroll
+                ng-if="!vctrl.noMoreData"
+                on-infinite="vctrl.fetchVotes()">
+            </ion-infinite-scroll>
+
+          </ion-content>
+
+        </ion-pane>
+      </ion-tab>
+      <ion-tab title="My polls">
+        <ion-pane>
+
+          <ion-content class="nested" 
+                        profile-shrink 
+                        delegate-handle="pollScroll"
+                        scroll-event-interval="5"
+                        ng-controller="RecentPollsCtrl as pctrl">
+            <div class="padding"></div>
+            <ion-refresher on-refresh="pctrl.fetchPolls(true)">
+            </ion-refresher>
+
+            <div class="list">
+              <a class="item item-thumbnail-left" href="#" collection-repeat="poll in pctrl.polls">
+                <vo-card-img class="thumbnail" 
+                              src1="{{poll.answer1.picture}}"
+                              src2="{{poll.answer2.picture}}">
+                </vo-card-img>
+                <h2>{{ poll.question }}</h2>
+                <p>
+                  {{poll.answer1.numVotes + poll.answer2.numVotes}} hits
+                </p>
+              </a>
+            </div>
+
+            <ion-infinite-scroll
+                ng-if="!pctrl.noMoreData"
+                on-infinite="pctrl.fetchPolls()">
+            </ion-infinite-scroll>
+
+          </ion-content>
+
+        </ion-pane>
+      </ion-tab>
+    </ion-tabs>
+
+  </ion-content>
+
+ </ion-view>

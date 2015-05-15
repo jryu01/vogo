@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('voteit.profile', [
+angular.module('voteit.tab.profile', [
   'ionic',
   'voteit.auth',
-  'voteit.profile.recentPolls',
-  'voteit.profile.recentVotes'
+  'voteit.tab.profile.recentPolls',
+  'voteit.tab.profile.recentVotes'
 ])
 
 .config(function ($stateProvider) {
@@ -13,7 +13,7 @@ angular.module('voteit.profile', [
     params: {user: null},
     views: {
       'tab-profile': {
-        templateUrl: 'app/profile/profile.html',
+        templateUrl: 'app/tab/profile/profile.html',
         controller: 'ProfileCtrl as ctrl'
       }
     }
@@ -22,7 +22,7 @@ angular.module('voteit.profile', [
     params: {user: null},
     views: {
       'tab-home': {
-        templateUrl: 'app/profile/profile.html',
+        templateUrl: 'app/tab/profile/profile.html',
         controller: 'ProfileCtrl as ctrl'
       }
     }
@@ -71,18 +71,7 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDele
 
   var setScrollPosition = function () {
     var pollScroll = $ionicScrollDelegate.$getByHandle('pollScroll'),
-        // pollScrollPosition = pollScroll.getScrollPosition() || {},
-        // pollScrollTop = pollScrollPosition.top || 0,
         voteScroll = $ionicScrollDelegate.$getByHandle('voteScroll');
-        // voteScrollPosition = voteScroll.getScrollPosition() || {},
-        // voteScrollTop = voteScrollPosition.top || 0,
-        // maxShrinkAmt = 220;
-
-    // if (tabIndex === 0 && voteScrollTop <= maxShrinkAmt) {
-    //   voteScroll.scrollTo(0, Math.min(maxShrinkAmt, pollScrollTop));
-    // } else if (tabIndex === 1 && pollScrollTop <= maxShrinkAmt) {
-    //   pollScroll.scrollTo(0, Math.min(maxShrinkAmt, voteScrollTop));
-    // }
       voteScroll.scrollTop();
       pollScroll.scrollTop();
   };
@@ -133,7 +122,7 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDele
         }
         if (scrollTop > starty) {
           // Start shrinking
-          shrinkAmt = shrinkElemHeight - Math.max(0, (starty + shrinkElemHeight) - scrollTop);
+          shrinkAmt = shrinkElemHeight - Math.max(0, shrinkElemHeight - scrollTop);
           shrink(shrinkElem, shrinkAmt, maxShrinkAmt);
         } else {
           shrink(shrinkElem, 0, maxShrinkAmt);
