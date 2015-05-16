@@ -13,6 +13,16 @@ angular.module('voteit.tab.comments', [])
       }
     }
   });
+  $stateProvider.state('tab.tab-profile-comments', {
+    url: '/tab-profile/comments',
+    params: {poll: null},
+    views: {
+      'tab-profile': {
+        templateUrl: 'app/tab/comments/comments.html',
+        controller: 'CommentsCtrl as ctrl'
+      }
+    }
+  });
 })
 
 .controller('CommentsCtrl', [
@@ -46,5 +56,8 @@ function ($scope, Polls, $stateParams, $ionicScrollDelegate) {
 
   $scope.$on('$ionicView.beforeEnter', function () {
     $scope.$emit('tab.hide');
+  });
+  $scope.$on('$ionicView.beforeLeave', function () {
+    $scope.$emit('tab.show');
   });
 }]);

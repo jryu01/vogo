@@ -9,8 +9,8 @@ angular.module('voteit.tab.profile', [
 
 .config(function ($stateProvider) {
   $stateProvider.state('tab.tab-profile-profile', {
-    url: '/tab-profile/profile/:me',
-    params: {user: null},
+    url: '/tab-profile/profile',
+    params: { user: null, settings: false },
     views: {
       'tab-profile': {
         templateUrl: 'app/tab/profile/profile.html',
@@ -18,8 +18,10 @@ angular.module('voteit.tab.profile', [
       }
     }
   });
+
   $stateProvider.state('tab.tab-home-profile', {
-    params: {user: null},
+    url: '/tab-home/profile',
+    params: { user: null },
     views: {
       'tab-home': {
         templateUrl: 'app/tab/profile/profile.html',
@@ -38,31 +40,18 @@ angular.module('voteit.tab.profile', [
   '$ionicScrollDelegate',
 function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDelegate) {
   var self = this, 
-      me = User.getMe(),
       uid = '';
 
-  self.profile = {};
-  self.showSetting = false;
-  self.isMyProfile = false;
-  self.tabs = {
-    selected: 0
-  };
-
   var init = function () {
-    if ($stateParams.me === 'me') {
-      // entered by clicking profile tab
-      uid = me.id;
-      self.profile.name = me.name;
-      self.profile.picture = me.picture;
-      self.showSetting = true;
-      self.isMyProfile = true;
-    } else {
-      uid = $stateParams.user.userId;
-      self.profile.name = $stateParams.user.name;
-      self.profile.picture = $stateParams.user.picture;
-      self.isMyProfile = 
-        ($stateParams.user.userId === User.getMe().id) ? true : false;
-    }
+    self.tabs = {
+      selected: 0
+    };
+    uid = $stateParams.user.userId || $stateParams.user.id;
+    self.profile = {};
+    self.profile.name = $stateParams.user.name;
+    self.profile.picture = $stateParams.user.picture;
+    self.showSetting = $stateParams.settings;
+    self.isMyProfile = (uid === User.getMe().id) ? true : false;
 
     User.getProfileByUserId(uid).then(function (profile) {
       self.profile = profile;
@@ -128,6 +117,65 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDele
           shrink(shrinkElem, 0, maxShrinkAmt);
         }
       });
+    }
+  };
+}])
+
+.factory('voTabsDelegate', [function () {
+  return {};
+}])
+.directive('voTabs', [
+  'voTabsDelegate',
+function (voTabsDelegate) {
+  return {
+    restrict: 'E',
+    scope: true,
+    transclude: true,
+    template: '<div class="tab-headers">' +
+      '  <div ng-repeat="tab in tabs"' +
+      '       style="z-index: 2000;"' + 
+      '       ng-click="selectTab($index)"' +
+      // '       ng-class="{selected: isSelectedTab($index)}">' +
+      '     <span ng-bind="tab.title"></span>' +
+      '  </div>' +
+      '</div>' +
+      '<div ng-transclude></div> ',
+    controller: function ($scope) {
+      var self = this,
+          currentIndex = 0;  
+      $scope.tabs = [];
+
+      self.registerTab = function (title, scope) {
+        if ($scope.tabs.length === 0) {
+          scope.$element.css({ display: 'block'});
+        } else {
+          scope.$element.css({ display: 'none'});
+        }
+        $scope.tabs.push({title: title, scope: scope});
+      };
+
+      $scope.selectTab = function (index) {
+        currentIndex = index;
+        $scope.tabs.forEach(function (tab, i) {
+          var display = (currentIndex === i) ? 'block': 'none';
+          tab.scope.$element.css({ display: display });
+        });
+      };
+    }
+  };
+}])
+
+.directive('voTab', [
+function () {
+  return {
+    restrict: 'E',
+    transclude: true,
+    template: '<div ng-transclude><div>',
+    require: '^voTabs',
+    scope: true,
+    link: function ($scope, $element, $attr, tabCtrl) {
+      $scope.$element = $element;
+      tabCtrl.registerTab($attr.title, $scope);   
     }
   };
 }]);

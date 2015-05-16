@@ -28,22 +28,27 @@
       </div>
     </div>
 
-    <ion-tabs class="has-custom-control" 
-              delegate-handle="custom-tabs-handle">
-      <ion-tab title="My votes">
-        <ion-pane> 
+    <!-- <ion-tabs class="has-custom-control"  -->
+              <!-- delegate-handle="custom-tabs-handle"> -->
+      <!-- <ion-tab title="Votes"> -->
+    <vo-tabs>
+      <vo-tab title="tab1">
+        <div> <p>test1</p></div>
+     
+      <!--   <ion-pane ng-controller="RecentVotesCtrl as vctrl"> 
           <ion-content class="nested" 
                         profile-shrink 
                         delegate-handle="voteScroll"
-                        scroll-event-interval="5"
-                        ng-controller="RecentVotesCtrl as vctrl">
+                        scroll-event-interval="5">
             <div class="padding"></div>
+            <div style="padding-top: 90px"></div>
             <ion-refresher on-refresh="vctrl.fetchVotes(true)">
             </ion-refresher>
 
             <div class="list">
               <a class="item item-thumbnail-left" 
                   href="#" 
+                  ng-click="tabCtrl.go('pollcard', { poll: vote._poll })"
                   collection-repeat="vote in vctrl.votes">
                 <vo-card-img class="thumbnail" 
                               src1="{{vote._poll.answer1.picture}}"
@@ -63,22 +68,30 @@
 
           </ion-content>
 
-        </ion-pane>
-      </ion-tab>
-      <ion-tab title="My polls">
-        <ion-pane>
+        </ion-pane> -->
+
+
+
+      </vo-tab>
+      <vo-tab title="tab2">
+        <div> <p>test2</p></div>
+
+    <!--     <ion-pane ng-controller="RecentPollsCtrl as pctrl">
 
           <ion-content class="nested" 
                         profile-shrink 
                         delegate-handle="pollScroll"
-                        scroll-event-interval="5"
-                        ng-controller="RecentPollsCtrl as pctrl">
+                        scroll-event-interval="5">
             <div class="padding"></div>
+            <div style="padding-top: 90px"></div>
             <ion-refresher on-refresh="pctrl.fetchPolls(true)">
             </ion-refresher>
 
             <div class="list">
-              <a class="item item-thumbnail-left" href="#" collection-repeat="poll in pctrl.polls">
+              <a class="item item-thumbnail-left" 
+                  href="#" 
+                  ng-click="tabCtrl.go('pollcard', { poll: poll })"
+                  collection-repeat="poll in pctrl.polls">
                 <vo-card-img class="thumbnail" 
                               src1="{{poll.answer1.picture}}"
                               src2="{{poll.answer2.picture}}">
@@ -97,9 +110,10 @@
 
           </ion-content>
 
-        </ion-pane>
-      </ion-tab>
-    </ion-tabs>
+        </ion-pane> -->
+
+      </vo-tab>
+    </vo-tabs>
 
   </ion-content>
 
