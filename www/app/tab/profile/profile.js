@@ -66,8 +66,7 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDele
   };
 
   self.selectTab = function (index) {
-    // setScrollPosition(index);
-    // $ionicTabsDelegate.$getByHandle('custom-tabs-handle').select(index);
+    setScrollPosition(index);
     self.tabs.selected = index;
     $scope.$broadcast('votabs.select', index);
   };
@@ -156,6 +155,7 @@ function () {
           tab.scope.$tabSelected = currentIndex === i;
         });
       };
+
       $scope.$on('votabs.select', function (e, index) {
         $scope.selectTab(index);
       });
@@ -179,7 +179,7 @@ function ($compile) {
       }
       tabContentEle.style.display = 'none';
       element.empty();
-      
+
       return function link($scope, $element, $attr, tabsCtrl) {
         var childScope,
             childElement,
@@ -207,7 +207,9 @@ function ($compile) {
               childElement.css({ display: 'block'});
             }
           } else {
-            childElement.css({ display: 'none'});
+            if (childElement) {
+              childElement.css({ display: 'none'});
+            }
           }
         }
         $scope.$watch('$tabSelected', tabSelected);
