@@ -66,9 +66,10 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDele
   };
 
   self.selectTab = function (index) {
-    setScrollPosition(index);
-    $ionicTabsDelegate.$getByHandle('custom-tabs-handle').select(index);
+    // setScrollPosition(index);
+    // $ionicTabsDelegate.$getByHandle('custom-tabs-handle').select(index);
     self.tabs.selected = index;
+    $scope.$broadcast('votabs.select', index);
   };
 
   init();
@@ -121,61 +122,96 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDele
   };
 }])
 
-.factory('voTabsDelegate', [function () {
-  return {};
-}])
 .directive('voTabs', [
-  'voTabsDelegate',
-function (voTabsDelegate) {
+function () {
   return {
     restrict: 'E',
     scope: true,
     transclude: true,
-    template: '<div class="tab-headers">' +
-      '  <div ng-repeat="tab in tabs"' +
-      '       style="z-index: 2000;"' + 
-      '       ng-click="selectTab($index)"' +
+    // template: '<div class="tab-headers">' +
+      // '  <div ng-repeat="tab in tabs"' +
+      // '       style="z-index: 2000;"' + 
+      // '       ng-click="selectTab($index)"' +
       // '       ng-class="{selected: isSelectedTab($index)}">' +
-      '     <span ng-bind="tab.title"></span>' +
-      '  </div>' +
-      '</div>' +
-      '<div ng-transclude></div> ',
+      // '     <span ng-bind="tab.title"></span>' +
+      // '  </div>' +
+      // '</div>' +
+      // '<div ng-transclude></div> ',
+    template: '<div ng-transclude></div>',
     controller: function ($scope) {
       var self = this,
           currentIndex = 0;  
       $scope.tabs = [];
 
-      self.registerTab = function (title, scope) {
-        if ($scope.tabs.length === 0) {
-          scope.$element.css({ display: 'block'});
-        } else {
-          scope.$element.css({ display: 'none'});
+      self.registerTab = function (scope) {
+        $scope.tabs.push({scope: scope});
+        if ($scope.tabs.length === 1) {
+          $scope.selectTab(0);
         }
-        $scope.tabs.push({title: title, scope: scope});
       };
 
       $scope.selectTab = function (index) {
         currentIndex = index;
         $scope.tabs.forEach(function (tab, i) {
-          var display = (currentIndex === i) ? 'block': 'none';
-          tab.scope.$element.css({ display: display });
+          tab.scope.$tabSelected = currentIndex === i;
         });
       };
+      $scope.$on('votabs.select', function (e, index) {
+        $scope.selectTab(index);
+      });
     }
   };
 }])
 
 .directive('voTab', [
-function () {
+  '$compile',
+function ($compile) {
   return {
     restrict: 'E',
-    transclude: true,
-    template: '<div ng-transclude><div>',
     require: '^voTabs',
     scope: true,
-    link: function ($scope, $element, $attr, tabCtrl) {
-      $scope.$element = $element;
-      tabCtrl.registerTab($attr.title, $scope);   
+    compile: function (element) {
+
+      // Remove the contents of the element so we can compile them later, if tab is selected
+      var tabContentEle = document.createElement('div');
+      for (var i = 0; i < element[0].children.length; i++) {
+        tabContentEle.appendChild(element[0].children[i].cloneNode(true));
+      }
+      tabContentEle.style.display = 'none';
+      element.empty();
+      
+      return function link($scope, $element, $attr, tabsCtrl) {
+        var childScope,
+            childElement,
+            isTabContentAttached = false;
+        $scope.$tabSelected = false;
+   
+        tabsCtrl.registerTab($scope);   
+
+        function tabSelected(isSelected) {
+          if (isSelected) {
+            // this tab is being selected
+
+            // check if the tab is already in the DOM
+            // only do this if the tab has child elements
+            if (!isTabContentAttached) {
+              // tab should be selected and is NOT in the DOM
+              // create a new scope and append it
+              childScope = $scope.$new();
+              childElement = angular.element(tabContentEle);
+              childElement.css({ display: 'block' });
+              $element.append(childElement);
+              $compile(childElement)(childScope);
+              isTabContentAttached = true;
+            } else if (isTabContentAttached && childElement) {
+              childElement.css({ display: 'block'});
+            }
+          } else {
+            childElement.css({ display: 'none'});
+          }
+        }
+        $scope.$watch('$tabSelected', tabSelected);
+      };
     }
   };
 }]);

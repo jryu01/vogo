@@ -32,16 +32,13 @@
               <!-- delegate-handle="custom-tabs-handle"> -->
       <!-- <ion-tab title="Votes"> -->
     <vo-tabs>
-      <vo-tab title="tab1">
-        <div> <p>test1</p></div>
-     
-      <!--   <ion-pane ng-controller="RecentVotesCtrl as vctrl"> 
+      <vo-tab>
+        <ion-pane ng-controller="RecentVotesCtrl as vctrl"> 
           <ion-content class="nested" 
                         profile-shrink 
                         delegate-handle="voteScroll"
                         scroll-event-interval="5">
             <div class="padding"></div>
-            <div style="padding-top: 90px"></div>
             <ion-refresher on-refresh="vctrl.fetchVotes(true)">
             </ion-refresher>
 
@@ -68,22 +65,19 @@
 
           </ion-content>
 
-        </ion-pane> -->
+        </ion-pane>
 
 
 
       </vo-tab>
-      <vo-tab title="tab2">
-        <div> <p>test2</p></div>
-
-    <!--     <ion-pane ng-controller="RecentPollsCtrl as pctrl">
+      <vo-tab>
+        <ion-pane ng-controller="RecentPollsCtrl as pctrl">
 
           <ion-content class="nested" 
                         profile-shrink 
                         delegate-handle="pollScroll"
                         scroll-event-interval="5">
             <div class="padding"></div>
-            <div style="padding-top: 90px"></div>
             <ion-refresher on-refresh="pctrl.fetchPolls(true)">
             </ion-refresher>
 
@@ -110,7 +104,7 @@
 
           </ion-content>
 
-        </ion-pane> -->
+        </ion-pane>
 
       </vo-tab>
     </vo-tabs>
