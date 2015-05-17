@@ -44,7 +44,7 @@ function ($scope, $ionicHistory, $state, User) {
   };
 
   self.selectProfileTab = function () {
-    $state.go('tab.tab-profile-profile', { user: self.me, settings: true });
+    $state.go('tab.tab-profile-profile', { id: self.me.id, user: self.me });
   };
 
 

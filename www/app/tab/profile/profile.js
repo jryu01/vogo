@@ -10,7 +10,7 @@ angular.module('voteit.tab.profile', [
 .config(function ($stateProvider) {
   $stateProvider.state('tab.tab-profile-profile', {
     url: '/tab-profile/profile',
-    params: { user: null, settings: false },
+    params: { id: '', user: null },
     views: {
       'tab-profile': {
         templateUrl: 'app/tab/profile/profile.html',
@@ -21,7 +21,7 @@ angular.module('voteit.tab.profile', [
 
   $stateProvider.state('tab.tab-home-profile', {
     url: '/tab-home/profile',
-    params: { user: null },
+    params: { id: '', user: null },
     views: {
       'tab-home': {
         templateUrl: 'app/tab/profile/profile.html',
@@ -50,8 +50,9 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDele
     self.profile = {};
     self.profile.name = $stateParams.user.name;
     self.profile.picture = $stateParams.user.picture;
-    self.showSetting = $stateParams.settings;
+    // self.showSetting = $stateParams.settings;
     self.isMyProfile = (uid === User.getMe().id) ? true : false;
+    self.showSetting = self.isMyProfile;
 
     User.getProfileByUserId(uid).then(function (profile) {
       self.profile = profile;

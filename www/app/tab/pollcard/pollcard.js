@@ -5,7 +5,7 @@ angular.module('voteit.tab.pollcard', [])
 .config(function ($stateProvider) {
   $stateProvider.state('tab.tab-home-pollcard', {
     url: '/tab-home/pollcard',
-    params: {poll: null},
+    params: { id: '', poll: null },
     views: {
       'tab-home': {
         templateUrl: 'app/tab/pollcard/pollcard.html',
@@ -15,7 +15,7 @@ angular.module('voteit.tab.pollcard', [])
   });
   $stateProvider.state('tab.tab-profile-pollcard', {
     url: '/tab-profile/pollcard',
-    params: {poll: null},
+    params: { id: '', poll: null },
     views: {
       'tab-profile': {
         templateUrl: 'app/tab/pollcard/pollcard.html',

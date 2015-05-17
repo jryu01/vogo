@@ -42,7 +42,7 @@
             <div class="list">
               <a class="item item-thumbnail-left" 
                   href="#" 
-                  ng-click="tabCtrl.go('pollcard', { poll: vote._poll })"
+                  ng-click="tabCtrl.go('pollcard', { id: vote._poll.id, poll: vote._poll })"
                   collection-repeat="vote in vctrl.votes">
                 <vo-card-img class="thumbnail" 
                               src1="{{vote._poll.answer1.picture}}"
@@ -64,8 +64,6 @@
 
         </ion-pane>
 
-
-
       </vo-tab>
       <vo-tab>
         <ion-pane ng-controller="RecentPollsCtrl as pctrl">
@@ -81,7 +79,7 @@
             <div class="list">
               <a class="item item-thumbnail-left" 
                   href="#" 
-                  ng-click="tabCtrl.go('pollcard', { poll: poll })"
+                  ng-click="tabCtrl.go('pollcard', { id: poll.id, poll: poll })"
                   collection-repeat="poll in pctrl.polls">
                 <vo-card-img class="thumbnail" 
                               src1="{{poll.answer1.picture}}"

@@ -8,15 +8,9 @@
   -webkit-transform: scale(1,1);
   width: 96%;
   left: 50%;
-  top: 50%;
   height: 420px;
   margin-left: -48%;
-  margin-top: -210px;
   -webkit-animation-fill-mode: forwards;
-}
-
-.platform-ios .pollcard swipe-card {
-  margin-top: -200px;
 }
 
 @media (min-width: 680px) {

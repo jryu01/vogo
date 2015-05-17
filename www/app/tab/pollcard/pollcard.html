@@ -6,7 +6,7 @@
                   on-card-swipe="ctrl.cardSwiped()">
 
       <div class="item item-avatar" 
-            ng-click="tabCtrl.go('profile', { user: ctrl.poll.createdBy })">
+            ng-click="tabCtrl.go('profile', { id: ctrl.poll.createdBy.userId, user: ctrl.poll.createdBy })">
         <img ng-src="{{ctrl.poll.createdBy.picture}}">
         <span class="item-note">
           {{ctrl.poll.answer1.numVotes + ctrl.poll.answer2.numVotes}} hits
@@ -51,7 +51,7 @@
           <a style="opacity: 0">s</a>
           <a href="#" 
               class="subdued" 
-              ng-click="tabCtrl.go('comments', { poll: ctrl.poll })">
+              ng-click="tabCtrl.go('comments', { pollId: ctrl.poll.id, poll: ctrl.poll })">
             {{ctrl.poll.numComments }} Comments
           </a>
         </p>

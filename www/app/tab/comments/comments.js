@@ -5,7 +5,7 @@ angular.module('voteit.tab.comments', [])
 .config(function ($stateProvider) {
   $stateProvider.state('tab.tab-home-comments', {
     url: '/tab-home/comments',
-    params: {poll: null},
+    params: { pollId: '' },
     views: {
       'tab-home': {
         templateUrl: 'app/tab/comments/comments.html',
@@ -15,7 +15,7 @@ angular.module('voteit.tab.comments', [])
   });
   $stateProvider.state('tab.tab-profile-comments', {
     url: '/tab-profile/comments',
-    params: {poll: null},
+    params: { pollId: '' },
     views: {
       'tab-profile': {
         templateUrl: 'app/tab/comments/comments.html',
@@ -32,13 +32,13 @@ angular.module('voteit.tab.comments', [])
   '$ionicScrollDelegate',
 function ($scope, Polls, $stateParams, $ionicScrollDelegate) {
   var self = this,
-      poll = $stateParams.poll;
+      pollId = $stateParams.pollId;
   self.comments = [];
   self.newComment = '';
 
-  poll.getList('comments', {limit: 1000}).then(function (comments) {
-    self.comments = comments;
-  });
+  // poll.getList('comments', {limit: 1000}).then(function (comments) {
+  //   self.comments = comments;
+  // });
 
   self.addComment = function () {
     if (self.newComment) {
