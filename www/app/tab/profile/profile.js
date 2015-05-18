@@ -9,7 +9,7 @@ angular.module('voteit.tab.profile', [
 
 .config(function ($stateProvider) {
   $stateProvider.state('tab.tab-profile-profile', {
-    url: '/tab-profile/profile',
+    url: '/tab-profile/profile/:myId',
     params: { id: '', user: null },
     views: {
       'tab-profile': {
@@ -36,45 +36,34 @@ angular.module('voteit.tab.profile', [
   'User',
   '$scope',
   '$stateParams',
-  '$ionicTabsDelegate',
-  '$ionicScrollDelegate',
-function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDelegate) {
+function (auth, User, $scope, $stateParams) {
   var self = this, 
-      uid = '';
-
+      uid = $stateParams.id || $stateParams.myId;
   var init = function () {
     self.tabs = {
       selected: 0
     };
-    uid = $stateParams.user.userId || $stateParams.user.id;
+    if ($stateParams.myId) {
+      $stateParams.user = User.getMe();
+      self.showSetting = true;
+    }
     self.profile = {};
     self.profile.name = $stateParams.user.name;
     self.profile.picture = $stateParams.user.picture;
-    // self.showSetting = $stateParams.settings;
     self.isMyProfile = (uid === User.getMe().id) ? true : false;
-    self.showSetting = self.isMyProfile;
 
     User.getProfileByUserId(uid).then(function (profile) {
       self.profile = profile;
     });
   };
 
-  var setScrollPosition = function () {
-    var pollScroll = $ionicScrollDelegate.$getByHandle('pollScroll'),
-        voteScroll = $ionicScrollDelegate.$getByHandle('voteScroll');
-      voteScroll.scrollTop();
-      pollScroll.scrollTop();
-  };
-
   self.selectTab = function (index) {
-    setScrollPosition(index);
     self.tabs.selected = index;
     $scope.$broadcast('votabs.select', index);
   };
-
   init();
-
 }])
+
 .directive('profileShrink', [function () {
 
   var shrink = function(shrinkElem, amt, max) {
@@ -83,26 +72,15 @@ function (auth, User, $scope, $stateParams, $ionicTabsDelegate, $ionicScrollDele
       shrinkElem.style[ionic.CSS.TRANSFORM] = 'translate3d(0, -' + amt + 'px, 0)';
     });
   };
-  var getParentIonContent = function (elem) {
-    var node = elem[0].parentNode;
-    while (node.nodeName.toLowerCase() !== 'ion-content') {
-      node = node.parentNode;
-    }
-    return node;
-  };
   return {
     restrict: 'A',
     link: function($scope, $element, $attr) {
       var starty = $scope.$eval($attr.profileShrink) || 0,
           shrinkAmt,
           maxShrinkAmt = 220,
-          ionContent = getParentIonContent($element),
-          shrinkElem = ionContent.querySelector('.profile-info'),
+          shrinkElem = $element[0].parentNode.querySelector('.profile-info'),
           shrinkElemHeight = shrinkElem.offsetHeight;
-          // contentHeight = $element[0].offsetHeight;
 
-      // $element[0].querySelector('.scroll').style['min-height'] = (contentHeight + maxShrinkAmt) + 'px';
-      
       $element.bind('scroll', function (e) {
         var scrollTop = null;
         if (e.detail) {

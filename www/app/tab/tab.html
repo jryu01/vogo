@@ -19,8 +19,10 @@
   <ion-tab title="Profile" 
             icon-off="ion-person" 
             icon-on="ion-person" 
-            ng-click="tabCtrl.selectProfileTab()">
+            href="#/tab/tab-profile/profile/{{tabCtrl.me.id}}">
     <ion-nav-view name="tab-profile"></ion-nav-view>
   </ion-tab>
 
 </ion-tabs>
+
+            <!-- ng-click="tabCtrl.selectProfileTab()"> -->
