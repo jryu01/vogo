@@ -4,31 +4,42 @@
 angular.module('voteit.user', ['voteit.config'])
 
 .factory('User', [
-  'Restangular',
   'config',
   '$http', 
   '$q',
   'auth',
   '$cordovaOauth',
   'localStorageService',
-function (Restangular, config, $http, $q, auth, $cordovaOauth, localStorageService) {
+function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
 
   var that = {};
-  var Users = Restangular.all('users');
+
+  var url = function () {
+    var args = Array.prototype.slice.call(arguments),
+        url = config.baseUrl;
+    args.forEach(function (urlSegment) {
+      url = url + '/' + urlSegment;
+    });
+    return url;
+  };
+
+  var extract = function (result) {
+    return result.data;
+  };
 
   that.signin = function () {
     return $cordovaOauth
       .facebook(config.fbAppId, ['email','user_friends'])
       .then(function (result) {
-        return $http.post(config.baseUrl + '/login', {
+        return $http.post(url('login'), {
           grantType: 'facebook',
           facebookAccessToken: result.access_token
         });
-      }).then(function (response) {
-        auth.authenticate(response.data.user, response.data.access_token);
-        return $http.get(config.baseUrl + '/s3info');
-      }).then(function (response) {
-        localStorageService.set('s3Info', response.data);
+      }).then(function (res) {
+        auth.authenticate(res.data.user, res.data.access_token);
+        return $http.get(url('s3Info'));
+      }).then(function (res) {
+        localStorageService.set('s3Info', res.data);
       });
   };
 
@@ -45,38 +56,32 @@ function (Restangular, config, $http, $q, auth, $cordovaOauth, localStorageServi
   };
 
   that.getProfileByUserId = function (id) {
-    var getUser = Users.get(id),
-        getFollowingCount = Users.one(id).customGET('following-count'),
-        getFollowersCount = Users.one(id).customGET('followers-count');
+    var getUser = $http.get(url('users', id)),
+        getFollowingCount = $http.get(url('users', id, 'following-count')),
+        getFollowersCount = $http.get(url('users', id, 'followers-count'));
     return $q.all([getUser, getFollowingCount, getFollowersCount])
       .then(function (result) {
         var profile = {
           userId: id,
-          name: result[0].name,
-          picture: result[0].picture,
-          numFollowing: result[1].numberOfFollowing,
-          numFollowers: result[2].numberOfFollowers
+          name: result[0].data.name,
+          picture: result[0].data.picture,
+          numFollowing: result[1].data.numberOfFollowing,
+          numFollowers: result[2].data.numberOfFollowers
         };
         return profile;
       });
   };
 
-  that.getVotes = function () {
-    var id = that.getMe().id;
-    var query = { voterId: id };
-    return $http.get(config.baseUrl + '/polls', {params: query});
-  };
-
   that.getVotesById = function (id, before) {
     var query = {};
     query.before = before; // before is vote id
-    return Users.one(id).getList('votes', query);
+    return $http.get(url('users', id, 'votes'), {params: query}).then(extract);
   };
   
   that.getPollsById = function (id, before) {
     var query = {};
     query.before = before; // before is poll id
-    return Users.one(id).getList('polls', query);
+    return $http.get(url('users', id, 'polls'), {params: query}).then(extract);
   };
 
   return that;

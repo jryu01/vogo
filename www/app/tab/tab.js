@@ -43,11 +43,6 @@ function ($scope, $ionicHistory, $state, User) {
     $state.go(to = 'tab.' + tabName + '-' + to, params, options);
   };
 
-  self.selectProfileTab = function () {
-    $state.go('tab.tab-profile-profile', { id: self.me.id, user: self.me });
-  };
-
-
   $scope.$on('tab.hide', function () {
     self.hideTab = true;
   });
