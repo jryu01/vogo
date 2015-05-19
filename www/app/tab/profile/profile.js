@@ -40,9 +40,6 @@ function (auth, User, $scope, $stateParams) {
   var self = this, 
       uid = $stateParams.id || $stateParams.myId;
   var init = function () {
-    self.tabs = {
-      selected: 0
-    };
     if ($stateParams.myId) {
       $stateParams.user = User.getMe();
       self.showSetting = true;
@@ -56,9 +53,7 @@ function (auth, User, $scope, $stateParams) {
       self.profile = profile;
     });
   };
-
   self.selectTab = function (index) {
-    self.tabs.selected = index;
     $scope.$broadcast('votabs.select', index);
   };
   init();

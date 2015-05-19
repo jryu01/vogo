@@ -8,11 +8,9 @@
   </ion-nav-buttons>
   <ion-content scroll="false">
 
-
     <vo-tabs>
       <vo-tab>
         <ion-pane> 
-
 
           <div class="profile-info">
             <img class="profile-picture" ng-src="{{ctrl.profile.picture}}">
@@ -32,11 +30,9 @@
             </div>
           </div>
 
-
           <ion-content class="nested" 
                         profile-shrink 
                         ng-controller="RecentVotesCtrl as vctrl"
-                        delegate-handle="voteScroll"
                         scroll-event-interval="5">
             <div class="padding"></div>
             <ion-refresher on-refresh="vctrl.fetchVotes(true)">
@@ -89,11 +85,9 @@
             </div>
           </div>
 
-
           <ion-content class="nested" 
                         profile-shrink 
                         ng-controller="RecentPollsCtrl as pctrl"
-                        delegate-handle="pollScroll"
                         scroll-event-interval="5">
             <div class="padding"></div>
             <ion-refresher on-refresh="pctrl.fetchPolls(true)">
