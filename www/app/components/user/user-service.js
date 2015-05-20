@@ -27,6 +27,22 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
     return result.data;
   };
 
+  var markVotedPolls = function (polls) {
+    // add isVotedByMe boolean value to each poll of polls array
+    var pollIds = polls.map(function (poll) { return poll.id; }),
+        params = { params: { pollIds: pollIds } },
+        me = that.getMe();
+    return $http.get(url('users', me.id, 'votes'), params)
+      .then(extract)
+      .then(function (myVotes) {
+        var pollIdsVotedByMe = myVotes.map(function (v) { return v._poll; });
+        polls.forEach(function (poll) {
+          poll.isVotedByMe = pollIdsVotedByMe.indexOf(poll.id) > 0;
+        });
+        return polls;
+      });
+  };
+
   that.signin = function () {
     return $cordovaOauth
       .facebook(config.fbAppId, ['email','user_friends'])
@@ -75,14 +91,52 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
   that.getVotesById = function (id, before) {
     var query = {};
     query.before = before; // before is vote id
-    return $http.get(url('users', id, 'votes'), {params: query}).then(extract);
+
+    var convertToPollsArray = function (votes) {
+      var polls = votes.map(function (vote) { 
+        vote._poll._outer = vote;
+        return vote._poll; 
+      });
+      return polls;
+    };
+
+    var restoreToVotesArray = function (polls) {
+      var votes = polls.map(function (poll) {
+        var vote = poll._outer;
+        delete vote._poll._outer;
+        return vote;
+      });
+      return votes;
+    };
+
+    var markPolls = function (polls) {
+      var me = that.getMe();
+      if (id === me.id) {
+        // since all votes are currnt user's vote
+        polls.forEach(function (poll) {
+          poll.isVotedByMe = true;
+        });
+        return polls;
+      } else {
+        return markVotedPolls(polls); 
+      }
+    };
+
+    return $http.get(url('users', id, 'votes'), {params: query})
+      .then(extract)
+      .then(convertToPollsArray)
+      .then(markPolls)
+      .then(restoreToVotesArray);
   };
   
   that.getPollsById = function (id, before) {
     var query = {};
     query.before = before; // before is poll id
-    return $http.get(url('users', id, 'polls'), {params: query}).then(extract);
-  };
 
+    return $http.get(url('users', id, 'polls'), {params: query})
+      .then(extract)
+      .then(markVotedPolls);
+  };
+  
   return that;
 }]);
