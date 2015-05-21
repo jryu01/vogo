@@ -10,7 +10,7 @@ angular.module('voteit.tab.home', [
     views: {
       'tab-home': {
         templateUrl: 'app/tab/home/home.html',
-        controller: 'HomeCtrl as ctrl'
+        controller: 'HomeCtrl as home'
       }
     }
   });

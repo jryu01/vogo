@@ -1,45 +1,45 @@
 <ion-modal-view class="create-poll-modal">
   <ion-header-bar class="bar-light">
     <button class="button button-clear button-royal"
-        ng-click="ctrl.closeModal()">Cancel</button>
+        ng-click="home.closeModal()">Cancel</button>
     <h1 class="title">New Poll</h1>
   </ion-header-bar>
   <ion-content class="padding">
   
-    <form ng-submit="ctrl.createPoll()" name="newPollForm">
+    <form ng-submit="home.createPoll()" name="newPollForm">
       <div class="item item-input">
         <input type="text" 
                 placeholder="What's your question?"
-                ng-model="ctrl.newPoll.question"
+                ng-model="home.newPoll.question"
                 required>
       </div>
 
       <vo-card-img 
         height="250px"
-        src1="{{ctrl.newPoll.answer1.picture}}"
-        src2="{{ctrl.newPoll.answer2.picture}}">
+        src1="{{home.newPoll.answer1.picture}}"
+        src2="{{home.newPoll.answer2.picture}}">
       </vo-card-img>
       <div class="card" 
             style="width: 200px; margin: auto; margin-top: -150px; 
                   margin-bottom: 70px; opacity: 0.6"
-            ng-if="!ctrl.newPoll.answer2.picture">
+            ng-if="!home.newPoll.answer2.picture">
         <h5 class="text-center" 
-            ng-if="!ctrl.newPoll.answer1.picture">
+            ng-if="!home.newPoll.answer1.picture">
           Add a picture
         </h5>
         <h5 class="text-center" 
-            ng-if="ctrl.newPoll.answer1.picture">
+            ng-if="home.newPoll.answer1.picture">
           Add more picture
         </h5>
         <div class="row buttons">
           <a class="tab-item" 
               href="#"
-              ng-click='ctrl.getPhoto("CAMERA")'>
+              ng-click='home.getPhoto("CAMERA")'>
             <i class="icon ion-ios-camera"></i>
           </a>
           <a class="tab-item" 
               href="#" 
-              ng-click='ctrl.getPhoto("PHOTOLIBRARY")'>
+              ng-click='home.getPhoto("PHOTOLIBRARY")'>
             <i class="icon ion-images"></i>
           </a>
           <a class="tab-item" href="#">
@@ -54,7 +54,7 @@
             <input type="text" 
                   class="text-center" 
                   style="width: 100%"
-                  ng-model="ctrl.newPoll.answer1.text"
+                  ng-model="home.newPoll.answer1.text"
                   maxlength="30"
                   placeholder="Answer"
                   required/>
@@ -65,7 +65,7 @@
             <input type="text" 
                   class="text-center" 
                   style="width: 100%"
-                  ng-model="ctrl.newPoll.answer2.text"
+                  ng-model="home.newPoll.answer2.text"
                   maxlength="30"
                   placeholder="Answer"
                   required/>
