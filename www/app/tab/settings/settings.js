@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('voteit.tab.settings', [
-  'restangular'
-])
+angular.module('voteit.tab.settings', [])
 
 .config(function ($stateProvider) {
   $stateProvider.state('tab.tab-profile-settings', {
@@ -19,10 +17,9 @@ angular.module('voteit.tab.settings', [
 .controller('SettingsCtrl', [
   '$scope',
   'User',
-  '$state',
   '$cordovaEmailComposer',
   '$window',
-function ($scope, User, $state, $cordovaEmailComposer, $window) {
+function ($scope, User, $cordovaEmailComposer, $window) {
   var self = this;
 
   $scope.$on('$ionicView.beforeEnter', function () {
