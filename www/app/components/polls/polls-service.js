@@ -46,15 +46,15 @@ angular.module('voteit.polls', [])
         array.splice(index, 1);
       }
     });
-    return poll.post('votes', { answer: answerNum });
+    return Polls.one(poll.id).post('votes', { answer: answerNum });
   };
 
   that.comment = function (poll, text) {
-    return poll.post('comments', { text: text });
+    return Polls.one(poll.id).post('comments', { text: text });
   };
 
   that.getComments = function (poll, skip, limit) {
-    return poll.getList('comments', {skip: skip, limit: limit});
+    return Polls.one(poll.id).getList('comments', {skip: skip, limit: limit});
   };
 
   return that;
