@@ -51,7 +51,7 @@ function (User, $scope, $stateParams) {
     });
   };
   self.selectTab = function (index) {
-    $scope.$broadcast('votabs.select', index);
+    $scope.$broadcast('voTabs.select', index);
   };
   init();
 }])
@@ -127,7 +127,7 @@ function () {
         });
       };
 
-      $scope.$on('votabs.select', function (e, index) {
+      $scope.$on('voTabs.select', function (e, index) {
         $scope.selectTab(index);
       });
     }
