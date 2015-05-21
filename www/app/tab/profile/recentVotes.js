@@ -1,18 +1,12 @@
 'use strict';
 
-angular.module('voteit.tab.profile.recentVotes', [
-  'ionic',
-  'restangular',
-  'voteit.pollCard',
-  'voteit.auth'
-])
+angular.module('voteit.tab.profile.recentVotes', [])
 
 .controller('RecentVotesCtrl', [
   '$scope',
-  'auth',
   'User',
   '$stateParams',
-function ($scope, auth, User, $stateParams) {
+function ($scope, User, $stateParams) {
 
   var self = this,
       user = $stateParams.user || User.getMe(),

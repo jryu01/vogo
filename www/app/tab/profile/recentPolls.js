@@ -1,10 +1,6 @@
 'use strict';
 
-angular.module('voteit.tab.profile.recentPolls', [
-  'ionic',
-  'restangular',
-  'voteit.pollCard'
-])
+angular.module('voteit.tab.profile.recentPolls', [])
 
 .controller('RecentPollsCtrl', [
   '$scope', 

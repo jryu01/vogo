@@ -9,7 +9,6 @@ angular.module('voteit', [
   'mm.dataService',
   'voteit.auth',
   'voteit.config',
-  'voteit.pollCard',
   'voteit.polls',
   'voteit.user',
   'voCardImg',

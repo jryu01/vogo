@@ -1,8 +1,6 @@
 'use strict';
 
 angular.module('voteit.tab.profile', [
-  'ionic',
-  'voteit.auth',
   'voteit.tab.profile.recentPolls',
   'voteit.tab.profile.recentVotes'
 ])
@@ -32,11 +30,10 @@ angular.module('voteit.tab.profile', [
 })
 
 .controller('ProfileCtrl', [
-  'auth',
   'User',
   '$scope',
   '$stateParams',
-function (auth, User, $scope, $stateParams) {
+function (User, $scope, $stateParams) {
   var self = this, 
       uid = $stateParams.id || $stateParams.myId;
   var init = function () {

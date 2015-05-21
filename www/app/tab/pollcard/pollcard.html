@@ -37,12 +37,12 @@
         </div>
         <div class="row" style="height: 30px">
           <h3 class="col text-center" 
-              ng-show="ctrl.poll.voted"
+              ng-show="ctrl.poll.isVotedByMe"
               style="white-space: normal;">
             {{ctrl.poll.answer1.numVotes}} hits
           </h3>
           <h3 class="col text-center" 
-              ng-show="ctrl.poll.voted"
+              ng-show="ctrl.poll.isVotedByMe"
               style="white-space: normal;">
             {{ctrl.poll.answer2.numVotes}} hits
           </h3>
