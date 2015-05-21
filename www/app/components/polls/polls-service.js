@@ -3,7 +3,6 @@
 
 angular.module('voteit.polls', [])
 
-
 .factory('Polls', ['Restangular', function (Restangular) {
 
   var that = {

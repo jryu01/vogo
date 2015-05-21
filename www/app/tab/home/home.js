@@ -19,19 +19,13 @@ angular.module('voteit.tab.home', [
 .controller('HomeCtrl', [
   '$scope', 
   '$ionicModal',
-  'dataService',
   'Polls',
   'User', 
-  '$timeout',
   '$cordovaCamera',
   '$cordovaFileTransfer',
-function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamera, $cordovaFileTransfer) {
+function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer) {
 
   var self = this;
-
-  self.polls = [];
-  self.msgCards = [];
-  self.loading = false;
 
   self.createPollModal = '';
   self.newPoll = { 
@@ -103,22 +97,45 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
 
   //TODO: handle erros
   self.createPoll = function () {
-    Polls.create(self.newPoll).then(function (poll) {
+    Polls.create(self.newPoll).then(function () {
       self.closeModal();
-      self.msgCards = [];
-      self.polls = [];
-      self.addCard();
-
-      var myPolls = dataService.getData('myPolls');
-      if (myPolls) {
-        myPolls.unshift(poll);
-      }
+      $scope.$broadcast('HomeCtrl.cardCreated');
     }).catch(function (err) {
 
     });
   };
-  /////////////////////////////////////////////////////////////////////////////
-  // Handle poll cards
+
+}])
+
+.controller('CardsCtrl', [
+  '$scope',
+  '$ionicSwipeCardDelegate',
+  'Polls',
+  '$timeout',
+function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
+
+  var self = this;
+
+  self.polls = [];
+  self.msgCards = [];
+  self.loading = false;
+
+  var init = function () {
+    self.loading = true;
+    Polls.getNextPolls().then(function () {
+      self.addCard();
+      self.loading = false;
+    });
+  };
+
+  self.vote = function (poll, answerNum) {
+    if(!poll.voted) {
+      poll['answer' + answerNum].numVotes += 1;
+      poll.voted = true;
+      Polls.vote(poll, answerNum);
+    }
+  };
+
   self.cardSwiped = function() {
     $timeout(function () {
       self.addCard();
@@ -136,47 +153,18 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
   self.addCard = function () {
     var poll = Polls.getNextPoll();
     if (!poll) {
-      self.msgCards.push({
+      return self.msgCards.push({
         message: '<span>No more polls.<br>Try again later.</span>'
       });
-      return;
     }
     self.polls.push(poll);
   };
 
-  self.init = function () {
-    self.loading = true;
-    Polls.getNextPolls().then(function () {
-      self.addCard();
-      self.loading = false;
-    });
-  };
-  self.init();
-}])
+  $scope.$on('HomeCtrl.cardCreated', function () {
+    self.msgCards = [];
+    self.polls = [];
+    self.addCard();
+  });
 
-.controller('createPollModalCtrl', [function () {
-
-}])
-
-.controller('CardCtrl', [
-  '$ionicSwipeCardDelegate',
-  'dataService',
-  'Polls',
-function ($ionicSwipeCardDelegate, dataService, Polls) {
-
-  var self = this;
-
-  self.vote = function (poll, answerNum) {
-    if(!poll.voted) {
-      poll['answer' + answerNum].numVotes += 1;
-      poll.voted = true;
-      Polls.vote(poll, answerNum).then(function (vote) {
-        // if polls for my votes are loaded already
-        var votes = dataService.getData('myVotes');
-        if (votes) {
-          votes.unshift(vote);
-        }
-      });
-    }
-  };
+  init();
 }]);

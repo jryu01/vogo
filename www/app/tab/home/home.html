@@ -4,21 +4,21 @@
       ng-click="ctrl.openModal()"></a>
   </ion-nav-buttons>
 
-  <ion-pane ng-controller="CardCtrl as cardCtrl">
+  <ion-pane ng-controller="CardsCtrl as cardsCtrl">
     <swipe-cards>
-      <div class="spinner-wrapper" ng-if="ctrl.loading">
+      <div class="spinner-wrapper" ng-if="cardsCtrl.loading">
         <ion-spinner></ion-spinner>
       </div>
       <swipe-card class="msg-card card"
-                  ng-repeat="card in ctrl.msgCards"
-                  on-destroy="ctrl.cardDestroyed($index, true)"
-                  on-card-swipe="ctrl.cardSwiped($index)" 
+                  ng-repeat="card in cardsCtrl.msgCards"
+                  on-destroy="cardsCtrl.cardDestroyed($index, true)"
+                  on-card-swipe="cardsCtrl.cardSwiped($index)" 
                   ng-bind-html="card.message">
       </swipe-card>
       <swipe-card class="poll-card card list" 
-                  ng-repeat="poll in ctrl.polls" 
-                  on-destroy="ctrl.cardDestroyed($index)" 
-                  on-card-swipe="ctrl.cardSwiped()">
+                  ng-repeat="poll in cardsCtrl.polls" 
+                  on-destroy="cardsCtrl.cardDestroyed($index)" 
+                  on-card-swipe="cardsCtrl.cardSwiped()">
 
         <div class="item item-avatar" ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
           <img ng-src="{{poll.createdBy.picture}}">
@@ -30,8 +30,8 @@
         </div>
 
         <div class="vote-area row">
-          <div class="col" ng-click="cardCtrl.vote(poll, 1);"></div>
-          <div class="col" ng-click="cardCtrl.vote(poll, 2);"></div>
+          <div class="col" ng-click="cardsCtrl.vote(poll, 1);"></div>
+          <div class="col" ng-click="cardsCtrl.vote(poll, 2);"></div>
         </div>
 
         <div class="item item-image">
