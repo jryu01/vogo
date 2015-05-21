@@ -16,8 +16,8 @@
       </div>
 
       <div class="vote-area row">
-        <div class="col" ng-click="cardCtrl.vote(ctrl.poll, 1);"></div>
-        <div class="col" ng-click="cardCtrl.vote(ctrl.poll, 2);"></div>
+        <div class="col" ng-click="ctrl.vote(ctrl.poll, 1);"></div>
+        <div class="col" ng-click="ctrl.vote(ctrl.poll, 2);"></div>
       </div>
 
       <div class="item item-image">
@@ -37,12 +37,12 @@
         </div>
         <div class="row" style="height: 30px">
           <h3 class="col text-center" 
-              ng-show="ctrl.poll.isVotedByMe"
+              ng-if="ctrl.poll.isVotedByMe"
               style="white-space: normal;">
             {{ctrl.poll.answer1.numVotes}} hits
           </h3>
           <h3 class="col text-center" 
-              ng-show="ctrl.poll.isVotedByMe"
+              ng-if="ctrl.poll.isVotedByMe"
               style="white-space: normal;">
             {{ctrl.poll.answer2.numVotes}} hits
           </h3>

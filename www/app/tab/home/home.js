@@ -159,11 +159,10 @@ function ($scope, $ionicModal, dataService, Polls, User, $timeout, $cordovaCamer
 }])
 
 .controller('CardCtrl', [
-  '$scope', 
   '$ionicSwipeCardDelegate',
   'dataService',
   'Polls',
-function ($scope, $ionicSwipeCardDelegate, dataService, Polls) {
+function ($ionicSwipeCardDelegate, dataService, Polls) {
 
   var self = this;
 

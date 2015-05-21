@@ -28,7 +28,16 @@ angular.module('voteit.tab.pollcard', [])
 .controller('PollcardCtrl', [
   '$scope',
   '$stateParams', 
-function ($scope, $stateParams) {
+  'Polls',
+function ($scope, $stateParams, Polls) {
   var self = this;
   self.poll = $stateParams.poll;
+  
+ self.vote = function (poll, answerNum) {
+    if (!poll.isVotedByMe) {
+      poll['answer' + answerNum].numVotes += 1;
+      poll.isVotedByMe = true;
+      Polls.vote(poll, answerNum);
+    }
+  };
 }]);
