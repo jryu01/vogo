@@ -14,6 +14,8 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
 
   var that = {};
 
+  that.myProfile = {};
+
   var url = function () {
     var args = Array.prototype.slice.call(arguments),
         url = config.baseUrl;
@@ -71,21 +73,40 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
     return localStorageService.get('s3Info');
   };
 
-  that.getProfileByUserId = function (id) {
-    var getUser = $http.get(url('users', id)),
-        getFollowingCount = $http.get(url('users', id, 'following-count')),
-        getFollowersCount = $http.get(url('users', id, 'followers-count'));
-    return $q.all([getUser, getFollowingCount, getFollowersCount])
-      .then(function (result) {
-        var profile = {
-          userId: id,
-          name: result[0].data.name,
-          picture: result[0].data.picture,
-          numFollowing: result[1].data.numberOfFollowing,
-          numFollowers: result[2].data.numberOfFollowers
-        };
-        return profile;
-      });
+  that.follow = function (userId) {
+    var me = that.getMe();
+    return $http.put(url('users', me.id, 'following', userId))
+    .then(function () {
+      that.myProfile.numFollowing += 1;
+    });
+  };
+
+  that.unfollow = function (userId) {
+    var me = that.getMe();
+    return $http.delete(url('users', me.id, 'following', userId))
+    .then(function () {
+      that.myProfile.numFollowing -= 1;
+    });
+  };
+
+  that.getFollowInfo = function (userId) {
+    var getFollowingCount = $http.get(url('users', userId, 'following-count')),
+        getFollowersCount = $http.get(url('users', userId, 'followers-count')),
+        getFollowingInfo = that.getFollowingInfo([userId]),
+        promises = [ getFollowingCount, getFollowersCount, getFollowingInfo ];
+    return $q.all(promises).then(function (result) {
+      var info = {
+        numFollowing: result[0].data.numberOfFollowing,
+        numFollowers: result[1].data.numberOfFollowers,
+        following: result[2][0].following
+      };
+      return info;
+    });
+  };
+
+  that.getFollowingInfo = function (ids) {
+    var options = { params: { userId: ids} };
+    return $http.get(url('relationships', 'following'), options).then(extract);
   };
 
   that.getVotesById = function (id, before) {

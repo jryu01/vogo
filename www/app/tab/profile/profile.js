@@ -41,15 +41,33 @@ function (User, $scope, $stateParams) {
       $stateParams.user = User.getMe();
       self.showSetting = true;
     }
-    self.profile = {};
+    self.isMyProfile = (uid === User.getMe().id) ? true : false;
+    self.profile = (self.isMyProfile) ? User.myProfile : {};
+    self.profile.uid = uid;
     self.profile.name = $stateParams.user.name;
     self.profile.picture = $stateParams.user.picture;
-    self.isMyProfile = (uid === User.getMe().id) ? true : false;
 
-    User.getProfileByUserId(uid).then(function (profile) {
-      self.profile = profile;
+    User.getFollowInfo(uid).then(function (info) {
+      self.profile.numFollowing = info.numFollowing;
+      self.profile.numFollowers = info.numFollowers;
+      self.profile.following = info.following;
     });
   };
+
+  self.follow = function (userId) {
+    User.follow(userId).then(function () {
+      self.profile.following = true;
+      self.profile.numFollowers += 1;
+    });
+  };
+
+  self.unfollow = function (userId) {
+    User.unfollow(userId).then(function () {
+      self.profile.following = false;
+      self.profile.numFollowers -= 1;
+    });
+  };
+
   self.selectTab = function (index) {
     $scope.$broadcast('voTabs.select', index);
   };
