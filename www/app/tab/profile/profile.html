@@ -30,13 +30,13 @@
               </a>
             </h3>
             <div class="profile-actions">
-              <p> 
+              <p ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'following' })"> 
                 {{ctrl.profile.numFollowing}} 
-                <a href="#" ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'following' })">Following</a>
+                <a href="#">Following</a>
               </p>
-              <p> 
+              <p ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'followers' })"> 
                 {{ctrl.profile.numFollowers}} 
-                <a href="#" ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'followers' })">Followers</a>
+                <a href="#">Followers</a>
               </p>
             </div>
             <div class="button-bar center">
@@ -105,13 +105,13 @@
               </a>
             </h3>
             <div class="profile-actions">
-              <p> 
+              <p ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'following' })"> 
                 {{ctrl.profile.numFollowing}} 
-                <a href="#" ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'following' })">Following</a>
+                <a href="#">Following</a>
               </p>
-              <p> 
+              <p ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'followers' })"> 
                 {{ctrl.profile.numFollowers}} 
-                <a href="#" ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'followers' })">Followers</a>
+                <a href="#">Followers</a>
               </p>
             </div>
             <div class="button-bar center">
