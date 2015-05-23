@@ -89,17 +89,37 @@
 
           <div class="profile-info">
             <img class="profile-picture" ng-src="{{ctrl.profile.picture}}">
-            <h3 class="profile-name" ng-bind="ctrl.profile.name"></h3>
+            <h3 class="profile-name">
+              {{ ctrl.profile.name }} 
+              <a class="button button-small button-balanced" 
+                href="#"
+                ng-click="ctrl.unfollow(ctrl.profile.uid)"
+                ng-if="!ctrl.isMyProfile && ctrl.profile.following === true">
+                Following
+              </a>
+              <a class="button button-small" 
+                href="#"
+                ng-click="ctrl.follow(ctrl.profile.uid)"
+                ng-if="!ctrl.isMyProfile && ctrl.profile.following === false">
+                + Follow
+              </a>
+            </h3>
             <div class="profile-actions">
-              <p> {{ctrl.profile.numFollowing}} <a href="#">Following</a></p>
-              <p> {{ctrl.profile.numFollowers}} <a href="#">Followers</a></p>
+              <p> 
+                {{ctrl.profile.numFollowing}} 
+                <a href="#" ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'following' })">Following</a>
+              </p>
+              <p> 
+                {{ctrl.profile.numFollowers}} 
+                <a href="#" ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'followers' })">Followers</a>
+              </p>
             </div>
             <div class="button-bar center">
-              <a class="button button-outline button-royal"
-                  ng-click="ctrl.selectTab(0)">
+              <a class="button button-outline button-royal active">
                 Votes
               </a>
-              <a class="button button-outline button-royal active">
+              <a class="button button-outline button-royal"
+                  ng-click="ctrl.selectTab(1)">
                 Polls
               </a>
             </div>
