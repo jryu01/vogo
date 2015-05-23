@@ -15,6 +15,8 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
   var that = {};
 
   that.myProfile = {};
+  // that.myVotes = [];
+  // that.myPolls = [];
 
   var url = function () {
     var args = Array.prototype.slice.call(arguments),
@@ -103,10 +105,26 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
       return info;
     });
   };
-
-  that.getFollowingInfo = function (ids) {
-    var options = { params: { userId: ids} };
+  // return following relationships info with authenticated user to userIds
+  that.getFollowingInfo = function (userIds) {
+    var options = { params: { userId: userIds} };
     return $http.get(url('relationships', 'following'), options).then(extract);
+  };
+
+  that.getFollowing = function (userId) {
+    return $http.get(url('users', userId, 'following'))
+      .then(extract)
+      .then(function (users) {
+        return users.map(function (user) { return user.userId; });
+      }).then(that.getFollowingInfo);
+  };
+
+  that.getFollowers = function (userId) {
+    return $http.get(url('users', userId, 'followers'))
+      .then(extract)
+      .then(function (users) {
+        return users.map(function (user) { return user.userId; });
+      }).then(that.getFollowingInfo);
   };
 
   that.getVotesById = function (id, before) {

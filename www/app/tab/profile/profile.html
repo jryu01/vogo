@@ -26,12 +26,18 @@
                 href="#"
                 ng-click="ctrl.follow(ctrl.profile.uid)"
                 ng-if="!ctrl.isMyProfile && ctrl.profile.following === false">
-                Follow
+                + Follow
               </a>
             </h3>
             <div class="profile-actions">
-              <p> {{ctrl.profile.numFollowing}} <a href="#">Following</a> </p>
-              <p> {{ctrl.profile.numFollowers}} <a href="#">Followers</a></p>
+              <p> 
+                {{ctrl.profile.numFollowing}} 
+                <a href="#" ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'following' })">Following</a>
+              </p>
+              <p> 
+                {{ctrl.profile.numFollowers}} 
+                <a href="#" ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'followers' })">Followers</a>
+              </p>
             </div>
             <div class="button-bar center">
               <a class="button button-outline button-royal active">

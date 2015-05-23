@@ -6,7 +6,8 @@ angular.module('voteit.tab', [
   'voteit.tab.profile',
   'voteit.tab.settings',
   'voteit.tab.about',
-  'voteit.tab.pollcard'
+  'voteit.tab.pollcard',
+  'voteit.tab.userlist'
 ])
 
 .config(['$stateProvider', function ($stateProvider) {

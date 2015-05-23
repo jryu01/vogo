@@ -1,0 +1,25 @@
+<ion-view class="comments" view-title="{{userlist.title}}">
+  <ion-content>
+    <div class="list">
+      <div class="item item-avatar" 
+          collection-repeat="user in userlist.users">
+        <img ng-src="{{ ::user.picture }}">
+        <h3 ng-bind="::user.name"></h3>
+        <div ng-if="user.userId !== userlist.me.id">
+          <a class="button button-small button-balanced" 
+            href="#"
+            ng-click="userlist.unfollow(user)"
+            ng-if="user.following === true">
+            Following
+          </a>
+          <a class="button button-small" 
+            href="#"
+            ng-click="userlist.follow(user)"
+            ng-if="user.following === false">
+            + Follow
+          </a>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
