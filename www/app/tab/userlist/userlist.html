@@ -3,9 +3,12 @@
     <div class="list">
       <div class="item item-avatar" 
           collection-repeat="user in userlist.users">
-        <img ng-src="{{ ::user.picture }}">
-        <h3 ng-bind="::user.name"></h3>
-        <div ng-if="user.userId !== userlist.me.id">
+        <img ng-src="{{ ::user.picture }}" 
+            ng-click="tabCtrl.go('profile', { id: user.userId, user: user })">
+        <h3 ng-bind="::user.name" 
+            ng-click="tabCtrl.go('profile', { id: user.userId, user: user })">
+        </h3>
+        <div ng-if="user.userId !== userlist.me.id" style="margin-left: 80%">
           <a class="button button-small button-balanced" 
             href="#"
             ng-click="userlist.unfollow(user)"
