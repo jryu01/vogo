@@ -26,10 +26,9 @@ angular.module('voteit.tab.userlist', [])
 })
 
 .controller('UserlistCtrl', [
-  '$scope',
   'User',
   '$stateParams', 
-function ($scope, User, $stateParams) {
+function (User, $stateParams) {
   var self = this,
       uid = $stateParams.userId,
       type = $stateParams.type,
@@ -60,11 +59,4 @@ function ($scope, User, $stateParams) {
       user.following = false;
     });
   };
-
-  $scope.$on('$ionicView.beforeEnter', function () {
-    $scope.$emit('tab.hide');
-  });
-  $scope.$on('$ionicView.beforeLeave', function () {
-    $scope.$emit('tab.show');
-  });
 }]);
