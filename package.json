@@ -42,7 +42,10 @@
     {
       "locator": "https://github.com/apache/cordova-plugin-whitelist.git",
       "id": "cordova-plugin-whitelist"
-    }
+    },
+    "https://github.com/katzer/cordova-plugin-email-composer.git",
+    "engine/cordova-crosswalk-engine-c0.7.1",
+    "https://github.com/apache/cordova-plugin-whitelist.git"
   ],
   "cordovaPlatforms": [
     {

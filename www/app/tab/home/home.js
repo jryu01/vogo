@@ -42,6 +42,28 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
     self.createPollModal = modal;
   });
 
+  var uploadImgToS3 = function (imageUri) {
+    var user = User.getMe(),
+        s3Info = User.getS3Info(),
+        fileName = user.id + '/' + Date.now() + '.jpeg',
+        pictureUrl = s3Info.uploadUrl + fileName,
+        options = {};
+
+    options.params = {
+      'key': fileName,
+      'AWSAccessKeyId': s3Info.accessKey,
+      'acl': 'public-read',
+      'policy': s3Info.policy,
+      'signature': s3Info.signature,
+      'Content-Type': 'image/jpeg'
+    };
+    options.chunkedMode = false;
+    options.headers = { 'Connection': 'close' };
+
+    return $cordovaFileTransfer.upload(s3Info.uploadUrl, imageUri, options)
+      .then(function () { return pictureUrl; });
+  };
+
   self.openModal = function () {
     if (window.StatusBar) { window.StatusBar.styleDefault(); }
     self.newPoll.question = '';
@@ -70,29 +92,15 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
       popoverOptions: window.CameraPopoverOptions,
       saveToPhotoAlbum: false
     };
-
-    $cordovaCamera.getPicture(options).then(function (imageUri) {
-      var user = User.getMe();
-      var s3Info = User.getS3Info();
-      var options = {};
-      options.params = {
-        'key': user.id + '/' + Date.now() + '.jpeg',
-        'AWSAccessKeyId': s3Info.accessKey,
-        'acl': 'public-read',
-        'policy': s3Info.policy,
-        'signature': s3Info.signature,
-        'Content-Type': 'image/jpeg'
-      };
-     return $cordovaFileTransfer.upload(s3Info.uploadUrl, imageUri, options);
-    }).then(function (result) {
-      if (!self.newPoll.answer1.picture) {
-        self.newPoll.answer1.picture = result.headers.Location;
-      } else {
-        self.newPoll.answer2.picture = result.headers.Location;
-      }
-    }).catch(function (err) {
-
-    });
+    $cordovaCamera.getPicture(options)
+      .then(uploadImgToS3)
+      .then(function (uploadedUrl) {
+        if (!self.newPoll.answer1.picture) {
+          self.newPoll.answer1.picture = uploadedUrl;
+        } else {
+          self.newPoll.answer2.picture = uploadedUrl;
+        }
+      }).catch(function () {});
   };
 
   //TODO: handle erros
@@ -100,9 +108,7 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
     Polls.create(self.newPoll).then(function () {
       self.closeModal();
       $scope.$broadcast('HomeCtrl.cardCreated');
-    }).catch(function (err) {
-
-    });
+    }).catch(function () {});
   };
 
 }])
