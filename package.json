@@ -26,11 +26,20 @@
     "com.ionic.keyboard",
     "org.apache.cordova.console",
     "org.apache.cordova.inappbrowser",
-    "./engine/cordova-crosswalk-engine-c0.6.2",
     "https://github.com/katzer/cordova-plugin-email-composer.git",
     "org.apache.cordova.statusbar",
     "org.apache.cordova.splashscreen",
     "org.apache.cordova.camera",
-    "org.apache.cordova.file-transfer"
+    "org.apache.cordova.file-transfer",
+    {
+      "locator": "engine/cordova-crosswalk-engine-c0.7.1",
+      "id": "cordova-plugin-crosswalk-webview"
+    }
+  ],
+  "cordovaPlatforms": [
+    {
+      "platform": "android",
+      "locator": "./engine/cordova-android-c0.6.1/"
+    }
   ]
 }
