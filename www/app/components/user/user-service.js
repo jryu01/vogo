@@ -111,16 +111,20 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
     return $http.get(url('relationships', 'following'), options).then(extract);
   };
 
-  that.getFollowing = function (userId) {
-    return $http.get(url('users', userId, 'following'))
+  that.getFollowing = function (userId, skip) {
+    var opts = {};
+    opts.params = { limit: 100, skip: skip };
+    return $http.get(url('users', userId, 'following'), opts)
       .then(extract)
       .then(function (users) {
         return users.map(function (user) { return user.userId; });
       }).then(that.getFollowingInfo);
   };
 
-  that.getFollowers = function (userId) {
-    return $http.get(url('users', userId, 'followers'))
+  that.getFollowers = function (userId, skip) {
+    var opts = {};
+    opts.params = { limit: 100, skip: skip };
+    return $http.get(url('users', userId, 'followers'), opts)
       .then(extract)
       .then(function (users) {
         return users.map(function (user) { return user.userId; });

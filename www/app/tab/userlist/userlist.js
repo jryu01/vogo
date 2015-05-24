@@ -43,8 +43,8 @@ function (User, $stateParams) {
   } else if (type === 'followers') {
     funcName = 'getFollowers';
   }
-  //TODO: Infinite scroll and limit to 100
-  User[funcName](uid).then(function (users) {
+  //TODO: Infinite scroll
+  User[funcName](uid, 0).then(function (users) {
     self.users = users;
   });
 
