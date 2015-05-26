@@ -1,22 +1,6 @@
 .home {
 }
 
-.spinner-wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 100%;
-  height: 40px;
-  margin-left: -50%;
-  margin-top: -20px;
-
-  display: flex;
-  display: -webkit-flex;
-  align-items: center;
-  -webkit-align-items: center;
-  -webkit-justify-content: center;
-}
-
 .home swipe-card {
   z-index: 1; 
   position: absolute;
@@ -48,7 +32,7 @@
   z-index:10;
 }
 
-.msg-card {
+.home .msg-card {
   color: #fff;
   background-color: #30BD8A;
   line-height: 300px;
@@ -56,7 +40,7 @@
   border: 6px solid #4CD68E;
   text-align: center;
 }
-.msg-card span {
+.home .msg-card span {
   display: inline-block;
   line-height: 40px;
   // width: 200px;
@@ -76,6 +60,6 @@
   }
 }
 
-swipe-card.pop-in {
+.home swipe-card.pop-in {
   -webkit-animation: bounceIn 0.4s ease-out;
 }

@@ -16,8 +16,7 @@ $dark:                            #444 !default;
 */
 
 // our app theme color
-// $royal:                           #0e116e !default;
-$royal:                           #3F51B5 !default;
+$royal:                           #251037 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -27,31 +26,31 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 //---- Custom styling for the app ----
 
-// .platform-android {
-//   .tabs-top.tabs-striped .tab-item.tab-item-active, 
-//   .tabs-top.tabs-striped .tab-item.active, 
-//   .tabs-top.tabs-striped .tab-item.activated {
-//     margin-top: 1px;
-//   }
-// }
+$bg-color: #CECBD2;
+$tabs-color: #000000;
 
-.bar.bar-light .title {
-  color: $royal; 
+.app .pane {
+  background-color: $bg-color;
+}
+.app .tabs-dark > .tabs {
+  background-color: $tabs-color;
 }
 
-.platform-ios, .platform-android {
-  .tabs-royal > .tabs, .tabs.tabs-royal {
-    border-color: #b2b2b2;
-    background-color: #f8f8f8;
-    background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
-    color: $royal; 
-  }
-  .tabs-royal > .tabs .tab-item .badge, .tabs.tabs-royal .tab-item .badge {
-    background-color: $royal;
-    color: #f8f8f8; 
-  }
-}
+.app .spinner-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 40px;
+  margin-left: -50%;
+  margin-top: -20px;
 
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+}
 //---- end custom styling for the app ----
 
 // Include all sub scss files for the app

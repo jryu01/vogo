@@ -1,4 +1,4 @@
-<ion-view view-title="Home" class="home">
+<ion-view view-title="VOGO" class="home">
   <ion-nav-buttons side="right">
     <a class="button button-icon icon ion-plus-round"
       ng-click="home.openModal()"></a>
@@ -6,7 +6,7 @@
 
   <ion-pane ng-controller="CardsCtrl as cardsCtrl">
     <swipe-cards>
-      <div class="spinner-wrapper" ng-if="cardsCtrl.loading">
+      <div class="spinner-center" ng-if="cardsCtrl.loading">
         <ion-spinner></ion-spinner>
       </div>
       <swipe-card class="msg-card card"
