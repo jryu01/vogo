@@ -9,13 +9,13 @@
       <ion-spinner></ion-spinner>
     </div>
     <swipe-cards>
-      <swipe-card class="msg-card card"
+      <swipe-card class="msg-card"
                   ng-repeat="card in cardsCtrl.msgCards"
                   on-destroy="cardsCtrl.cardDestroyed($index, true)"
                   on-card-swipe="cardsCtrl.cardSwiped($index)" 
                   ng-bind-html="card.message">
       </swipe-card>
-      <swipe-card class="poll-card card list" 
+      <swipe-card class="poll-card list" 
                   ng-repeat="poll in cardsCtrl.polls" 
                   on-destroy="cardsCtrl.cardDestroyed($index)" 
                   on-card-swipe="cardsCtrl.cardSwiped()">
@@ -38,10 +38,10 @@
             <div class="col" ng-click="cardsCtrl.vote(poll, 2);"></div>
           </div>
           <div class="row item answer-box">
-            <div class="col text-center" >
+            <div class="col text-center" ng-click="cardsCtrl.vote(poll, 1);">
               <h3 ng-bind="::poll.answer1.text"></h3>
             </div>
-            <div class="col text-center">
+            <div class="col text-center" ng-click="cardsCtrl.vote(poll, 2);">
               <h3 ng-bind="::poll.answer2.text"></h3>
             </div>
           </div>

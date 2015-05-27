@@ -7,30 +7,32 @@ $card-bg: #FEFFFA;
   z-index: 1; 
   position: absolute;
   -webkit-transform: scale(1,1);
-  width: 90%;
+  width: 310px;
   left: 50%;
   top: 50%;
-  height: 420px;
-  margin-left: -45%;
-  margin-top: -210px;
+  height: 380px;
+  margin-left: -155px;
+  margin-top: -190px;
   -webkit-animation-fill-mode: forwards;
 }
 
-.platform-ios .home swipe-card {
-  margin-top: -200px;
-}
-
-@media (min-width: 680px) {
+@media (min-width: 360px) {
   .home swipe-card {
-    width: 60%;
-    margin-left: -30%;
+    width: 340px;
+    margin-left: -170px;
   }
 }
 
-.home .poll-card, 
-.home .poll-card .item {
+.home .poll-card {
   background-color: $card-bg;
 }
+
+.home .poll-card .item {
+  background-color: $card-bg;
+  margin: 0;
+  border: none;
+}
+
 
 .home .item.pollcard-item-header {
   text-align: center;
@@ -86,7 +88,7 @@ $card-bg: #FEFFFA;
   }
 }
 
-.item-image {
+.home .item-image {
   border: none;
 }
 
