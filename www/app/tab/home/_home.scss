@@ -10,9 +10,9 @@ $card-bg: #FEFFFA;
   width: 310px;
   left: 50%;
   top: 50%;
-  height: 380px;
+  height: 386px;
   margin-left: -155px;
-  margin-top: -190px;
+  margin-top: -193px;
   -webkit-animation-fill-mode: forwards;
 }
 
@@ -90,6 +90,11 @@ $card-bg: #FEFFFA;
 
 .home .item-image {
   border: none;
+}
+
+.home .item.pollcard-item-footer {
+  padding: 0;
+  padding-top: 15px;
 }
 
 .home .msg-card {

@@ -55,23 +55,29 @@
         </div>
 
         <div class="item pollcard-item-footer">
-          <div class="row" style="height: 30px">
-            <h3 class="col text-center" 
-                ng-show="poll.voted"
+          <div class="row">
+            <p class="col text-center" 
+                ng-show="!poll.voted"
                 style="white-space: normal;">
-              {{poll.answer1.numVotes}} hits
-            </h3>
-            <h3 class="col text-center" 
-                ng-show="poll.voted"
+              {{poll.answer1.numVotes}} HITS
+            </p>
+            <span class="col col-10 text-center" 
+                ng-show="!poll.voted">
+                G
+            </span>
+            <p class="col text-center" 
+                ng-show="!poll.voted"
                 style="white-space: normal;">
-              {{poll.answer2.numVotes}} hits
-            </h3>
+              {{poll.answer2.numVotes}} HITS
+            </p>
           </div>
           <p>
             <a style="opacity: 0">s</a>
             <a href="#" 
                 class="subdued" 
+                style="float: right; padding-right: 10px;"
                 ng-click="tabCtrl.go('comments', { pollId: poll.id, poll: poll })">
+                <i class="ion-edit"></i>
               {{poll.numComments }} Comments
             </a>
           </p>
