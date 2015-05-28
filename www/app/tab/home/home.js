@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('voteit.tab.home', [
-  'ionic.contrib.ui.cards'
+  'ionic.contrib.ui.cards',
+   'n3-pie-chart'
 ])
 
 .config(function ($stateProvider) {
@@ -134,10 +135,30 @@ function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
     });
   };
 
+  var updatePie = function (answer1, answer2) {
+    var COLOR_BOLD = '#201236',
+        COLOR_LIGHT = '#CDCCD3',
+        a1Data = {label: 'answer1', value: answer1},
+        a2Data = {label: 'answer2', value: answer2};
+    self.pieData = [];
+    self.pieOptions = {};
+    a1Data.isBig = answer1 > answer2;
+    a2Data.isBig = !a1Data.isBig;
+    a1Data.color = (a1Data.isBig) ? COLOR_BOLD : COLOR_LIGHT;
+    a2Data.color = (a2Data.isBig) ? COLOR_BOLD : COLOR_LIGHT;
+    self.pieOptions = {
+      thickness: 200, 
+      mode: 'gauge', 
+      total: answer1 + answer2 
+    };
+    self.pieData = [a2Data, a1Data];
+  };
+
   self.vote = function (poll, answerNum) {
     if(!poll.voted) {
       poll['answer' + answerNum].numVotes += 1;
       poll.voted = true;
+      updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
       Polls.vote(poll, answerNum);
     }
   };

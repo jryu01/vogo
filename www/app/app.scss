@@ -31,11 +31,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 //=============================================================================
 //                             Themes
 //=============================================================================
-$bg-color: #CECBD2;
+// $bg-color: rgba(205, 204, 208, 0.33);
 $tabs-color: #000000;
 
 .app .pane {
-  background-color: $bg-color;
+  background: -webkit-radial-gradient(#FFF, #E4E3E6, #CDCCD0);
+  background: radial-gradient(#FFF, #E4E3E6, #CDCCD0);
 }
 .app .tabs-dark > .tabs {
   background-color: $tabs-color;

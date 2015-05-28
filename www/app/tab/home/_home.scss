@@ -1,4 +1,4 @@
-$card-bg: #FEFFFA;
+$card-bg: #FFF;
 
 .home {
 }
@@ -6,25 +6,33 @@ $card-bg: #FEFFFA;
 .home swipe-card {
   z-index: 1; 
   position: absolute;
+  padding: 0;
   -webkit-transform: scale(1,1);
-  width: 310px;
+  width: 300px;
   left: 50%;
   top: 50%;
   height: 386px;
-  margin-left: -155px;
+  margin-left: -150px;
   margin-top: -193px;
   -webkit-animation-fill-mode: forwards;
+  background-color: transparent;  
+}
+.home .swipe-card {
+  background-color: transparent;
 }
 
 @media (min-width: 360px) {
   .home swipe-card {
-    width: 340px;
-    margin-left: -170px;
+    width: 330px;
+    margin-left: -165px;
   }
 }
 
 .home .poll-card {
+  padding: 0;
   background-color: $card-bg;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .home .poll-card .item {
@@ -33,10 +41,10 @@ $card-bg: #FEFFFA;
   border: none;
 }
 
-
 .home .item.pollcard-item-header {
   text-align: center;
   padding-bottom: 8px;
+  border-radius: inherit;
   a {
     display: inline-block;
     text-decoration: none;
@@ -95,6 +103,19 @@ $card-bg: #FEFFFA;
 .home .item.pollcard-item-footer {
   padding: 0;
   padding-top: 15px;
+  padding-bottom: 5px;
+  border-radius: inherit;
+  .result {
+    height: 42px;
+  }
+  .pie-container {
+    position: absolute; 
+    width: 70px; 
+    height: 70px; 
+    top: 0; 
+    left: 50%;
+    margin-left: -35px;
+  }
 }
 
 .home .msg-card {

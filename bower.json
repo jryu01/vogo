@@ -8,6 +8,7 @@
   "dependencies": {
     "angular-local-storage": "~0.1.5",
     "ngCordova": "~0.1.12-alpha",
-    "lodash": "~3.9.0"
+    "lodash": "~3.9.0",
+    "d3": "~3.5.5"
   }
 }
