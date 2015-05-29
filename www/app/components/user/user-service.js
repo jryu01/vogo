@@ -32,7 +32,8 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
   };
 
   var markVotedPolls = function (polls) {
-    // add isVotedByMe boolean value to each poll of polls array
+    // add isVotedByMe boolean value and answer number (if true) 
+    // to each poll of polls array
     var pollIds = polls.map(function (poll) { return poll.id; }),
         params = { params: { pollIds: pollIds } },
         me = that.getMe();
@@ -41,7 +42,9 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
       .then(function (myVotes) {
         var pollIdsVotedByMe = myVotes.map(function (v) { return v._poll; });
         polls.forEach(function (poll) {
-          poll.isVotedByMe = pollIdsVotedByMe.indexOf(poll.id) > 0;
+          var index = pollIdsVotedByMe.indexOf(poll.id);
+          poll.isVotedByMe = index >= 0;
+          if (poll.isVotedByMe) { poll.answerVotedByMe = myVotes[index]; }
         });
         return polls;
       });
@@ -158,6 +161,7 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
         // since all votes are currnt user's vote
         polls.forEach(function (poll) {
           poll.isVotedByMe = true;
+          poll.answerVotedByMe = poll._outer.answer;
         });
         return polls;
       } else {

@@ -136,7 +136,7 @@ function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
   };
 
   var updatePie = function (answer1, answer2) {
-    var COLOR_BOLD = '#201236',
+    var COLOR_BOLD = '#1E1532',
         COLOR_LIGHT = '#CDCCD3',
         a1Data = {label: 'answer1', value: answer1},
         a2Data = {label: 'answer2', value: answer2};
@@ -155,12 +155,8 @@ function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
   };
 
   self.vote = function (poll, answerNum) {
-    if(!poll.voted) {
-      poll['answer' + answerNum].numVotes += 1;
-      poll.voted = true;
-      updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
-      Polls.vote(poll, answerNum);
-    }
+    Polls.vote(poll, answerNum);
+    updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
   };
 
   self.cardSwiped = function() {

@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'OratorStd';
+  src: url('OratorStd.eot');
+  src: url('OratorStd.eot?#iefix') format('embedded-opentype'),
+       url('OratorStd.woff2') format('woff2'),
+       url('OratorStd.woff') format('woff'),
+       url('OratorStd.ttf') format('truetype'),
+       url('OratorStd.svg#OratorStd') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+

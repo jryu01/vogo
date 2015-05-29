@@ -16,7 +16,7 @@ $dark:                            #444 !default;
 */
 
 // our app theme color
-$royal:                           #251037 !default;
+$royal:                           #1E1532 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -31,12 +31,48 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 //=============================================================================
 //                             Themes
 //=============================================================================
-// $bg-color: rgba(205, 204, 208, 0.33);
 $tabs-color: #000000;
 
+@font-face {
+  font-family: 'Bank Gothic Light BT';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bank Gothic Light BT'), url('../fonts/bankgothic-lt-bt/TT0589M_.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'OratorStd';
+  src: url('../fonts/oratorStd/OratorStd.woff') format('woff'),
+       url('../fonts/oratorStd/OratorStd.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AmerTypewriterITCbyBT-Medium';
+  src: url('../fonts/american-type-writer/AmerTypewriterITCbyBT-Medium.woff2') format('woff2'),
+    url('../fonts/american-type-writer/AmerTypewriterITCbyBT-Medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/** Overridding Ionic Defaults */
+body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divider {
+  font-family: 'AmerTypewriterITCbyBT-Medium', sans-serif;
+}
+.app .bar .title {
+  font-family: 'AmerTypewriterITCbyBT-Medium', sans-serif;
+}
+
+#app-logo {
+  font-family: 'Bank Gothic Light BT';
+  font-size: 30px;
+  font-weight: bold;
+}
+
 .app .pane {
-  background: -webkit-radial-gradient(#FFF, #E4E3E6, #CDCCD0);
-  background: radial-gradient(#FFF, #E4E3E6, #CDCCD0);
+  background: -webkit-radial-gradient(#CDCCD0, #777879);
+  background: radial-gradient(#CDCCD0, #777879);
 }
 .app .tabs-dark > .tabs {
   background-color: $tabs-color;
@@ -44,7 +80,24 @@ $tabs-color: #000000;
 .app ion-content {
   border-top: 8px solid white;
 }
-
+.app p.ft-orator, 
+.app a.ft-orator,
+.app span.ft-orator {
+  font-weight: bold;
+  line-height: 10px;
+  // font-size: 14px;
+  // padding-top: 5px;
+  font-family: 'OratorStd';
+}
+.app .ft-orator {
+  p, a, span {
+    font-weight: bold;
+    line-height: 10px;
+    // font-size: 14px;
+    // padding-top: 5px;
+    font-family: 'OratorStd';
+  }
+}
 //=============================================================================
 //                             Common
 //=============================================================================

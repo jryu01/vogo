@@ -3,6 +3,10 @@ $card-bg: #FFF;
 .home {
 }
 
+.home ion-content {
+  bottom: 49px;
+}
+
 .home swipe-card {
   z-index: 1; 
   position: absolute;
@@ -11,9 +15,9 @@ $card-bg: #FFF;
   width: 300px;
   left: 50%;
   top: 50%;
-  height: 386px;
+  height: 390px;
   margin-left: -150px;
-  margin-top: -193px;
+  margin-top: -195px;
   -webkit-animation-fill-mode: forwards;
   background-color: transparent;  
 }
@@ -41,10 +45,15 @@ $card-bg: #FFF;
   border: none;
 }
 
+.home .poll-card .item p {
+  color: #888;
+}
+
 .home .item.pollcard-item-header {
   text-align: center;
   padding-bottom: 8px;
   border-radius: inherit;
+  height: 128px;
   a {
     display: inline-block;
     text-decoration: none;
@@ -53,6 +62,8 @@ $card-bg: #FFF;
     display: inline-block;
     vertical-align: middle; 
     padding-right: 3px;
+    width: 40px;
+    height: 40px;
   }
   a > span {
     display: inline-block;
@@ -60,7 +71,7 @@ $card-bg: #FFF;
   }
   .question {
     margin-top: 8px;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 400;
   }
 }
@@ -76,7 +87,7 @@ $card-bg: #FFF;
   }
   .answer-box {
     position: absolute;
-    height: initial;
+    height: 42px;
     padding: 0;
     bottom: 0;
     background: rgba(255, 255, 255, 0.6);
@@ -93,6 +104,12 @@ $card-bg: #FFF;
   }
   .answer-box h3 {
     white-space: normal;
+    color: #555;
+  }
+  .answer-box .my-vote h3 {
+    font-size: 15px;
+    font-weight: bolder;
+    color: #000;
   }
 }
 

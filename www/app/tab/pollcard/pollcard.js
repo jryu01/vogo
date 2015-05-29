@@ -34,10 +34,11 @@ function ($scope, $stateParams, Polls) {
   self.poll = $stateParams.poll;
   
  self.vote = function (poll, answerNum) {
-    if (!poll.isVotedByMe) {
-      poll['answer' + answerNum].numVotes += 1;
-      poll.isVotedByMe = true;
-      Polls.vote(poll, answerNum);
-    }
+    Polls.vote(poll, answerNum);
+    // if (!poll.isVotedByMe) {
+    //   poll['answer' + answerNum].numVotes += 1;
+    //   poll.isVotedByMe = true;
+    //   poll.answerVotedByMe = answerNum;
+    // }
   };
 }]);

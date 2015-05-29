@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'AmerTypewriterITCbyBT-Medium';
+  src: url('AmerTypewriterITCbyBT-Medium.eot');
+  src: url('AmerTypewriterITCbyBT-Medium.eot?#iefix') format('embedded-opentype'),
+       url('AmerTypewriterITCbyBT-Medium.woff2') format('woff2'),
+       url('AmerTypewriterITCbyBT-Medium.woff') format('woff'),
+       url('AmerTypewriterITCbyBT-Medium.ttf') format('truetype'),
+       url('AmerTypewriterITCbyBT-Medium.svg#AmerTypewriterITCbyBT-Medium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+

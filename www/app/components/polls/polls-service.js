@@ -39,12 +39,12 @@ angular.module('voteit.polls', [])
   };
 
   that.vote = function (poll, answerNum) {
-    // remove voted poll from the queue if one exists
-    that.queue.forEach(function (value, index, array) {
-      if (value.id === poll.id) {
-        array.splice(index, 1);
-      }
-    });
+    if (poll.isVotedByMe) {
+      return;
+    }
+    poll['answer' + answerNum].numVotes += 1;
+    poll.isVotedByMe = true;
+    poll.answerVotedByMe = answerNum;
     return Polls.one(poll.id).post('votes', { answer: answerNum });
   };
 
