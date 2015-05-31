@@ -3,48 +3,130 @@
 }
 
 .profile .profile-info {
-  background-color: #fff;
+  background-color: transparent;
   position: relative;
   z-index: 1000;
+  height: 155px;
+  padding: 20px;
+}
+
+.profile .profile-info-content {
+  height: 135px;
+  .col-50 {
+    padding-left: 15px;
+    padding-right: 0px;
+  }
 }
 
 .profile .profile-picture {
-  // display: block;
   border-radius: 100px;
-  border: 1px solid #fff;
-  width: 80px;
-  height: 80px;
-  margin: 10px 0 0 10px;
-  // margin: 30px auto 0;
-  box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+  background-color: #DDD;
+  width: 68px;
+  height: 68px;
 }
 
-.profile ion-tabs.has-custom-control .tabs {
-  display: none;
+.profile .profile-actions {
+  padding-left: 25px;
+  .button {
+    width: 100%;
+    margin-bottom: 2px;
+  }
+  .button.has-number {
+    text-align: initial;
+    span {
+      float: right;
+    }
+  }
+  .button-follow {
+    color: #000020;
+    border-color: #000020;
+    background-color: #E0DFE6;
+
+  }
 }
 
-.profile ion-pane {
-  background: transparent;
+.profile .button-row {
+  .button-dark {
+    box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.6);
+  }
+  .button-dark.activated {
+    box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0);
+  }
+  .button-dark.active {
+    border-color: #3F3353;
+    background-color: #3F3353;
+  }
+  .button-dark {
+    border-color: #7D788B;
+    background-color: #7D788B;
+  }
 }
 
 .profile ion-content.nested {
   bottom: 0;
+  border: none;
+  .padding {
+    height: 210px;
+  }
+  .scroll-refresher {
+    top:  150px; // -60px(default) + 210px(padding)
+  }
 }
 
-.profile ion-content.nested .padding {
-  height: 270px;
-}
-
-.profile ion-content.nested .scroll-refresher {
-  top:  210px; // -60px(default) + 270px(padding)
-}
-
-.profile ion-content.nested .list .thumbnail {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  max-width: 80px;
-  max-height: 80px;
-  width: 100%;
-  height: 100%; 
+.profile ion-content.nested .item-container {
+  padding: 0 10px 5px;
+  @media (min-width: 360px) {
+    padding: 0 15px 10px;
+  } 
+  .item {
+    padding-right: 10px;
+  }
+  .thumbnail {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    max-width: 80px;
+    max-height: 80px;
+    width: 100%;
+    height: 100%; 
+  }
+  p {
+    font-size: 11px;
+  }
+  .img-avatar {
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+  }
+  .name {
+    color: black;
+  }
+  .total-hits {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px 10px 0 0;
+    background-color: inherit;
+  }
+  .question {
+    margin: 0px;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+  }
+  .question > h3 {
+    max-height: 50px;
+    white-space: normal;
+    -webkit-white-space: normal;
+  }
+  .comment {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+  }
 }

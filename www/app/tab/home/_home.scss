@@ -58,7 +58,7 @@ $card-bg: #FFF;
     display: inline-block;
     text-decoration: none;
   }
-  a > img {
+  a > .img-avatar {
     display: inline-block;
     vertical-align: middle; 
     padding-right: 3px;
@@ -104,6 +104,7 @@ $card-bg: #FFF;
   }
   .answer-box h3 {
     white-space: normal;
+    -webkit-white-space: normal;
     color: #555;
   }
   .answer-box .my-vote h3 {

@@ -19,14 +19,14 @@ angular.module('voCardImg', [])
         elem.style.width = attrs.width || '100%';
         elem.style.height = attrs.height || '300px';
 
-        pic1.style['background-color'] = 'lightgrey';
+        pic1.style['background-color'] = '#DDD';
         pic1.style['background-position'] = 'center center';
         pic1.style['background-repeat'] = 'no-repeat';
         pic1.style['background-size'] = 'cover';
         pic1.style.width = '50%';
         pic1.style.height = '100%';
 
-        pic2.style['background-color'] = 'lightgrey';
+        pic2.style['background-color'] = '#DDD';
         pic2.style['background-position'] = 'center center';
         pic2.style['background-repeat'] = 'no-repeat';
         pic2.style['background-size'] = 'cover';

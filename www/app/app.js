@@ -69,14 +69,14 @@ function ($urlRouterProvider, RestangularProvider, config) {
 .run(['config', 'auth', '$http', 'localStorageService', function (config, auth, $http, localStorageService) {
   // login with predefined user on development
   if (config.env === 'development') {
-    // auth.authenticate({
-    //   'email': 'testuser1@test.com',
-    //   'name': 'Test User1',
-    //   'picture': 'http://lorempixel.com/100/100/',
-    //   'id': '554be56e11a864e3832decd1'
-    // }, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTRiZTU2ZTExYTg2NGUzODMyZGVjZDEiLCJleHAiOjE0MzYyMjE5OTcxMDB9.4evSv0naOQxDRr1r4V0hqhoeyERYPMi5oNGZMGI00XA');
-    // $http.get(config.baseUrl + '/s3Info').then(function (res) {
-    //   localStorageService.set('s3Info', res.data);
-    // });
+    auth.authenticate({
+      'email': 'testuser1@test.com',
+      'name': 'Test User1',
+      'picture': 'http://lorempixel.com/100/100/',
+      'id': '554be56e11a864e3832decd1'
+    }, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTRiZTU2ZTExYTg2NGUzODMyZGVjZDEiLCJleHAiOjE0MzYyMjE5OTcxMDB9.4evSv0naOQxDRr1r4V0hqhoeyERYPMi5oNGZMGI00XA');
+    $http.get(config.baseUrl + '/s3Info').then(function (res) {
+      localStorageService.set('s3Info', res.data);
+    });
   }
 }]);

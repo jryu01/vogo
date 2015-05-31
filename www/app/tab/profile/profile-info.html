@@ -1,0 +1,49 @@
+<div class="profile-info-content row">
+  <div class="col col-50">
+    <img class="profile-picture" ng-src="{{ctrl.profile.picture}}">
+    <p class="profile-name">
+      <span class="ft-orator">{{ ctrl.profile.name }}</span>
+    </p>
+  </div>
+  <div class="profile-actions col">
+    <a class="button button-small has-number"
+        href="#"
+        ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'following' })"> 
+      Following <span>{{ctrl.profile.numFollowing}}</span>
+    </a>
+    <a class="button button-small has-number"
+        href="#"
+        ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'followers' })"> 
+      Followers <span>{{ctrl.profile.numFollowers}}</span>
+    </a>
+    <a class="button button-small button-balanced" 
+      href="#"
+      ng-click="ctrl.unfollow(ctrl.profile.uid)"
+      ng-if="!ctrl.isMyProfile && ctrl.profile.following === true">
+      Following
+    </a>
+    <a class="button button-small button-stable button-follow" 
+      href="#"
+      ng-click="ctrl.follow(ctrl.profile.uid)"
+      ng-if="!ctrl.isMyProfile && ctrl.profile.following === false">
+      <i class="ion-plus"></i> Follow
+    </a>
+  </div>
+</div>
+
+<div class="button-row row">
+  <div class="col">
+    <a class="button button-block button-small button-dark"
+        ng-class="{ active: active === 'vote' }"
+        ng-click="ctrl.selectTab(0)">
+      Vote
+    </a>
+  </div>
+  <div class="col">
+    <a class="button button-block button-small button-dark"
+        ng-class="{ active: active === 'poll' }"
+        ng-click="ctrl.selectTab(1)">
+      Poll
+    </a>
+  </div>
+</div>

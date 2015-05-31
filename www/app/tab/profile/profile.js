@@ -74,6 +74,19 @@ function (User, $scope, $stateParams) {
   init();
 }])
 
+.directive('profileInfo', [
+function () {
+  return {
+    restrict: 'E',
+    scope: true,
+    templateUrl: 'app/tab/profile/profile-info.html',
+    link: function ($scope, $element, $attr) {
+      console.log("profile-info");
+      $scope.active = $attr.active;
+    }
+  };
+}])
+
 .directive('profileShrink', [function () {
 
   var shrink = function(shrinkElem, amt, max) {
@@ -85,12 +98,14 @@ function (User, $scope, $stateParams) {
   return {
     restrict: 'A',
     link: function($scope, $element, $attr) {
+      console.log("profileshrink");
       var starty = $scope.$eval($attr.profileShrink) || 0,
           shrinkAmt,
           maxShrinkAmt = 220,
           shrinkElem = $element[0].parentNode.querySelector('.profile-info'),
           shrinkElemHeight = shrinkElem.offsetHeight;
-
+      console.log(shrinkElem);
+      console.log(shrinkElemHeight);
       $element.bind('scroll', function (e) {
         var scrollTop = null;
         if (e.detail) {
