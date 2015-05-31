@@ -36,7 +36,7 @@
                   </vo-card-img>
                   <p>
                     <img class="img-avatar" ng-src="{{vote._poll.createdBy.picture}}">
-                    <span class="ft-orator name" ng-bind="::vote._poll.createdBy.name"></span>
+                    <span class="ft-orator name" ng-bind="vote._poll.createdBy.name"></span>
                   </p>
                   <p class="total-hits">
                     <i class="icon ion-checkmark-round"></i>
@@ -81,7 +81,7 @@
 
             <div class="list">
               <div class="item-container" 
-                    collection-repeat="poll in pctrl.votes">
+                    collection-repeat="poll in pctrl.polls">
                 <a class="item item-thumbnail-left" 
                     href="#" 
                     ng-click="tabCtrl.go('pollcard', { id: poll.id, poll: poll })">
@@ -91,7 +91,7 @@
                   </vo-card-img>
                   <p>
                     <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
-                    <span class="ft-orator name" ng-bind="::poll.createdBy.name"></span>
+                    <span class="ft-orator name" ng-bind="poll.createdBy.name"></span>
                   </p>
                   <p class="total-hits">
                     <i class="icon ion-checkmark-round"></i>
