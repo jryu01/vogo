@@ -34,6 +34,7 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
     answer1: { text: '', picture: '' },
     answer2: { text: '', picture: '' }
   };
+  self.creating = false;
 
   $ionicModal
   .fromTemplateUrl('app/tab/home/create-poll-modal.html', {
@@ -67,16 +68,16 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
 
   self.openModal = function () {
     if (window.StatusBar) { window.StatusBar.styleDefault(); }
-    self.newPoll.question = '';
-    self.newPoll.answer1.text = '';
-    self.newPoll.answer2.text = '';
-    self.newPoll.answer1.picture = '';
-    self.newPoll.answer2.picture = '';
     self.createPollModal.show();
   };
 
   self.closeModal = function() {
     if (window.StatusBar) { window.StatusBar.styleLightContent(); }
+    self.newPoll.question = '';
+    self.newPoll.answer1.text = '';
+    self.newPoll.answer2.text = '';
+    self.newPoll.answer1.picture = '';
+    self.newPoll.answer2.picture = '';
     self.createPollModal.hide();
   };
 
@@ -106,7 +107,12 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
 
   //TODO: handle erros
   self.createPoll = function () {
+    if (self.creatingPoll) {
+      return;
+    }
+    self.creatingPoll = true;
     Polls.create(self.newPoll).then(function () {
+      self.creatingPoll = false;
       self.closeModal();
       $scope.$broadcast('HomeCtrl.cardCreated');
     }).catch(function () {});
@@ -155,8 +161,9 @@ function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
   };
 
   self.vote = function (poll, answerNum) {
-    Polls.vote(poll, answerNum);
-    updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
+    Polls.vote(poll, answerNum).then(function () {
+      updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
+    });
   };
 
   self.cardSwiped = function() {

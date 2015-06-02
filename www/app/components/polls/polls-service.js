@@ -3,7 +3,7 @@
 
 angular.module('voteit.polls', [])
 
-.factory('Polls', ['Restangular', function (Restangular) {
+.factory('Polls', ['Restangular', '$q', function (Restangular, $q) {
 
   var that = {
     queue: []
@@ -40,12 +40,14 @@ angular.module('voteit.polls', [])
 
   that.vote = function (poll, answerNum) {
     if (poll.isVotedByMe) {
-      return;
+      return $q.when();
     }
-    poll['answer' + answerNum].numVotes += 1;
-    poll.isVotedByMe = true;
-    poll.answerVotedByMe = answerNum;
-    return Polls.one(poll.id).post('votes', { answer: answerNum });
+    return Polls.one(poll.id)
+      .post('votes', { answer: answerNum }).then(function () {
+        poll['answer' + answerNum].numVotes += 1;
+        poll.isVotedByMe = true;
+        poll.answerVotedByMe = answerNum;
+      });
   };
 
   that.comment = function (poll, text) {
