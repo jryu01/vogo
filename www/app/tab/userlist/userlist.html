@@ -1,14 +1,26 @@
 <ion-view class="comments" view-title="{{userlist.title}}">
   <ion-content>
     <div class="list">
-      <div class="item item-avatar" 
-          collection-repeat="user in userlist.users">
-        <img ng-src="{{ ::user.picture }}" 
+      <div class="item" 
+            style="width: 100%: height: 55px;padding: 5px;"
+            collection-repeat="user in userlist.users">
+
+<!--         <img ng-src="{{ ::user.picture }}" 
             ng-click="tabCtrl.go('profile', { id: user.userId, user: user })">
         <h3 ng-bind="::user.name" 
             ng-click="tabCtrl.go('profile', { id: user.userId, user: user })">
         </h3>
-        <div ng-if="user.userId !== userlist.me.id" style="margin-left: 80%">
+ -->        
+        <a href="#" 
+            style="text-decoration: none; color: #000;"
+            ng-click="tabCtrl.go('profile', { id: user.userId, user: user })">
+          <img class="img-avatar" ng-src="{{ user.picture }}">
+          <span class="ft-orator" 
+                style="padding-left: 3px; color: black;"
+                ng-bind="user.name"></span>
+        </a>
+
+        <div ng-if="user.userId !== userlist.me.id" style="float: right; padding: 5px">
           <a class="button button-small button-balanced" 
             href="#"
             ng-click="userlist.unfollow(user)"
@@ -26,3 +38,4 @@
     </div>
   </ion-content>
 </ion-view>
+
