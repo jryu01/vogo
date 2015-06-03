@@ -11,6 +11,7 @@ function (Polls) {
     scope: true,
     templateUrl: 'app/components/vocard/vocard.html',
     link: function ($scope, $element, $attr) {
+      var poll = $scope.poll;
       var updatePie = function (answer1, answer2) {
         var COLOR_BOLD = '#1E1532',
             COLOR_LIGHT = '#CDCCD3',
@@ -29,6 +30,9 @@ function (Polls) {
         };
         $scope.pieData = [a2Data, a1Data];
       };
+      if ($scope.poll.isVotedByMe) {
+        updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
+      }
       $scope.vote = function (poll, answerNum) {
         Polls.vote(poll, answerNum).then(function () {
           updatePie(poll.answer1.numVotes, poll.answer2.numVotes);

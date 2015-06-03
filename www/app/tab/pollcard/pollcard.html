@@ -1,61 +1,7 @@
 <ion-view class="pollcard" view-title="">
   <ion-content>
-
-    <div class="poll-card card list" 
-                  on-destroy="ctrl.cardDestroyed($index)" 
-                  on-card-swipe="ctrl.cardSwiped()">
-
-      <div class="item item-avatar" 
-            ng-click="tabCtrl.go('profile', { id: ctrl.poll.createdBy.userId, user: ctrl.poll.createdBy })">
-        <img ng-src="{{ctrl.poll.createdBy.picture}}">
-        <span class="item-note">
-          {{ctrl.poll.answer1.numVotes + ctrl.poll.answer2.numVotes}} hits
-        </span>
-        <h3 ng-bind="::ctrl.poll.createdBy.name"></h3>
-        <p ng-bind="::ctrl.poll.question"></p>
-      </div>
-
-      <div class="vote-area row">
-        <div class="col" ng-click="ctrl.vote(ctrl.poll, 1);"></div>
-        <div class="col" ng-click="ctrl.vote(ctrl.poll, 2);"></div>
-      </div>
-
-      <div class="item item-image">
-        <vo-card-img src1="{{::ctrl.poll.answer1.picture}}"
-                      src2="{{::ctrl.poll.answer2.picture}}"
-                      height="250px">
-        </vo-card-img>
-      </div>
-      <div class="item" style="padding: 0;">
-        <div class="row">
-          <h3 class="col text-center" 
-              style="white-space: normal;"
-              ng-bind="::ctrl.poll.answer1.text"></h3>
-          <h3 class="col text-center" 
-              style="white-space: normal;"
-              ng-bind="::ctrl.poll.answer2.text"></h3>
-        </div>
-        <div class="row" style="height: 30px">
-          <h3 class="col text-center" 
-              ng-if="ctrl.poll.isVotedByMe"
-              style="white-space: normal;">
-            {{ctrl.poll.answer1.numVotes}} hits
-          </h3>
-          <h3 class="col text-center" 
-              ng-if="ctrl.poll.isVotedByMe"
-              style="white-space: normal;">
-            {{ctrl.poll.answer2.numVotes}} hits
-          </h3>
-        </div>
-        <p>
-          <a style="opacity: 0">s</a>
-          <a href="#" 
-              class="subdued" 
-              ng-click="tabCtrl.go('comments', { pollId: ctrl.poll.id, poll: ctrl.poll })">
-            {{ctrl.poll.numComments }} Comments
-          </a>
-        </p>
-      </div>
-    </div> 
+    <div class="card-container">
+      <vocard></vocard>
+    </div>
   </ion-content>
 </ion-view>

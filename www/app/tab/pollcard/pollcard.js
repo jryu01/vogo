@@ -31,14 +31,15 @@ angular.module('voteit.tab.pollcard', [])
   'Polls',
 function ($scope, $stateParams, Polls) {
   var self = this;
-  self.poll = $stateParams.poll;
+  // self.poll = $stateParams.poll;
+  $scope.poll = $stateParams.poll;
   
- self.vote = function (poll, answerNum) {
-    Polls.vote(poll, answerNum);
+ // self.vote = function (poll, answerNum) {
+    // Polls.vote(poll, answerNum);
     // if (!poll.isVotedByMe) {
     //   poll['answer' + answerNum].numVotes += 1;
     //   poll.isVotedByMe = true;
     //   poll.answerVotedByMe = answerNum;
     // }
-  };
+  // };
 }]);

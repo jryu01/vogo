@@ -39,21 +39,18 @@
   </div>
 
   <div class="item pollcard-item-footer">
-    <div class="row result">
-      <p class="col text-center" 
-          ng-if="poll.isVotedByMe">
+    <div class="row result" ng-if="poll.isVotedByMe">
+      <p class="col text-center">
         {{poll.answer1.numVotes}} <span class="ft-orator">hits</span>
       </p>
-      <span class="col col-10 text-center" 
-          ng-if="poll.isVotedByMe">
+      <span class="col col-10 text-center">
         <div class="pie-container">
           <pie-chart data="pieData" 
                       options="pieOptions">
           </pie-chart>
         </div>
       </span>
-      <p class="col text-center" 
-          ng-if="poll.isVotedByMe">
+      <p class="col text-center">
         {{poll.answer2.numVotes}} <span class="ft-orator">hits</span>
       </p>
     </div>
