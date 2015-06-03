@@ -130,6 +130,7 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
 //-----------------------------------------------------------------------------
 
 // Include all sub scss files for the app
+@import "components/vocard/vocard";
 @import "tab/home/home";
 @import "tab/pollcard/pollcard";
 @import "tab/profile/profile";

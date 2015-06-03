@@ -19,7 +19,7 @@
           <ion-content class="nested" 
                         profile-shrink 
                         ng-controller="RecentVotesCtrl as vctrl"
-                        scroll-event-interval="5">
+                        scroll-event-interval="1">
             <div class="padding"></div>
             <ion-refresher on-refresh="vctrl.fetchVotes(true)">
             </ion-refresher>
@@ -74,7 +74,7 @@
           <ion-content class="nested" 
                         profile-shrink 
                         ng-controller="RecentPollsCtrl as pctrl"
-                        scroll-event-interval="5">
+                        scroll-event-interval="1">
             <div class="padding"></div>
             <ion-refresher on-refresh="pctrl.fetchPolls(true)">
             </ion-refresher>

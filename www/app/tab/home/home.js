@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('voteit.tab.home', [
-  'ionic.contrib.ui.cards',
-   'n3-pie-chart'
+  'ionic.contrib.ui.cards'
 ])
 
 .config(function ($stateProvider) {
@@ -105,7 +104,6 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
       }).catch(function () {});
   };
 
-  //TODO: handle erros
   self.createPoll = function () {
     if (self.creatingPoll) {
       return;
@@ -115,7 +113,9 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
       self.creatingPoll = false;
       self.closeModal();
       $scope.$broadcast('HomeCtrl.cardCreated');
-    }).catch(function () {});
+    }).catch(function () {
+      self.creatingPoll = false;
+    });
   };
 
 }])
@@ -138,31 +138,6 @@ function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
     Polls.getNextPolls().then(function () {
       self.addCard();
       self.loading = false;
-    });
-  };
-
-  var updatePie = function (answer1, answer2) {
-    var COLOR_BOLD = '#1E1532',
-        COLOR_LIGHT = '#CDCCD3',
-        a1Data = {label: 'answer1', value: answer1},
-        a2Data = {label: 'answer2', value: answer2};
-    self.pieData = [];
-    self.pieOptions = {};
-    a1Data.isBig = answer1 > answer2;
-    a2Data.isBig = !a1Data.isBig;
-    a1Data.color = (a1Data.isBig) ? COLOR_BOLD : COLOR_LIGHT;
-    a2Data.color = (a2Data.isBig) ? COLOR_BOLD : COLOR_LIGHT;
-    self.pieOptions = {
-      thickness: 200, 
-      mode: 'gauge', 
-      total: answer1 + answer2 
-    };
-    self.pieData = [a2Data, a1Data];
-  };
-
-  self.vote = function (poll, answerNum) {
-    Polls.vote(poll, answerNum).then(function () {
-      updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
     });
   };
 

@@ -10,6 +10,7 @@ angular.module('voteit', [
   'voteit.config',
   'voteit.polls',
   'voteit.user',
+  'voteit.vocard',
   'voCardImg',
 
   //subsections

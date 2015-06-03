@@ -18,76 +18,7 @@
       <swipe-card ng-repeat="poll in cardsCtrl.polls" 
                   on-destroy="cardsCtrl.cardDestroyed($index)" 
                   on-card-swipe="cardsCtrl.cardSwiped()">
-        <div class="poll-card list">
-          <div class="item pollcard-item-header">
-            <a href="#" ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
-              <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
-              <span class="ft-orator" ng-bind="::poll.createdBy.name"></span>
-            </a>
-            <h3 class="question" ng-bind="::poll.question"></h3>
-            <p class="hits-total">
-              <i class="icon ion-checkmark-round"></i>
-              {{poll.answer1.numVotes + poll.answer2.numVotes}} 
-              <span class="ft-orator">hits</span>
-            </p>
-          </div>
-
-          <div class="vote-area-wrapper">
-            <div class="row vote-area">
-              <div class="col" ng-click="cardsCtrl.vote(poll, 1);"></div>
-              <div class="col" ng-click="cardsCtrl.vote(poll, 2);"></div>
-            </div>
-            <div class="row item answer-box">
-              <div class="col text-center" 
-                    ng-class="{ 'my-vote': poll.answerVotedByMe === 1 }"
-                    ng-click="cardsCtrl.vote(poll, 1);">
-                <h3 ng-bind="::poll.answer1.text"></h3>
-              </div>
-              <div class="col text-center" 
-                    ng-class="{ 'my-vote': poll.answerVotedByMe === 2}"
-                    ng-click="cardsCtrl.vote(poll, 2);">
-                <h3 ng-bind="::poll.answer2.text"></h3>
-              </div>
-            </div>
-          </div>
-
-          <div class="item item-image">
-            <vo-card-img src1="{{::poll.answer1.picture}}"
-                          src2="{{::poll.answer2.picture}}"
-                          height="180px">
-            </vo-card-img>
-          </div>
-
-          <div class="item pollcard-item-footer">
-            <div class="row result">
-              <p class="col text-center" 
-                  ng-if="poll.isVotedByMe">
-                {{poll.answer1.numVotes}} <span class="ft-orator">hits</span>
-              </p>
-              <span class="col col-10 text-center" 
-                  ng-if="poll.isVotedByMe">
-                <div class="pie-container">
-                  <pie-chart data="cardsCtrl.pieData" 
-                              options="cardsCtrl.pieOptions">
-                  </pie-chart>
-                </div>
-              </span>
-              <p class="col text-center" 
-                  ng-if="poll.isVotedByMe">
-                {{poll.answer2.numVotes}} <span class="ft-orator">hits</span>
-              </p>
-            </div>
-            <p>
-              <a href="#" 
-                  class="subdued" 
-                  style="float: right; padding-right: 10px;"
-                  ng-click="tabCtrl.go('comments', { pollId: poll.id, poll: poll })">
-                  <i class="ion-edit"></i> {{ poll.numComments }} 
-                  <span class="ft-orator">comment</span>
-              </a>
-            </p>
-          </div>
-        </div>
+        <vocard></vocard>
       </swipe-card>
     </swipe-cards>
   </ion-content>
