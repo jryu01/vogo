@@ -25,16 +25,17 @@ function (config, $ionicConfigProvider) {
 
   // If it is running on android and dev mode, change localhost to 10.0.2.2
   if (config.env === 'development' && (ionic.Platform.isAndroid() || ionic.Platform.isIOS())) {
-    // config.baseUrl = 'http://10.0.2.2:3000/api'; //android emulator
-    // config.baseUrl = 'http://10.0.3.2:3000/api'; //genymotion
+    // config.baseUrl = 'http://10.0.2.2:3000/api'; //android emulator 
     config.baseUrl = 'http://192.168.0.26:3000/api'; //ios or android device
-
     // config.baseUrl = 'http://localhost:3000/api'; //ios emulator
+  }
+
+  if(!ionic.Platform.isIOS()) {
+    $ionicConfigProvider.scrolling.jsScrolling(false); 
   }
 
   $ionicConfigProvider.platform.android.tabs.style('standard');
   $ionicConfigProvider.tabs.position('bottom');
-
 }])
 
 .config([

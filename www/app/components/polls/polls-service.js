@@ -42,11 +42,15 @@ angular.module('voteit.polls', [])
     if (poll.isVotedByMe) {
       return $q.when();
     }
+    poll['answer' + answerNum].numVotes += 1;
+    poll.isVotedByMe = true;
+    poll.answerVotedByMe = answerNum;
     return Polls.one(poll.id)
-      .post('votes', { answer: answerNum }).then(function () {
-        poll['answer' + answerNum].numVotes += 1;
-        poll.isVotedByMe = true;
-        poll.answerVotedByMe = answerNum;
+      .post('votes', { answer: answerNum })
+      .catch(function () {
+        poll['answer' + answerNum].numVotes -= 1;
+        poll.isVotedByMe = false;
+        poll.answerVotedByMe = undefined;
       });
   };
 

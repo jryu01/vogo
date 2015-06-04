@@ -63,3 +63,59 @@ $card-bg: #FFF;
 .home swipe-card.pop-in {
   -webkit-animation: bounceIn 0.4s ease-out;
 }
+
+//=======Create Poll Modal==============
+
+.create-poll-modal {
+  background: -webkit-radial-gradient(#CDCCD0, #777879); 
+  background: radial-gradient(#CDCCD0, #777879);
+  .form-wrapper {
+    width: 300px;
+    height: 390px;
+    margin: auto;
+    background-color: #fff;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 2px solid #fff;
+    margin-top: calc((100VH - 10px - 52px - 49px - 390px)/2); // vh - status bar - header - tabs - card height
+    @media (min-width: 360px) {
+      width: 330px;
+    }
+  } 
+  .item-input {
+    margin: 0;
+  }
+  .padding {
+    padding: 20px;
+  }
+  vo-card-img .pic1, 
+  vo-card-img .pic2 {
+    background-color: #89898B !important;
+  }
+  .action-box {
+    width: 250px;
+    height: 80px;
+    margin: auto;
+    margin-top: -150px;
+    margin-bottom: 28px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+  .answer-row {
+    position: relative;
+    background-color: #fff;
+    height: 42px;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  .answer-row .col {
+    padding: 0;
+  }
+  .answer-row input {
+    margin: auto;
+    width: 110px;
+    border: 1px solid #89898B;
+    border-radius: 0;
+    padding: 0;
+  }
+}
