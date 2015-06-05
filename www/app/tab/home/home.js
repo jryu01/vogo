@@ -66,12 +66,10 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
   };
 
   self.openModal = function () {
-    if (window.StatusBar) { window.StatusBar.styleDefault(); }
     self.createPollModal.show();
   };
 
   self.closeModal = function() {
-    if (window.StatusBar) { window.StatusBar.styleLightContent(); }
     self.newPoll.question = '';
     self.newPoll.answer1.text = '';
     self.newPoll.answer2.text = '';
