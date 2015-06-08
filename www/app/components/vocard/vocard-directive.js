@@ -12,7 +12,7 @@ function (Polls) {
     templateUrl: 'app/components/vocard/vocard.html',
     link: function ($scope, $element, $attr) {
       var poll = $scope.poll;
-      var updatePie = function (answer1, answer2) {
+      var updatePie = function (answer1, answer2, duration) {
         var COLOR_BOLD = '#1E1532',
             COLOR_LIGHT = '#CDCCD3',
             a1Data = {label: 'answer1', value: answer1},
@@ -26,7 +26,8 @@ function (Polls) {
         $scope.pieOptions = {
           thickness: 200, 
           mode: 'gauge', 
-          total: answer1 + answer2 
+          total: answer1 + answer2,
+          duration: duration 
         };
         $scope.pieData = [a2Data, a1Data];
       };
@@ -35,7 +36,7 @@ function (Polls) {
       }
       $scope.vote = function (poll, answerNum) {
         Polls.vote(poll, answerNum).then(function () {
-          updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
+          updatePie(poll.answer1.numVotes, poll.answer2.numVotes, 1000);
         });
       };
     }

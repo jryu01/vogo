@@ -6,7 +6,7 @@ angular.module('voteit.tab', [
   'voteit.tab.profile',
   'voteit.tab.settings',
   'voteit.tab.about',
-  'voteit.tab.pollcard',
+  'voteit.tab.polldetail',
   'voteit.tab.userlist'
 ])
 

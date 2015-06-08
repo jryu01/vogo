@@ -105,17 +105,17 @@ updatePaths: function(svg, data, dimensions, options) {
       })
       .style({
         "fill": function(d) {return d.data.color;},
-        "fill-opacity": 1,
-        "stroke": "white",
+        "fill-opacity": 1, //EDITED
+        "stroke": "white", //EDITED
         "stroke-width": function (d) {
           return (d.data.value > 0) ? 3 : 0;
-        }
+        } //EDITED
       })
   ;
-  
+
   paths
     .transition()
-      .duration(1000)
+      .duration(options.duration || 0) //EDITED
       .attrTween("d", tween)
       .each("end", function(d) {
         this.__current = {startAngle: d.startAngle, endAngle: d.endAngle};

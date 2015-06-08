@@ -1,0 +1,76 @@
+<ion-view class="polldetail" view-title="">
+  <ion-content>
+
+
+    <div class="list">
+      <div class="item detail-item-header">
+        <div class="text-center">
+
+<!--           <a href="#" ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
+            <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
+            <span class="ft-orator" ng-bind="poll.createdBy.name"></span>
+          </a>
+ -->        
+
+          <h3 class="question" ng-bind="poll.question"></h3>
+
+<!--           <p class="hits-total">
+            <i class="icon ion-checkmark-round"></i>
+            {{poll.answer1.numVotes + poll.answer2.numVotes}} 
+            <span class="ft-orator">hits</span>
+          </p>
+ -->        
+        </div>
+        
+
+      </div>
+
+      <div class="vote-area-wrapper">
+        <div class="row vote-area">
+          <div class="col" ng-click="vote(poll, 1);"></div>
+          <div class="col" ng-click="vote(poll, 2);"></div>
+        </div>
+        <div class="row item answer-box">
+          <div class="col text-center" 
+                ng-class="{ 'my-vote': poll.answerVotedByMe === 1 }"
+                ng-click="vote(poll, 1);">
+            <h3 ng-bind="poll.answer1.text"></h3>
+          </div>
+          <div class="col text-center" 
+                ng-class="{ 'my-vote': poll.answerVotedByMe === 2}"
+                ng-click="vote(poll, 2);">
+            <h3 ng-bind="poll.answer2.text"></h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="item item-image">
+        <vo-card-img src1="{{poll.answer1.picture}}"
+                      src2="{{poll.answer2.picture}}"
+                      height="60vw">
+        </vo-card-img>
+      </div>
+
+      <div class="item detail-item-footer" ng-if="poll.isVotedByMe">
+        <div class="row result">
+          <p class="col text-center">
+            {{poll.answer1.numVotes}} <span class="ft-orator">hits</span>
+          </p>
+          <span class="col col-10 text-center">
+            <div class="pie-container">
+              <pie-chart data="pieData" 
+                          options="pieOptions">
+              </pie-chart>
+            </div>
+          </span>
+          <p class="col text-center">
+            {{poll.answer2.numVotes}} <span class="ft-orator">hits</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+
+  </ion-content>
+</ion-view>

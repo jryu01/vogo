@@ -29,7 +29,7 @@
                     collection-repeat="vote in vctrl.votes">
                 <a class="item item-thumbnail-left" 
                     href="#" 
-                    ng-click="tabCtrl.go('pollcard', { id: vote._poll.id, poll: vote._poll })">
+                    ng-click="tabCtrl.go('polldetail', { id: vote._poll.id, poll: vote._poll })">
                   <vo-card-img class="thumbnail" 
                                 src1="{{vote._poll.answer1.picture}}"
                                 src2="{{vote._poll.answer2.picture}}">
@@ -84,7 +84,7 @@
                     collection-repeat="poll in pctrl.polls">
                 <a class="item item-thumbnail-left" 
                     href="#" 
-                    ng-click="tabCtrl.go('pollcard', { id: poll.id, poll: poll })">
+                    ng-click="tabCtrl.go('polldetail', { id: poll.id, poll: poll })">
                   <vo-card-img class="thumbnail" 
                                 src1="{{poll.answer1.picture}}"
                                 src2="{{poll.answer2.picture}}">
