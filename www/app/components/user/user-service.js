@@ -44,7 +44,9 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
         polls.forEach(function (poll) {
           var index = pollIdsVotedByMe.indexOf(poll.id);
           poll.isVotedByMe = index >= 0;
-          if (poll.isVotedByMe) { poll.answerVotedByMe = myVotes[index]; }
+          if (poll.isVotedByMe) { 
+            poll.answerVotedByMe = myVotes[index].answer; 
+          }
         });
         return polls;
       });

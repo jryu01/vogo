@@ -40,7 +40,7 @@ angular.module('voteit.polls', [])
 
   that.vote = function (poll, answerNum) {
     if (poll.isVotedByMe) {
-      return $q.when();
+      return $q.reject('already voted');
     }
     poll['answer' + answerNum].numVotes += 1;
     poll.isVotedByMe = true;

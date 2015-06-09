@@ -11,7 +11,7 @@ angular.module('voteit.tab.polldetail', [
     views: {
       'tab-home': {
         templateUrl: 'app/tab/polldetail/polldetail.html',
-        controller: 'PollcardCtrl as ctrl'
+        controller: 'PolldetailCtrl as ctrl'
       }
     }
   });
@@ -21,20 +21,24 @@ angular.module('voteit.tab.polldetail', [
     views: {
       'tab-profile': {
         templateUrl: 'app/tab/polldetail/polldetail.html',
-        controller: 'PollcardCtrl as ctrl'
+        controller: 'PolldetailCtrl as ctrl'
       }
     }
   });
 })
 
-.controller('PollcardCtrl', [
+.controller('PolldetailCtrl', [
   '$scope',
   '$stateParams', 
   'Polls',
-function ($scope, $stateParams, Polls) {
-  var self = this;
+  '$ionicScrollDelegate',
+function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
+  var self = this,
+      poll = {};
+
   $scope.poll = $stateParams.poll;
-  var poll = $scope.poll;
+  poll = $scope.poll;
+  self.newComment = '';
 
   var updatePie = function (answer1, answer2, duration) {
     var COLOR_BOLD = '#1E1532',
@@ -59,11 +63,28 @@ function ($scope, $stateParams, Polls) {
   if ($scope.poll.isVotedByMe) {
     updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
   }
+  Polls.getComments(poll, 0, 99999).then(function (comments) {
+    poll.comments = comments;
+  });
 
-  $scope.vote = function (poll, answerNum) {
+  self.vote = function (poll, answerNum) {
     Polls.vote(poll, answerNum).then(function () {
       updatePie(poll.answer1.numVotes, poll.answer2.numVotes, 1000);
     });
   };
 
+  self.addComment = function () {
+    if (self.newComment) {
+      Polls.comment(poll, self.newComment).then(function (c) {
+        poll.numComments += 1;
+        poll.comments.push(c); 
+        $ionicScrollDelegate.scrollBottom(true);
+      });
+      self.newComment = '';
+    }
+  };
+
+  self.scrollBottom = function () {
+    $ionicScrollDelegate.scrollBottom(true);
+  };
 }]);

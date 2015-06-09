@@ -2,7 +2,7 @@
   <ion-content>
 
 
-    <div class="list">
+    <div class="list poll-info">
       <div class="item detail-item-header">
         <div class="text-center">
 
@@ -27,18 +27,18 @@
 
       <div class="vote-area-wrapper">
         <div class="row vote-area">
-          <div class="col" ng-click="vote(poll, 1);"></div>
-          <div class="col" ng-click="vote(poll, 2);"></div>
+          <div class="col" ng-click="ctrl.vote(poll, 1);"></div>
+          <div class="col" ng-click="ctrl.vote(poll, 2);"></div>
         </div>
         <div class="row item answer-box">
           <div class="col text-center" 
                 ng-class="{ 'my-vote': poll.answerVotedByMe === 1 }"
-                ng-click="vote(poll, 1);">
+                ng-click="ctrl.vote(poll, 1);">
             <h3 ng-bind="poll.answer1.text"></h3>
           </div>
           <div class="col text-center" 
                 ng-class="{ 'my-vote': poll.answerVotedByMe === 2}"
-                ng-click="vote(poll, 2);">
+                ng-click="ctrl.vote(poll, 2);">
             <h3 ng-bind="poll.answer2.text"></h3>
           </div>
         </div>
@@ -51,7 +51,7 @@
         </vo-card-img>
       </div>
 
-      <div class="item detail-item-footer" ng-if="poll.isVotedByMe">
+      <div class="item detail-item-result" ng-if="poll.isVotedByMe">
         <div class="row result">
           <p class="col text-center">
             {{poll.answer1.numVotes}} <span class="ft-orator">hits</span>
@@ -69,8 +69,62 @@
         </div>
       </div>
     </div>
+    
+    <div class="detail-item-info">
+      <a href="#" 
+          class="user-name"
+          ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
+        <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
+        <span class="ft-orator" ng-bind="poll.createdBy.name"></span>
+      </a>
+      <p class="hits-total">
+        <i class="icon ion-checkmark-round"></i>
+        {{poll.answer1.numVotes + poll.answer2.numVotes}} 
+        <span class="ft-orator">hits</span>
+      </p>
+    </div>
 
+    <div class="comment-area">
+      <div class="comment-header">
+        <p> 
+           <i class="ion-edit"></i> 
+          {{ poll.numComments }} 
+          <span class="ft-orator">comment</span>
+        </p> 
+      </div>
+
+      <div class="list comment-list">
+        <div class="item item-avatar item-comment" 
+            ng-repeat="comment in poll.comments">
+          <img ng-src="{{ ::comment.createdBy.picture }}"
+                ng-click="tabCtrl.go('profile', { id: comment.createdBy.userId, user: comment.createdBy })">
+          <p>
+            <span class="ft-orator"
+                  ng-click="tabCtrl.go('profile', { id: comment.createdBy.userId, user: comment.createdBy })">
+              {{ comment.createdBy.name }} 
+            </span>
+            {{ comment.text }}
+          </p>
+        </div>
+
+      </div>
+    </div>
 
 
   </ion-content>
+
+  <form name="sendCommentForm" ng-submit="ctrl.addComment(sendCommentForm)" novalidate>
+      <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+        <label class="item-input-wrapper" style="padding:0">
+          <textarea ng-focus="ctrl.scrollBottom()" ng-blur="ctrl.scrollBottom()" ng-model="ctrl.newComment" value="" placeholder="Add a comment..." required minlength="1" maxlength="1500" msd-elastic style="width: 100%"></textarea>
+        </label>
+        <div class="footer-btn-wrap">
+          <button class="button button-small button-royal" 
+                  type="submit"
+                  ng-disabled="!ctrl.newComment|| ctrl.newComment=== ''">
+            Send
+          </button>
+        </div>
+      </ion-footer-bar>
+    </form>
 </ion-view>

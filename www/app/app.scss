@@ -125,6 +125,20 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
   border-radius: 50%;
   vertical-align: middle; 
 }
+.app a.user-name {
+  display: inline-block;
+  text-decoration: none;
+  > .img-avatar {
+    display: inline-block;
+    vertical-align: middle; 
+    width: 40px;
+    height: 40px;
+  }
+  > span {
+    display: inline-block;
+    color: #000;
+  }
+}
 
 //-----------------------------------------------------------------------------
 //                        End custom styling for the app
