@@ -53,7 +53,8 @@
 
       <div class="item detail-item-result" ng-if="poll.isVotedByMe">
         <div class="row result">
-          <p class="col text-center">
+          <p class="col text-center"
+              ng-click="tabCtrl.go('userlist', { pollId: poll.id, answer: 1, type: 'voters' })">
             {{poll.answer1.numVotes}} <span class="ft-orator">hits</span>
           </p>
           <span class="col col-10 text-center">
@@ -63,13 +64,14 @@
               </pie-chart>
             </div>
           </span>
-          <p class="col text-center">
+          <p class="col text-center"
+              ng-click="tabCtrl.go('userlist', { pollId: poll.id, answer: 2,type: 'voters' })">
             {{poll.answer2.numVotes}} <span class="ft-orator">hits</span>
           </p>
         </div>
       </div>
     </div>
-    
+
     <div class="detail-item-info">
       <a href="#" 
           class="user-name"

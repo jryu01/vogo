@@ -40,7 +40,8 @@
 
   <div class="item pollcard-item-footer">
     <div class="row result" ng-if="poll.isVotedByMe">
-      <p class="col text-center">
+      <p class="col text-center"
+          ng-click="tabCtrl.go('userlist', { pollId: poll.id, answer: 1, type: 'voters' })">
         {{poll.answer1.numVotes}} <span class="ft-orator">hits</span>
       </p>
       <span class="col col-10 text-center">
@@ -50,7 +51,8 @@
           </pie-chart>
         </div>
       </span>
-      <p class="col text-center">
+      <p class="col text-center"
+        ng-click="tabCtrl.go('userlist', { pollId: poll.id, answer: 2, type: 'voters' })">
         {{poll.answer2.numVotes}} <span class="ft-orator">hits</span>
       </p>
     </div>

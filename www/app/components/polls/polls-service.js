@@ -3,12 +3,32 @@
 
 angular.module('voteit.polls', [])
 
-.factory('Polls', ['Restangular', '$q', function (Restangular, $q) {
+.factory('Polls', [
+  'User',
+  'Restangular', 
+  '$q', 
+  'config',
+  '$http', 
+function (User, Restangular, $q, config, $http) {
 
   var that = {
     queue: []
   };
+
   var Polls = Restangular.all('polls');
+
+  var extract = function (result) {
+    return result.data;
+  };
+
+  var url = function () {
+    var args = Array.prototype.slice.call(arguments),
+        url = config.baseUrl;
+    args.forEach(function (urlSegment) {
+      url = url + '/' + urlSegment;
+    });
+    return url;
+  };
 
   that.getNextPolls = function (exclude) {
     var query = {};
@@ -52,6 +72,17 @@ angular.module('voteit.polls', [])
         poll.isVotedByMe = false;
         poll.answerVotedByMe = undefined;
       });
+  };
+
+  that.getVoters = function (pollId, answer, skip) {
+    var opts = {};
+    opts.params = { answer: answer, limit: 100, skip: skip };
+    return $http.get(url('polls', pollId, 'voters'), opts)
+      .then(extract)
+      .then(function (users) {
+        return users.map(function (user) { return user.id; });
+      })
+      .then(User.getFollowingInfo);
   };
 
   that.comment = function (poll, text) {

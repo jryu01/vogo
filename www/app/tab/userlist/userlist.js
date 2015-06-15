@@ -5,7 +5,7 @@ angular.module('voteit.tab.userlist', [])
 .config(function ($stateProvider) {
   $stateProvider.state('tab.tab-home-userlist', {
     url: '/tab-home/userlist',
-    params: { userId: '', type: '' },
+    params: { userId: '', pollId: '', answer: '', type: '' },
     views: {
       'tab-home': {
         templateUrl: 'app/tab/userlist/userlist.html',
@@ -15,7 +15,7 @@ angular.module('voteit.tab.userlist', [])
   });
   $stateProvider.state('tab.tab-profile-userlist', {
     url: '/tab-profile/userlist',
-    params: { userId: '', type: '' },
+    params: { userId: '', pollId: '', answer: '', type: '' },
     views: {
       'tab-profile': {
         templateUrl: 'app/tab/userlist/userlist.html',
@@ -27,24 +27,34 @@ angular.module('voteit.tab.userlist', [])
 
 .controller('UserlistCtrl', [
   'User',
+  'Polls',
   '$stateParams', 
-function (User, $stateParams) {
+  '$q',
+function (User, Polls, $stateParams, $q) {
   var self = this,
-      uid = $stateParams.userId,
       type = $stateParams.type,
-      funcName;
+      promise;
 
   self.users = [];
   self.me = User.getMe();
   self.title = type.charAt(0).toUpperCase() + type.slice(1);
 
-  if (type === 'following') {
-    funcName = 'getFollowing';
-  } else if (type === 'followers') {
-    funcName = 'getFollowers';
+  switch (type) {
+  case 'following':
+    promise =  User.getFollowing($stateParams.userId, 0);
+    break;
+  case 'followers':
+    promise =  User.getFollowers($stateParams.userId, 0);
+    break;
+  case 'voters':
+    promise =  Polls.getVoters($stateParams.pollId, $stateParams.answer, 0);
+    break;
+  default: 
+    promise = $q.reject(new Error ('Unknown userlist type'));
   }
+
   //TODO: Infinite scroll
-  User[funcName](uid, 0).then(function (users) {
+  promise.then(function (users) {
     self.users = users;
   });
 

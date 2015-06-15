@@ -31,6 +31,12 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
     return result.data;
   };
 
+  var mapToUserIds = function (users) {
+    return users.map(function (user) { 
+      return user.userId; 
+    });
+  };
+
   var markVotedPolls = function (polls) {
     // add isVotedByMe boolean value and answer number (if true) 
     // to each poll of polls array
@@ -112,6 +118,9 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
   };
   // return following relationships info with authenticated user to userIds
   that.getFollowingInfo = function (userIds) {
+    if (!(userIds && userIds.length > 0)) {
+      return [];
+    }
     var options = { params: { userId: userIds} };
     return $http.get(url('relationships', 'following'), options).then(extract);
   };
@@ -121,9 +130,8 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
     opts.params = { limit: 100, skip: skip };
     return $http.get(url('users', userId, 'following'), opts)
       .then(extract)
-      .then(function (users) {
-        return users.map(function (user) { return user.userId; });
-      }).then(that.getFollowingInfo);
+      .then(mapToUserIds)
+      .then(that.getFollowingInfo);
   };
 
   that.getFollowers = function (userId, skip) {
@@ -131,9 +139,8 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
     opts.params = { limit: 100, skip: skip };
     return $http.get(url('users', userId, 'followers'), opts)
       .then(extract)
-      .then(function (users) {
-        return users.map(function (user) { return user.userId; });
-      }).then(that.getFollowingInfo);
+      .then(mapToUserIds)
+      .then(that.getFollowingInfo);
   };
 
   that.getVotesById = function (id, before) {
