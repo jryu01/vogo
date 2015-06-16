@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('voteit.tab', [
-  'voteit.tab.comments',
   'voteit.tab.home',
   'voteit.tab.profile',
   'voteit.tab.settings',

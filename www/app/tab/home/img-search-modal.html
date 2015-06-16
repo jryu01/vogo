@@ -1,0 +1,25 @@
+<ion-modal-view class="img-search-modal">
+  <ion-header-bar class="bar-royal item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <form ng-submit="home.searchImg(imgSearchForm)" name="imgSearchForm">
+          <input type="search" 
+                  placeholder="Search" 
+                  ng-model="home.imgSearchQuery">
+        </form>
+      </label>
+    <button class="button button-clear"
+        ng-click="home.closeImagSeach()">
+        Cancel
+    </button>
+  </ion-header-bar>
+  <ion-content class="">
+    <div class="list">
+      <div class="img-box" 
+            ng-repeat="img in home.imgSearchResults"
+            ng-click="home.selectImg(img)">
+        <img ng-src="{{img.MediaUrl}}" alt="">
+      </div>
+    </div> 
+  </ion-content>
+</ion-modal-view>

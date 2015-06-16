@@ -193,6 +193,19 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
       .then(extract)
       .then(markVotedPolls);
   };
+
+
+  //TODO: move this to other service
+  that.searchImg = function (query) {
+    return $http.get(url('bing/search/image'), {params: { query: query }})
+      .then(extract)
+      .then(function (result) {
+        var objects = result.d.results;
+        return objects.map(function (obj) {
+          return obj.Thumbnail;
+        });
+      });
+  };
   
   return that;
 }]);

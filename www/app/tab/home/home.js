@@ -21,27 +21,23 @@ angular.module('voteit.tab.home', [
   '$ionicModal',
   'Polls',
   'User', 
+  '$ionicLoading',
   '$cordovaCamera',
+  '$cordovaFile',
   '$cordovaFileTransfer',
-function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer) {
+function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cordovaFile, $cordovaFileTransfer) {
 
   var self = this;
 
-  self.createPollModal = '';
-  self.newPoll = { 
-    question: '',
-    answer1: { text: '', picture: '' },
-    answer2: { text: '', picture: '' }
-  };
-  self.creating = false;
 
-  $ionicModal
-  .fromTemplateUrl('app/tab/home/create-poll-modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    self.createPollModal = modal;
-  });
+  var showLoading = function () {
+    $ionicLoading.show({
+      template: '<ion-spinner></ion-spinner>'
+    });
+  };
+  var hideLoading = function () {
+    $ionicLoading.hide();
+  };
 
   var uploadImgToS3 = function (imageUri) {
     var user = User.getMe(),
@@ -65,6 +61,33 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
       .then(function () { return pictureUrl; });
   };
 
+  var setPicture = function (url) {
+    if (!self.newPoll.answer1.picture) {
+      self.newPoll.answer1.picture = url;
+    } else {
+      self.newPoll.answer2.picture = url;
+    }
+  };
+
+  //===========================================================================
+  //                Create Poll Modal
+  //===========================================================================
+
+  self.newPoll = { 
+    question: '',
+    answer1: { text: '', picture: '' },
+    answer2: { text: '', picture: '' }
+  };
+  self.createPollModal = '';
+
+  $ionicModal
+  .fromTemplateUrl('app/tab/home/create-poll-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    self.createPollModal = modal;
+  });
+
   self.openModal = function () {
     self.createPollModal.show();
   };
@@ -75,11 +98,14 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
     self.newPoll.answer2.text = '';
     self.newPoll.answer1.picture = '';
     self.newPoll.answer2.picture = '';
+
+    self.resetImgSearch();
+
     self.createPollModal.hide();
   };
 
   self.getPhoto = function (sourceType) {
-    // sourcetype PHOTOLIBRARY or 
+    // sourcetype PHOTOLIBRARY or CAMERA 
     var options = {
       quality: 50,
       destinationType: window.Camera.DestinationType.FILE_URI,
@@ -91,15 +117,14 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
       popoverOptions: window.CameraPopoverOptions,
       saveToPhotoAlbum: false
     };
+    showLoading();
     $cordovaCamera.getPicture(options)
       .then(uploadImgToS3)
-      .then(function (uploadedUrl) {
-        if (!self.newPoll.answer1.picture) {
-          self.newPoll.answer1.picture = uploadedUrl;
-        } else {
-          self.newPoll.answer2.picture = uploadedUrl;
-        }
-      }).catch(function () {});
+      .then(setPicture)
+      .catch(function () {})
+      .finally(function () {
+        hideLoading();
+      });
   };
 
   self.createPoll = function () {
@@ -107,13 +132,77 @@ function ($scope, $ionicModal, Polls, User, $cordovaCamera, $cordovaFileTransfer
       return;
     }
     self.creatingPoll = true;
+    showLoading();
     Polls.create(self.newPoll).then(function () {
-      self.creatingPoll = false;
       self.closeModal();
       $scope.$broadcast('HomeCtrl.cardCreated');
     }).catch(function () {
+    }).finally(function () {
       self.creatingPoll = false;
+      hideLoading(); 
     });
+  };
+
+  //===========================================================================
+  //                Img Search Modal
+  //===========================================================================
+
+  self.imgSearchModal = '';
+  self.imgSearchQuery = '';
+  self.imgSearchResults = [];
+
+  $ionicModal
+  .fromTemplateUrl('app/tab/home/img-search-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    self.imgSearchModal = modal;
+  });
+
+  self.openImgSearchModal = function () {
+    self.imgSearchModal.show();
+  };
+
+  self.closeImagSeach = function () {
+    self.imgSearchModal.hide();
+  };
+
+  self.searchImg = function () {
+    window.cordova.plugins.Keyboard.close();
+    showLoading();
+    User.searchImg(self.imgSearchQuery).then(function (r) {
+      self.imgSearchResults = r;
+      hideLoading();
+    });
+  };
+
+  self.resetImgSearch = function () {
+    self.imgSearchQuery = '';
+    self.imgSearchResults = [];
+  };
+
+  self.selectImg = function (img) {
+    var cordova = window.cordova;
+    var url = img.MediaUrl,
+        targetPath = cordova.file.dataDirectory + 'downloadedSearchImg',
+        trustHosts = true,
+        options = {};
+
+    self.imgSearchModal.hide();
+    self.resetImgSearch();
+    showLoading();
+
+    $cordovaFileTransfer
+      .download(url, targetPath, options, trustHosts)
+      .then(function (result) {
+        var imageUri = result.nativeURL;
+        return imageUri;
+      }).then(uploadImgToS3)
+      .then(setPicture)
+      .catch(function () {})
+      .finally(function () {
+        hideLoading();
+      });
   };
 
 }])

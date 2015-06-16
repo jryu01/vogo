@@ -119,3 +119,19 @@ $card-bg: #FFF;
     padding: 0;
   }
 }
+//=======Img Search Modal==============
+.img-search-modal {
+  background: -webkit-radial-gradient(#CDCCD0, #777879); 
+  background: radial-gradient(#CDCCD0, #777879);
+
+  .img-box {
+    width: 33.33%;
+    float: left;
+    padding: 1px;
+    height: 33vw;
+  }
+  .img-box img {
+    height: 100%;
+    width: 100%;
+  }
+}
