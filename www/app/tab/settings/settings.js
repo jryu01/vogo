@@ -36,6 +36,8 @@ function ($scope, User, $cordovaEmailComposer, $window) {
       body: '',
       isHtml: true
     };
+    console.log("open email composer");
+    console.log(cordova.plugins.email);
     $cordovaEmailComposer.open(email).then(null, function () {
       // user cancelled email
     });

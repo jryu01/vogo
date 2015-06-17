@@ -1,0 +1,23 @@
+.userlist {
+  .item {
+    width: 100%;
+    height: 55px; 
+    padding: 5px;
+  }  
+  .item > a {
+    text-decoration: none; 
+    color: #000;
+  }
+  .item > a > span {
+    padding-left: 3px; 
+    color: black;
+  }
+  .btn-container {
+    float: right; 
+    padding: 5px;
+  }
+  .btn-container .button-small {
+    width: 77px;
+  }
+
+}

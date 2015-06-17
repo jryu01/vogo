@@ -8,7 +8,7 @@
             class="user-name"
             ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
           <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
-          <span class="ft-orator" ng-bind="poll.createdBy.name"></span>
+          <span class="ft-orator name" ng-bind="poll.createdBy.name"></span>
         </a>
         <p class="hits-total">
           <i class="icon ion-checkmark-round"></i>
@@ -19,21 +19,7 @@
 
       <div class="item detail-item-header">
         <div class="text-center">
-
-<!--           <a href="#" ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
-            <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
-            <span class="ft-orator" ng-bind="poll.createdBy.name"></span>
-          </a>
- -->        
-
           <h3 class="question" ng-bind="poll.question"></h3>
-
-<!--           <p class="hits-total">
-            <i class="icon ion-checkmark-round"></i>
-            {{poll.answer1.numVotes + poll.answer2.numVotes}} 
-            <span class="ft-orator">hits</span>
-          </p>
- -->        
         </div>
         
 
@@ -101,10 +87,10 @@
           <img ng-src="{{ ::comment.createdBy.picture }}"
                 ng-click="tabCtrl.go('profile', { id: comment.createdBy.userId, user: comment.createdBy })">
           <p>
-            <span class="ft-orator"
+            <a class="ft-orator name"
                   ng-click="tabCtrl.go('profile', { id: comment.createdBy.userId, user: comment.createdBy })">
               {{ comment.createdBy.name }} 
-            </span>
+            </a>
             {{ comment.text }}
           </p>
         </div>

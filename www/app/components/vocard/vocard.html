@@ -2,7 +2,7 @@
   <div class="item pollcard-item-header">
     <a href="#" ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
       <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
-      <span class="ft-orator" ng-bind="poll.createdBy.name"></span>
+      <span class="ft-orator name" ng-bind="poll.createdBy.name"></span>
     </a>
     <h3 class="question" 
           ng-click="tabCtrl.go('polldetail', { id: poll.id, poll: poll })"

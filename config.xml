@@ -7,8 +7,9 @@
   <author email="jaehwan.ryu@icloud.com" href="https://github.com/jryu01">
       Jaehwan Ryu
     </author>
-  <content src="index.html"/>
+  <content src="http://192.168.0.26:8100" original-src="index.html"/>
   <access origin="*"/>
+  <allow-navigation href="http://*/*"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>

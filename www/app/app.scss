@@ -80,27 +80,42 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
 .app ion-content {
   border-top: 8px solid white;
 }
+
+// buttons 
+
+.button.button-balanced,
+.button.button-balanced:hover {
+  border-color: #000020;
+  background-color: #FBFFA6;
+  color: #000020;
+}
+.button.button-balanced.active, .button.button-balanced.activated {
+  border-color: #000020;
+  background-color: #EAEDA4;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+}
 //=============================================================================
 //                             Common
 //=============================================================================
 .app p.ft-orator, 
 .app a.ft-orator,
 .app span.ft-orator {
-  // font-weight: bold;
   line-height: 10px;
-  // font-size: 14px;
-  // padding-top: 5px;
   font-family: 'OratorStd';
 }
 .app .ft-orator {
   p, a, span {
-    // font-weight: bold;
     line-height: 10px;
-    // font-size: 14px;
-    // padding-top: 5px;
     font-family: 'OratorStd';
   }
 }
+.app a.activated .ft-orator.name {
+  color: #888;
+}
+.app a.activated.ft-orator.name {
+  color: #888;
+}
+
 .app .spinner-center {
   position: absolute;
   left: 50%;
