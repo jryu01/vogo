@@ -29,7 +29,6 @@ function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cord
 
   var self = this;
 
-
   var showLoading = function () {
     $ionicLoading.show({
       template: '<ion-spinner></ion-spinner>'

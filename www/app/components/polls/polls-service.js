@@ -68,9 +68,9 @@ function (User, Restangular, $q, config, $http) {
     return Polls.one(poll.id)
       .post('votes', { answer: answerNum })
       .catch(function () {
-        poll['answer' + answerNum].numVotes -= 1;
-        poll.isVotedByMe = false;
-        poll.answerVotedByMe = undefined;
+        // poll['answer' + answerNum].numVotes -= 1;
+        // poll.isVotedByMe = false;
+        // poll.answerVotedByMe = undefined;
       });
   };
 
