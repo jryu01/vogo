@@ -68,6 +68,15 @@ function ($urlRouterProvider, RestangularProvider, config) {
 
 }])
 
+// register keyboard events
+.run(['$rootScope', function ($rootScope) {
+  var broadCast = function (e) {
+    $rootScope.$broadcast(e.type);
+  };
+  window.addEventListener('native.keyboardshow', broadCast);
+  window.addEventListener('native.keyboardhide', broadCast);  
+}])
+
 .run(['config', 'auth', '$http', 'localStorageService', function (config, auth, $http, localStorageService) {
   // login with predefined user on development
   if (config.env === 'development') {

@@ -16,7 +16,7 @@ $dark:                            #444 !default;
 */
 
 // our app theme color
-$royal:                           #1E1532 !default;
+$royal:                           #28225c !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -71,8 +71,8 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
 }
 
 .app .pane {
-  background: -webkit-radial-gradient(#CDCCD0, #777879);
-  background: radial-gradient(#CDCCD0, #777879);
+  background: -webkit-radial-gradient(#CDCCD0, #948F99);
+  background: radial-gradient(#CDCCD0, #948F99);
 }
 .app .tabs-dark > .tabs {
   background-color: $tabs-color;

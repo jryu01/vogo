@@ -246,7 +246,7 @@ function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
     var poll = Polls.getNextPoll();
     if (!poll) {
       return self.msgCards.push({
-        message: '<span>No more polls.<br>Try again later.</span>'
+        message: '<span><br>No more new polls.</span>'
       });
     }
     self.polls.push(poll);

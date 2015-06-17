@@ -41,7 +41,7 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
   self.newComment = '';
 
   var updatePie = function (answer1, answer2, duration) {
-    var COLOR_BOLD = '#1E1532',
+    var COLOR_BOLD = '#28225c',
         COLOR_LIGHT = '#CDCCD3',
         a1Data = {label: 'answer1', value: answer1},
         a2Data = {label: 'answer2', value: answer2};
@@ -87,4 +87,7 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
   self.scrollBottom = function () {
     $ionicScrollDelegate.scrollBottom(true);
   };
+
+  $scope.$on('native.keyboardshow', self.scrollBottom);
+  $scope.$on('native.keyboardhide', self.scrollBottom);
 }]);

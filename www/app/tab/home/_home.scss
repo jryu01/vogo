@@ -33,12 +33,14 @@ $card-bg: #FFF;
 }
 
 .home .msg-card {
-  color: #fff;
-  background-color: #30BD8A;
+  color: white;
+  background-color: #28225C;
   line-height: 300px;
   word-wrap: break-word;
-  border: 6px solid #4CD68E;
   text-align: center;
+  border-radius: 5px;
+  height: 348px;
+  border: 3px solid #fff;
 }
 .home .msg-card span {
   display: inline-block;
@@ -88,12 +90,15 @@ $card-bg: #FFF;
   .padding {
     padding: 20px;
   }
+  vo-card-img {
+    background-color: #89898B;
+  }
   vo-card-img .pic1, 
   vo-card-img .pic2 {
-    background-color: #89898B !important;
+    background-color: transparent !important;
   }
   .action-box {
-    width: 250px;
+    width: 200px;
     height: 80px;
     margin: auto;
     margin-top: -150px;
@@ -102,6 +107,10 @@ $card-bg: #FFF;
     box-shadow: none;
     background-color: transparent;
   }
+  .action-box-content {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 1px;
+  } 
   .answer-row {
     position: relative;
     background-color: #fff;

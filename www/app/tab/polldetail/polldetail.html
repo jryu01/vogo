@@ -3,6 +3,20 @@
 
 
     <div class="list poll-info">
+      <div class="detail-item-info">
+        <a href="#" 
+            class="user-name"
+            ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
+          <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
+          <span class="ft-orator" ng-bind="poll.createdBy.name"></span>
+        </a>
+        <p class="hits-total">
+          <i class="icon ion-checkmark-round"></i>
+          {{poll.answer1.numVotes + poll.answer2.numVotes}} 
+          <span class="ft-orator">hits</span>
+        </p>
+      </div>
+
       <div class="item detail-item-header">
         <div class="text-center">
 
@@ -71,21 +85,7 @@
         </div>
       </div>
     </div>
-
-    <div class="detail-item-info">
-      <a href="#" 
-          class="user-name"
-          ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
-        <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
-        <span class="ft-orator" ng-bind="poll.createdBy.name"></span>
-      </a>
-      <p class="hits-total">
-        <i class="icon ion-checkmark-round"></i>
-        {{poll.answer1.numVotes + poll.answer2.numVotes}} 
-        <span class="ft-orator">hits</span>
-      </p>
-    </div>
-
+    
     <div class="comment-area">
       <div class="comment-header">
         <p> 
@@ -118,7 +118,7 @@
   <form name="sendCommentForm" ng-submit="ctrl.addComment(sendCommentForm)" novalidate>
       <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
         <label class="item-input-wrapper" style="padding:0">
-          <textarea ng-focus="ctrl.scrollBottom()" ng-blur="ctrl.scrollBottom()" ng-model="ctrl.newComment" value="" placeholder="Add a comment..." required minlength="1" maxlength="1500" style="width: 100%"></textarea>
+          <textarea ng-model="ctrl.newComment" value="" placeholder="Add a comment..." required minlength="1" maxlength="1500" style="width: 100%"></textarea>
         </label>
         <div class="footer-btn-wrap">
           <button class="button button-small button-royal" 
