@@ -88,10 +88,6 @@ function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cord
   });
 
   self.openModal = function () {
-    self.createPollModal.show();
-  };
-
-  self.closeModal = function() {
     self.newPoll.question = '';
     self.newPoll.answer1.text = '';
     self.newPoll.answer2.text = '';
@@ -100,6 +96,10 @@ function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cord
 
     self.resetImgSearch();
 
+    self.createPollModal.show();
+  };
+
+  self.closeModal = function() {
     self.createPollModal.hide();
   };
 
@@ -247,7 +247,7 @@ function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
     var poll = Polls.getNextPoll();
     if (!poll) {
       return self.msgCards.push({
-        message: '<span><img src="img/minimon.png" width="80px" height="80px"><br>Wowww !!<br>You reviewed all polls !<br>It\'s your time to make one !</span>'
+        message: '<span><img src="img/minimon.png" width="80px" height="80px"><br>Wowww!<br>You reviewed all polls.<br>It\'s your time to make one!</span>'
       });
     }
     self.polls.push(poll);
