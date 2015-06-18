@@ -23,9 +23,6 @@ angular.module('voteit.login', [
   '$http',
   'User',
 function ($ionicPlatform, $cordovaOauth, $ionicHistory, $state, $http, User) {
-  $ionicPlatform.ready(function() {
-    window.StatusBar.hide();
-  });
   var self = this;
 
   self.loading = false;
@@ -37,7 +34,6 @@ function ($ionicPlatform, $cordovaOauth, $ionicHistory, $state, $http, User) {
         disableBack: true,
         disableAnimate: true
       });
-      window.StatusBar.show();
       $state.go('tab.tab-home-home', {}, { location: 'replace', reload: true });
     }).catch(function (err) {
       console.log(err);
