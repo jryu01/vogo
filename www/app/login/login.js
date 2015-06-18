@@ -24,7 +24,6 @@ angular.module('voteit.login', [
   'User',
 function ($ionicPlatform, $cordovaOauth, $ionicHistory, $state, $http, User) {
   $ionicPlatform.ready(function() {
-    console.log(window.StatusBar);
     window.StatusBar.hide();
   });
   var self = this;
