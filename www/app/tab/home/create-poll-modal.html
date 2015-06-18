@@ -6,10 +6,10 @@
     </button>
     <h1 class="title">New Poll</h1>
   </ion-header-bar>
-  <ion-content class="">
+  <ion-content class="" delegate-handle="createScroll">
     <div class="form-container">
-      <div class="form-wrapper">
-        
+      <div class="form-wrapper" adjust-margin>
+
       <form ng-submit="home.createPoll()" name="newPollForm">
         <div class="padding"></div> 
         <div class="item item-input">
@@ -17,6 +17,9 @@
                   class="text-center"
                   placeholder="What's your question?"
                   ng-model="home.newPoll.question"
+                  ng-init="focused = false"
+                  ng-focus="focused = true"
+                  ng-blur="focused = false"
                   required>
         </div>
         <div style="padding: 10px"></div>
@@ -63,6 +66,7 @@
                   ng-model="home.newPoll.answer1.text"
                   maxlength="30"
                   placeholder="Answer"
+                  ng-focus="home.scroll()"
                   required/>
           </div>
           <div class="col">
@@ -71,6 +75,7 @@
                   ng-model="home.newPoll.answer2.text"
                   maxlength="30"
                   placeholder="Answer"
+                  ng-focus="home.scroll()"
                   required/>
           </div>
         </div>

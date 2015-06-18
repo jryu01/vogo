@@ -260,4 +260,22 @@ function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
   });
 
   init();
+}])
+
+.directive('adjustMargin', [
+function () {
+  return {
+    restrict: 'A',
+    link: function ($scope, $element) {
+      var elem = $element[0];
+      if(!ionic.Platform.isIOS()) {
+        $scope.$on('native.keyboardhide', function () {
+          elem.style.marginTop = '';
+        });
+        $scope.$on('native.keyboardshow', function () {
+          elem.style.marginTop = '0';
+        });
+      }
+    }
+  };
 }]);
