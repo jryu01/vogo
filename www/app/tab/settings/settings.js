@@ -22,12 +22,6 @@ angular.module('voteit.tab.settings', [])
 function ($scope, User, $cordovaEmailComposer, $window) {
   var self = this;
 
-  $scope.$on('$ionicView.beforeEnter', function () {
-    if (ionic.Platform.isAndroid()) {
-      $scope.$emit('tab.hide');
-    }
-  });
-
   self.openEmailComposer = function () {
     var email = {
       to: 'letsvogo@gmail.com',
