@@ -171,8 +171,10 @@ function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cord
       window.cordova.plugins.Keyboard.close();
     }
     showLoading();
-    User.searchImg(self.imgSearchQuery).then(function (r) {
+    User.searchImg(encodeURIComponent(self.imgSearchQuery)).then(function (r) {
       self.imgSearchResults = r;
+    }).catch(function () {
+    }).finally(function () {
       hideLoading();
     });
   };
