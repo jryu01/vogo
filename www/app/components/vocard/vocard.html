@@ -4,10 +4,15 @@
       <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
       <span class="ft-orator name" ng-bind="poll.createdBy.name"></span>
     </a>
-    <h3 class="question" 
+
+    <div class="question"
           ng-click="tabCtrl.go('polldetail', { id: poll.id, poll: poll })"
-          ng-bind="poll.question">
-    </h3>
+          text-fill
+          max-font-size="28"
+          min-font-size="9"
+          ws-normal-at="18"> 
+      {{ poll.question }}
+    </div>
     <p class="hits-total">
       <i class="icon ion-checkmark-round"></i>
       {{poll.answer1.numVotes + poll.answer2.numVotes}} 
