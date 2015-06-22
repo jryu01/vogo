@@ -40,7 +40,8 @@
     "cordova-plugin-camera",
     "cordova-plugin-splashscreen",
     "cordova-plugin-inappbrowser",
-    "cordova-plugin-statusbar"
+    "cordova-plugin-statusbar",
+    "cordova-plugin-dialogs@r1.1.1"
   ],
   "cordovaPlatforms": [
     "ios",

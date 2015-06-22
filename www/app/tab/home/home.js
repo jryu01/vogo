@@ -25,7 +25,8 @@ angular.module('voteit.tab.home', [
   '$cordovaCamera',
   '$cordovaFile',
   '$cordovaFileTransfer',
-function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cordovaFile, $cordovaFileTransfer) {
+  '$cordovaDialogs',
+function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDialogs) {
 
   var self = this;
 
@@ -126,10 +127,42 @@ function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cord
       });
   };
 
+  self.cancelPicture = function (picNum) {
+    if (picNum === 1) {
+      self.newPoll.answer1.picture = self.newPoll.answer2.picture;
+      self.newPoll.answer2.picture = '';
+    } else if (picNum === 2) {
+      self.newPoll.answer2.picture = ''; 
+    }
+  };
+
+  self.handleReturnKey = function ($event, inputType) {
+    if ($event.which === 13) {
+      switch (inputType) {
+      case 'question':
+        self.questionDone = true;
+        break;
+      case 'answer1':
+        self.answer1Done = true;
+        break;
+      case 'answer2':
+        self.answer2Done = true;
+        break;
+      default:
+        // Do nothing
+      }
+    }
+  };
+
   self.createPoll = function () {
     if (self.creatingPoll) {
       return;
     }
+    if (!self.newPoll.question) {
+      return $cordovaDialogs
+              .alert('Please enter a question', 'Empty question', 'OK');
+    }
+
     self.creatingPoll = true;
     showLoading();
     Polls.create(self.newPoll).then(function () {

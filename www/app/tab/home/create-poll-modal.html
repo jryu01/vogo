@@ -10,16 +10,15 @@
     <div class="form-container">
       <div class="form-wrapper" adjust-margin>
 
-      <form ng-submit="home.createPoll()" name="newPollForm">
+      <form name="newPollForm">
         <div class="padding"></div> 
         <div class="item item-input">
           <input type="text" 
                   class="text-center"
+                  blur-Me="home.questionDone"
+                  ng-keypress="home.handleReturnKey($event, 'question')"
                   placeholder="What's your question?"
                   ng-model="home.newPoll.question"
-                  ng-init="focused = false"
-                  ng-focus="focused = true"
-                  ng-blur="focused = false"
                   maxlength="100"
                   required>
         </div>
@@ -30,6 +29,22 @@
           src2="{{home.newPoll.answer2.picture}}">
         </vo-card-img>
         <div class="card action-box">
+          <span style="position: absolute;padding:5px;background-color: rgba(0,0,0,0.1);"
+                ng-if="home.newPoll.answer1.picture"
+                ng-click="home.cancelPicture(1)">
+            <a href="#"
+                style="color: #fff">
+              <i class="ion ion-close"></i>
+            </a>
+          </span>
+          <span style="position: absolute;padding:5px; left: 50%;background-color: rgba(0,0,0,0.1);"
+                ng-if="home.newPoll.answer2.picture"
+                ng-click="home.cancelPicture(2)">
+            <a href="#"
+                style="color: #fff"
+              <i class="ion ion-close"></i>
+            </a>
+          </span>
           <div class="action-box-content"
                 ng-if="!home.newPoll.answer2.picture">
             <h5 class="text-center" 
@@ -65,27 +80,26 @@
             <input type="text" 
                   class="text-center" 
                   ng-model="home.newPoll.answer1.text"
+                  ng-keypress="home.handleReturnKey($event, 'answer1')"
                   maxlength="30"
-                  placeholder="Answer"
-                  ng-focus="home.scroll()"
-                  required/>
+                  placeholder="Answer"/>
           </div>
           <div class="col">
             <input type="text" 
                   class="text-center" 
                   ng-model="home.newPoll.answer2.text"
+                  focus-Me="home.answer1Done"
+                  blur-Me="home.answer2Done"
+                  ng-keypress="home.handleReturnKey($event, 'answer2')"
                   maxlength="30"
-                  placeholder="Answer"
-                  ng-focus="home.scroll()"
-                  required/>
+                  placeholder="Answer"/>
           </div>
         </div>
-
-        <input type="submit" 
-              value="Create"
-              class="button button-block button-royal"
-              ng-disabled="newPollForm.$invalid"/>
       </form> 
+      <button class="button button-block button-royal"
+              ng-click="home.createPoll()">
+        Create
+      </button>
 
       </div> 
     </div> 
