@@ -105,6 +105,9 @@
   }
   p {
     font-size: 11px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-right: 65px;
   }
   .img-avatar {
     vertical-align: middle;
