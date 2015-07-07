@@ -4,8 +4,7 @@
 </ion-nav-bar>
     
 <ion-tabs class="tabs-icon-only tabs-dark tabs-main" 
-          ng-class="{ 'tabs-item-hide': tabCtrl.hideTab }"
-          ng-controller="TabController as tabCtrl">
+          ng-class="{ 'tabs-item-hide': tabCtrl.hideTab }">
 
   <!-- Home Tab -->
   <ion-tab title="Home" 
@@ -13,6 +12,16 @@
             icon-on="ion-home"
             ui-sref="tab.tab-home-home">
     <ion-nav-view name="tab-home"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Notification Tab -->
+  <ion-tab title="Notification" 
+            badge="tabCtrl.notification.count" 
+            badge-style='badge-assertive'
+            icon-off="ion-android-notifications" 
+            icon-on="ion-android-notifications" 
+            ui-sref="tab.tab-notification-notification">
+    <ion-nav-view name="tab-notification"></ion-nav-view>
   </ion-tab>
 
   <!-- Profile Tab -->
@@ -24,5 +33,3 @@
   </ion-tab>
 
 </ion-tabs>
-
-            <!-- ng-click="tabCtrl.selectProfileTab()"> -->

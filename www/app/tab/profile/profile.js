@@ -27,6 +27,17 @@ angular.module('voteit.tab.profile', [
       }
     }
   });
+
+  $stateProvider.state('tab.tab-notification-profile', {
+    url: '/tab-notification/profile',
+    params: { id: '', user: null },
+    views: {
+      'tab-notification': {
+        templateUrl: 'app/tab/profile/profile.html',
+        controller: 'ProfileCtrl as ctrl'
+      }
+    }
+  });
 })
 
 .controller('ProfileCtrl', [

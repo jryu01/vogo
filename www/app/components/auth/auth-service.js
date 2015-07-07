@@ -6,10 +6,13 @@ angular.module('voteit.auth.service', ['LocalStorageModule'])
       accessToken = localStorageService.get('token') || undefined;
   return {
     getToken: function () {
-      return accessToken; 
+      return localStorageService.get('token'); 
     },
     getUser: function () {
-      return userProfile; 
+      return localStorageService.get('user'); 
+    },
+    saveUser: function (user) {
+      localStorageService.set('user', user);
     },
     isAuthenticated: function () {
       return !!(userProfile && accessToken);

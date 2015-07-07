@@ -1,0 +1,46 @@
+<ion-view class="notification" view-title="Notification">
+  <ion-content>
+    <ion-refresher on-refresh="nCtrl.fetchNotification()">
+    </ion-refresher>
+    <div class="list">
+      <div class="item-container"
+            ng-repeat="notification in nCtrl.notifications">
+        <div class="item" ng-if="notification.verb === 'follow'">
+          <p>
+            <a href="#"
+                ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })">
+              {{notification.actor.name}}
+            </a> 
+            is now following You
+          </p>
+        </div>
+        <div class="item" ng-if="notification.verb === 'vote'">
+          <p>
+            <a href="#"
+                ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })">
+              {{notification.actor.name}}
+            </a>
+            voted <b>{{ notification.object['answer' + notification.detail.answer].text }} </b> on:
+            <a href="#"
+                ng-click="tabCtrl.go('polldetail', { id: notification.object.id })">
+              {{ notification.object.question }}
+            </a>
+          </p>
+        </div>
+        <div class="item" ng-if="notification.verb === 'comment'">
+          <p>
+            <a href="#"
+                ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })">
+              {{notification.actor.name}}
+            </a>
+            commented on:
+            <a href="#"
+                ng-click="tabCtrl.go('polldetail', { id: notification.object.id })">
+              {{ notification.object.question }}
+            </a>
+          </p>
+        </div>
+      </div> 
+    </div>
+  </ion-content>
+</ion-view>

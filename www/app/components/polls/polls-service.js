@@ -68,9 +68,6 @@ function (User, Restangular, $q, config, $http) {
     return Polls.one(poll.id)
       .post('votes', { answer: answerNum })
       .catch(function () {
-        // poll['answer' + answerNum].numVotes -= 1;
-        // poll.isVotedByMe = false;
-        // poll.answerVotedByMe = undefined;
       });
   };
 
@@ -83,6 +80,28 @@ function (User, Restangular, $q, config, $http) {
         return users.map(function (user) { return user.id; });
       })
       .then(User.getFollowingInfo);
+  };
+
+  that.getOne = function (pollId) {
+    
+    var markIfVoted = function (poll) {
+      var pollId = poll.id,
+      params = { params: { pollIds: [pollId] } },
+      me = User.getMe();
+
+      return $http.get(url('users', me.id, 'votes'), params)
+        .then(extract)
+        .then(function (vote) {
+          if (vote.length > 0) {
+            poll.isVotedByMe = true;
+            poll.answerVotedByMe = vote[0].answer;
+          }
+          return poll;
+        });
+    };
+    return $http.get(url('polls', pollId))
+      .then(extract)
+      .then(markIfVoted);
   };
 
   that.comment = function (poll, text) {

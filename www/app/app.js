@@ -11,6 +11,7 @@ angular.module('voteit', [
   'voteit.config',
   'voteit.polls',
   'voteit.user',
+  'voteit.notification',
   'voteit.vocard',
   'voCardImg',
 
@@ -78,27 +79,32 @@ function ($urlRouterProvider, RestangularProvider, config) {
   window.addEventListener('native.keyboardhide', broadCast);  
 }])
 
-.run(['config', 'auth', '$http', 'localStorageService', function (config, auth, $http, localStorageService) {
-  // login with predefined user on development
-  if (config.env === 'development') {
-    var user1 = {
-      'email': 'testuser1@test.com',
-      'name': 'Test User1',
-      'picture': 'http://lorempixel.com/100/100/',
-      'id': '554be56e11a864e3832decd1',
-      token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTRiZTU2ZTExYTg2NGUzODMyZGVjZDEiLCJleHAiOjE0NDA4MTIyMDk2NjZ9.KzmaipMziraJnX4A2Rgmkmb5rOStXzjoHdOFxiwQNxE'
+.run(['config', 'auth', '$http', 'localStorageService', 'User', function (config, auth, $http, localStorageService, User) {
+  // login with predefined user on development and in browser env
+  if (config.env === 'development' && !ionic.Platform.isWebView()) {
+    // overwrite signin function
+    User.signin = function () {
+      var user1 = {
+        'email': 'testuser1@test.com',
+        'name': 'Test User1',
+        'picture': 'http://lorempixel.com/100/100/',
+        'id': '554be56e11a864e3832decd1',
+        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTRiZTU2ZTExYTg2NGUzODMyZGVjZDEiLCJleHAiOjE0NDA4MTIyMDk2NjZ9.KzmaipMziraJnX4A2Rgmkmb5rOStXzjoHdOFxiwQNxE'
+      };
+      var user2 = {
+        'email': 'jryu@vogo.com',
+        'name': 'Jaehwan Coding Master Ryu',
+        'picture': 'http://lorempixel.com/200/200/',
+        'id': '5591effffb89836a6130430d',
+        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTkxZWZmZmZiODk4MzZhNjEzMDQzMGQiLCJleHAiOjE0NDA4MTE1NjEyNDF9.Lsts_MpUBsF1CNJSvleKMKMv7aiALv8aFNJe-pFoQIw'
+      };
+      var testUser = user1;
+
+      auth.authenticate(testUser, testUser.token);
+
+      return $http.get(config.baseUrl + '/s3Info').then(function (res) {
+        localStorageService.set('s3Info', res.data);
+      });
     };
-    var user2 = {
-      'email': 'jryu@vogo.com',
-      'name': 'Jaehwan Coding Master Ryu',
-      'picture': 'http://lorempixel.com/200/200/',
-      'id': '5591effffb89836a6130430d',
-      token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTkxZWZmZmZiODk4MzZhNjEzMDQzMGQiLCJleHAiOjE0NDA4MTE1NjEyNDF9.Lsts_MpUBsF1CNJSvleKMKMv7aiALv8aFNJe-pFoQIw'
-    };
-    var testUser = user1;
-    auth.authenticate(testUser, testUser.token);
-    $http.get(config.baseUrl + '/s3Info').then(function (res) {
-      localStorageService.set('s3Info', res.data);
-    });
   }
 }]);

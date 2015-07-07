@@ -13,11 +13,23 @@ angular.module('voteit.tab.userlist', [])
       }
     }
   });
+
   $stateProvider.state('tab.tab-profile-userlist', {
     url: '/tab-profile/userlist',
     params: { userId: '', pollId: '', answer: '', type: '' },
     views: {
       'tab-profile': {
+        templateUrl: 'app/tab/userlist/userlist.html',
+        controller: 'UserlistCtrl as userlist'
+      }
+    }
+  });
+
+  $stateProvider.state('tab.tab-notification-userlist', {
+    url: '/tab-notification/userlist',
+    params: { userId: '', pollId: '', answer: '', type: '' },
+    views: {
+      'tab-notification': {
         templateUrl: 'app/tab/userlist/userlist.html',
         controller: 'UserlistCtrl as userlist'
       }

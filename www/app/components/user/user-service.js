@@ -82,6 +82,10 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
     return auth.getUser();
   };
 
+  that.saveMe = function (user) {
+    auth.saveUser(user);
+  };
+
   that.getS3Info = function () {
     return localStorageService.get('s3Info');
   };

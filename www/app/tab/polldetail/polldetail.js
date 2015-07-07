@@ -15,11 +15,23 @@ angular.module('voteit.tab.polldetail', [
       }
     }
   });
+
   $stateProvider.state('tab.tab-profile-polldetail', {
     url: '/tab-profile/polldetail',
     params: { id: '', poll: null },
     views: {
       'tab-profile': {
+        templateUrl: 'app/tab/polldetail/polldetail.html',
+        controller: 'PolldetailCtrl as ctrl'
+      }
+    }
+  });
+
+  $stateProvider.state('tab.tab-notification-polldetail', {
+    url: '/tab-notification/polldetail',
+    params: { id: '' },
+    views: {
+      'tab-notification': {
         templateUrl: 'app/tab/polldetail/polldetail.html',
         controller: 'PolldetailCtrl as ctrl'
       }
@@ -33,11 +45,9 @@ angular.module('voteit.tab.polldetail', [
   'Polls',
   '$ionicScrollDelegate',
 function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
-  var self = this,
-      poll = {};
+  var self = this;
 
   $scope.poll = $stateParams.poll;
-  poll = $scope.poll;
   self.newComment = '';
 
   var updatePie = function (answer1, answer2, duration) {
@@ -60,12 +70,28 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
     $scope.pieData = [a2Data, a1Data];
   };
 
-  if ($scope.poll.isVotedByMe) {
-    updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
-  }
-  Polls.getComments(poll, 0, 99999).then(function (comments) {
-    poll.comments = comments;
-  });
+  var init = function () {
+    var poll = $scope.poll,
+        pollId = $stateParams.id;
+    if (poll) {
+      if (poll.isVotedByMe) {
+        updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
+      }
+      Polls.getComments(poll, 0, 99999).then(function (comments) {
+        poll.comments = comments;
+      });
+    } else {
+      // when enter from notification view
+      Polls.getOne(pollId).then(function (poll) {
+        $scope.poll = poll; 
+        return poll;
+      }).then(function (poll) {
+        return Polls.getComments(poll, 0, 99999).then(function (comments) {
+          poll.comments = comments;
+        });  
+      });
+    }
+  };
 
   self.vote = function (poll, answerNum) {
     Polls.vote(poll, answerNum).then(function () {
@@ -74,6 +100,7 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
   };
 
   self.addComment = function () {
+    var poll = $scope.poll;
     if (self.newComment) {
       Polls.comment(poll, self.newComment).then(function (c) {
         poll.numComments += 1;
@@ -90,4 +117,8 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
 
   $scope.$on('native.keyboardshow', self.scrollBottom);
   $scope.$on('native.keyboardhide', self.scrollBottom);
+  $scope.$on('$ionicView.enter', init);
+  $scope.$on('$ionicView.leave', function () {
+    $scope.poll.comments = []; 
+  });
 }]);
