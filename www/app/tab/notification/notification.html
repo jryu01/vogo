@@ -54,5 +54,9 @@
         </div>
       </div> 
     </div>
+    <ion-infinite-scroll
+      ng-if="nCtrl.moreNotifications()"
+      on-infinite="nCtrl.loadMore()">
+    </ion-infinite-scroll>
   </ion-content>
 </ion-view>
