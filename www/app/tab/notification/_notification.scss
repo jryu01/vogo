@@ -1,0 +1,26 @@
+.notification {
+
+  .item {
+    padding-left: 65px;
+    min-height: 74px;
+  }
+
+  .item a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }  
+  .item a.activated {
+    color: #888
+  } 
+  .item p {
+    overflow: auto;
+    text-overflow: initial;
+    white-space: normal;
+  }
+  .item img.img-avatar {
+    left: 15px;
+    position: absolute;
+    vertical-align: initial;
+  }
+}
