@@ -1,19 +1,28 @@
 .notification {
 
+  .item-container {
+    padding: 5px 10px 5px 10px
+  }
   .item {
     padding-left: 65px;
-    min-height: 74px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    min-height: 56px;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
   }
-
   .item a {
     text-decoration: none;
-    color: black;
+    color: $dark;
     font-weight: bold;
   }  
   .item a.activated {
-    color: #888
+    opacity: 0.5;
   } 
   .item p {
+    font-size: 11px;
     overflow: auto;
     text-overflow: initial;
     white-space: normal;
