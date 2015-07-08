@@ -20,15 +20,19 @@ angular.module('voteit.tab.notification', [])
   'Notification',
 function ($scope, User, Notification) {
 
-  var self = this;
+  var self = this,
+      once = true;
 
   self.notifications = [];
   self.nextNotifications = [];
 
   $scope.$on('$ionicView.enter', function () {
-    self.nextNotifications = [];
-    Notification.clearNewNotification();
-    self.fetchNotification();
+    if (Notification.count > 0 || once) {
+      self.nextNotifications = [];
+      Notification.clearNewNotification();
+      self.fetchNotification();
+    }
+    once = false;
   });
 
   self.fetchNotification = function () {
@@ -51,5 +55,5 @@ function ($scope, User, Notification) {
     self.notifications = self.notifications.concat(next);
     $scope.$broadcast('scroll.infiniteScrollComplete');
   };
-  
+
 }]);
