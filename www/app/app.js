@@ -13,6 +13,7 @@ angular.module('voteit', [
   'voteit.user',
   'voteit.notification',
   'voteit.vocard',
+  // 'voteit.push',
   'voCardImg',
 
   //subsections
@@ -79,6 +80,7 @@ function ($urlRouterProvider, RestangularProvider, config) {
   window.addEventListener('native.keyboardhide', broadCast);  
 }])
 
+// only for dev environment.
 .run(['config', 'auth', '$http', 'localStorageService', 'User', function (config, auth, $http, localStorageService, User) {
   // login with predefined user on development and in browser env
   if (config.env === 'development' && !ionic.Platform.isWebView()) {

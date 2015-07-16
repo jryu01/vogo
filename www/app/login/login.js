@@ -16,29 +16,38 @@ angular.module('voteit.login', [
 })
 
 .controller('LoginCtrl', [
-  '$ionicPlatform',
-  '$cordovaOauth', 
   '$ionicHistory',
+  '$cordovaDialogs',
   '$state',
-  '$http',
   'User',
-function ($ionicPlatform, $cordovaOauth, $ionicHistory, $state, $http, User) {
+function ($ionicHistory, $cordovaDialogs, $state, User) {
   var self = this;
 
   self.loading = false;
 
   self.facebookLogin = function () {
     self.loading = true;
-    User.signin().then(function () {
-      $ionicHistory.nextViewOptions({ 
-        disableBack: true,
-        disableAnimate: true
+    User.signin()
+      .then(User.setS3Info)
+      .then(function () {
+        $ionicHistory.nextViewOptions({ 
+          disableBack: true,
+          disableAnimate: true
+        });
+        $state.go('tab.tab-home-home', {}, { location: 'replace', reload: true });
+      }).catch(function (err) {
+        User.signout();
+        switch (err) {
+        case 'The sign in flow was canceled':
+          $cordovaDialogs
+            .alert('User canceled the signin', 'Signin Canceled', 'OK');
+          break;
+        default: 
+          $cordovaDialogs
+            .alert('Signin failed', 'Error', 'OK');
+        }
+      }).finally(function () {
+        self.loading = false;
       });
-      $state.go('tab.tab-home-home', {}, { location: 'replace', reload: true });
-    }).catch(function (err) {
-      console.log(err);
-    }).finally(function () {
-      self.loading = false;
-    });
   };
 }]);

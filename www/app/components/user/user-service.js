@@ -9,8 +9,12 @@ angular.module('voteit.user', ['voteit.config'])
   '$q',
   'auth',
   '$cordovaOauth',
+  '$cordovaPush',
   'localStorageService',
-function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
+  '$ionicPlatform',
+  '$timeout',
+  '$cordovaDialogs',
+function (config, $http, $q, auth, $cordovaOauth, $cordovaPush, localStorageService, $ionicPlatform, $timeout, $cordovaDialogs) {
 
   var that = {};
 
@@ -59,23 +63,84 @@ function (config, $http, $q, auth, $cordovaOauth, localStorageService) {
   };
 
   that.signin = function () {
+
+    var loginData;
+
+    var loginWithFbToken = function (fbLoginResult) {
+      return $http.post(url('login'), {
+        grantType: 'facebook',
+        facebookAccessToken: fbLoginResult.access_token
+      }).then(function (res) {
+        loginData = res.data;
+        auth.authenticate(res.data.user, res.data.access_token);
+      });
+    };
+
     return $cordovaOauth
       .facebook(config.fbAppId, ['email','user_friends'])
-      .then(function (result) {
-        return $http.post(url('login'), {
-          grantType: 'facebook',
-          facebookAccessToken: result.access_token
-        });
-      }).then(function (res) {
-        auth.authenticate(res.data.user, res.data.access_token);
-        return $http.get(url('s3Info'));
-      }).then(function (res) {
-        localStorageService.set('s3Info', res.data);
-      });
+      .then(loginWithFbToken);
   };
 
   that.signout = function () {
+    $cordovaPush.unregister();
     auth.logout(); 
+  };
+
+  that.setS3Info = function () {
+    return $http.get(url('s3Info')).then(function (res) {
+      localStorageService.set('s3Info', res.data);
+    });
+  };
+
+  that.registerDeviceToken = function () {
+    var doneOnTime = false;
+    var iosConfig = {
+      "badge": true,
+      "sound": true,
+      "alert": true,
+    };
+
+    return $ionicPlatform.ready().then(function () {
+
+      //assumes if register doesn't finish within 2s, then push setting is off
+      //(unless user first logged on)
+      $timeout(function () {
+        var user = that.getMe();
+
+        //first time user login (user doesn't have iosPushSuggested field)
+        if (user.iosPushSuggested === undefined) {
+          user.iosPushSuggested = false;
+          that.saveMe(user);
+          return;
+        }
+
+        // suggest user to turn on push notification setting for this app
+        if (user.iosPushSuggested === false) {
+          $cordovaDialogs
+            .alert(
+              'Vogo works much better with push notifications turned on.' +
+              'Enable them in the Settings. ' +
+              'Sttings -> Notifications -> Vogo', 'Notifications!', 'OK'
+            ).then(function () {
+              user.iosPushSuggested = true;
+              that.saveMe(user);
+            });
+        }
+
+      }, 2000);
+
+      return $cordovaPush.register(iosConfig);
+    }).then(function (dToken) {
+      return $http.post(url('deviceTokens'), { token: dToken });
+    }).catch(function (e) {
+      if (e === ' - remote notifications are not supported in the simulator') {
+        return;
+      }
+      return $q.reject(e);
+    }).finally(function () {
+      doneOnTime = true;
+    });
+
   };
 
   that.getMe = function () {
