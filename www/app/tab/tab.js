@@ -41,7 +41,7 @@ function ($scope, $ionicHistory, $state, User, Notification, $interval, $ionicPl
   self.me = User.getMe();
   self.notification = Notification;
 
-  // register device token
+  // register device token on controller init
   User.registerDeviceToken();
 
   //fetch notification count and check every 30 seconds

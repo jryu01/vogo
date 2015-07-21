@@ -118,9 +118,8 @@ function (config, $http, $q, auth, $cordovaOauth, $cordovaPush, localStorageServ
         if (user.iosPushSuggested === false) {
           $cordovaDialogs
             .alert(
-              'Vogo works much better with push notifications turned on.' +
-              'Enable them in the Settings. ' +
-              'Sttings -> Notifications -> Vogo', 'Notifications!', 'OK'
+              'Vogo works much better with push notifications turned on. ' +
+              'Go to Sttings -> Notifications -> Vogo and enable them.', 'Notifications!', 'OK'
             ).then(function () {
               user.iosPushSuggested = true;
               that.saveMe(user);
