@@ -26,6 +26,12 @@ function ($scope, User, Notification) {
   self.notifications = [];
   self.nextNotifications = [];
 
+  $scope.$on('$ionicView.beforeEnter', function () {
+    if (Notification.hasNextNotificationStateInfo()) {
+      Notification.goNextNotificationState();
+    }
+  });
+
   $scope.$on('$ionicView.enter', function () {
     if (Notification.count > 0 || once) {
       self.nextNotifications = [];

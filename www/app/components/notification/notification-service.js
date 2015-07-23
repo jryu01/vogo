@@ -8,9 +8,12 @@ angular.module('voteit.notification', ['voteit.config'])
   '$http', 
   '$q',
   'User',
-function (config, $http, $q, User) {
+  '$state',
+  '$ionicHistory',
+function (config, $http, $q, User, $state, $ionicHistory) {
 
   var that = {},
+      nextNotificationStateInfo = null,
       user = User.getMe();
 
   if (!user.nLastCheckedDate) {
@@ -54,6 +57,37 @@ function (config, $http, $q, User) {
   that.get = function () {
     return $http.get(url('notifications')).then(extract);
   };
-  
+
+
+
+  // for navigating inside notification tab when push notification recieved
+  // might be better to move following codes to seperate service 
+
+  that.goNotificationTabWithNextState = function (stateName, stateParams) {
+    var currentStateName = $ionicHistory.currentView().stateName;
+    nextNotificationStateInfo = { 
+      stateName: stateName, 
+      stateParams: stateParams 
+    };
+    if (currentStateName === 'tab.tab-notification-notification') {
+      that.goNextNotificationState();
+    } else {
+      $state.go('tab.tab-notification-notification');
+    }
+  };
+
+  that.goNextNotificationState = function () {
+    $state.go(
+      nextNotificationStateInfo.stateName, 
+      nextNotificationStateInfo.stateParams
+    );
+    nextNotificationStateInfo = null;
+  };
+
+  that.hasNextNotificationStateInfo = function () {
+    return !!nextNotificationStateInfo;
+  };
+  ////////////////////////////////////////////////////////////////////////////
+
   return that;
 }]);

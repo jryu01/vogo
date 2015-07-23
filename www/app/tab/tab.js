@@ -71,6 +71,26 @@ function ($scope, $ionicHistory, $state, User, Notification, $interval, $ionicPl
   });
   //////////////////////////////
 
+  // register push notification event handler
+  $scope.$on('$cordovaPush:notificationReceived', function (ev, notification) {
+    var stateName, stateParams;
+
+    Notification.checkNewNotification().catch(console.error);
+
+    // notification is received when app is not in foreground mode
+    if (notification.foreground === '0') {
+      if (notification.objectType === 'poll') {
+        stateName = 'tab.tab-notification-polldetail';
+        stateParams = { id: notification.objectId };
+      } else if (notification.objectType === 'user') {
+        // stateName = 'tab.tab-notification-profile';
+        // stateParams = { id: notification.objectId };
+      }
+
+      Notification.goNotificationTabWithNextState(stateName, stateParams); 
+    }
+  });
+
   self.go = function (to, params, options) {
     // stateName in the form of tab.tab-name-toStateName
     var stateName = $ionicHistory.currentView().stateName,
