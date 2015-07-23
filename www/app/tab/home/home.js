@@ -30,6 +30,11 @@ function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cord
 
   var self = this;
 
+  // render piegraph when entering home view
+  $scope.$on('$ionicView.beforeEnter', function () {
+    $scope.$broadcast('vocard:updatePie');
+  });
+
   var showLoading = function () {
     $ionicLoading.show({
       template: '<ion-spinner></ion-spinner>'
@@ -286,6 +291,10 @@ function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
       });
     }
     self.polls.push(poll);
+    // update piechart for the case when added poll is already voted
+    $timeout(function () {
+      $scope.$broadcast('vocard:updatePie');
+    });
   };
 
   $scope.$on('HomeCtrl.cardCreated', function () {

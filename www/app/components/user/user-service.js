@@ -154,6 +154,10 @@ function (config, $http, $q, auth, $cordovaOauth, $cordovaPush, localStorageServ
     return localStorageService.get('s3Info');
   };
 
+  that.get = function (userId) {
+    return $http.get(url('users', userId)).then(extract);
+  };
+
   that.follow = function (userId) {
     var me = that.getMe();
     return $http.put(url('users', me.id, 'following', userId))

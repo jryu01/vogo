@@ -6,7 +6,9 @@
       "module": false,
       "sinon": false,
       "expect": false,
-      "ionic": false
+      "ionic": false,
+      "_": false,
+      "console": false
   },
   "bitwise": true,
   "curly": true,

@@ -5,14 +5,15 @@ angular.module('voteit.vocard', [
 ])
 .directive('vocard', [
   'Polls',
-function (Polls) {
+  '$timeout',
+function (Polls, $timeout) {
   return {
     restrict: 'E',
     scope: true,
     templateUrl: 'app/components/vocard/vocard.html',
     link: function ($scope, $element, $attr) {
-      var poll = $scope.poll,
-          showAnimation = false;
+      var poll = $scope.poll;
+
       var updatePie = function (answer1, answer2, duration) {
         var COLOR_BOLD = '#28225c',
             COLOR_LIGHT = '#CDCCD3',
@@ -32,17 +33,16 @@ function (Polls) {
         };
         $scope.pieData = [a2Data, a1Data];
       };
+
       $scope.vote = function (poll, answerNum) {
-        showAnimation = true;
-        Polls.vote(poll, answerNum).then(function () {
-          showAnimation = false;
-        });
-      };
-      $scope.$watch('poll.isVotedByMe', function(newValue) {
-        var duration = (showAnimation) ? 1000 : 0;
-        if (newValue) {
-          updatePie(poll.answer1.numVotes, poll.answer2.numVotes, duration);
+        if (!poll.isVotedByMe) {
+          Polls.vote(poll, answerNum);
+          $scope.$emit('vocard:updatePie', 1000);
         }
+      };
+
+      $scope.$on('vocard:updatePie', function (ev, duration) {
+        updatePie(poll.answer1.numVotes, poll.answer2.numVotes, duration || 0);
       });
     }
   };

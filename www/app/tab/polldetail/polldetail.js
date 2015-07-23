@@ -105,6 +105,7 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
       Polls.comment(poll, self.newComment).then(function (c) {
         poll.numComments += 1;
         poll.comments.push(c); 
+        Polls.findAndUpdatePollFromQueue(poll);
         $ionicScrollDelegate.scrollBottom(true);
       });
       self.newComment = '';

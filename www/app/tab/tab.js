@@ -42,7 +42,9 @@ function ($scope, $ionicHistory, $state, User, Notification, $interval, $ionicPl
   self.notification = Notification;
 
   // register device token on controller init
-  User.registerDeviceToken();
+  if (ionic.Platform.isIOS()) {
+    User.registerDeviceToken();
+  }
 
   //fetch notification count and check every 30 seconds
   var notifier;
@@ -83,9 +85,10 @@ function ($scope, $ionicHistory, $state, User, Notification, $interval, $ionicPl
         stateName = 'tab.tab-notification-polldetail';
         stateParams = { id: notification.objectId };
       } else if (notification.objectType === 'user') {
-        // stateName = 'tab.tab-notification-profile';
-        // stateParams = { id: notification.objectId };
+        stateName = 'tab.tab-notification-profile';
+        stateParams = { id: notification.objectId };
       }
+      if (!stateName) { return; }
 
       Notification.goNotificationTabWithNextState(stateName, stateParams); 
     }

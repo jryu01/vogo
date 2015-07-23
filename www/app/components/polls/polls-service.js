@@ -12,7 +12,8 @@ angular.module('voteit.polls', [])
 function (User, Restangular, $q, config, $http) {
 
   var that = {
-    queue: []
+    queue: [],
+    currentPoll: null
   };
 
   var Polls = Restangular.all('polls');
@@ -48,7 +49,8 @@ function (User, Restangular, $q, config, $http) {
     if (that.queue.length <= 3) {
       that.getNextPolls(that.lastVotedPollId);
     }
-    return that.queue.shift();
+    that.currentPoll = that.queue.shift();
+    return that.currentPoll;
   };
 
   that.create = function (poll) {
@@ -65,10 +67,25 @@ function (User, Restangular, $q, config, $http) {
     poll['answer' + answerNum].numVotes += 1;
     poll.isVotedByMe = true;
     poll.answerVotedByMe = answerNum;
+    that.findAndUpdatePollFromQueue(poll);
     return Polls.one(poll.id)
       .post('votes', { answer: answerNum })
       .catch(function () {
       });
+  };
+
+  // among feched polls(used in home tab), find voted poll and update
+  that.findAndUpdatePollFromQueue = function (poll) {
+    var curPoll = that.currentPoll;
+    if (curPoll.id === poll.id && curPoll !== poll) {
+      return _.assign(that.currentPoll, poll);
+    }
+
+    that.queue.forEach(function (p) {
+      if (p.id === poll.id && p !== poll) {
+        _.assign(p, poll);
+      }
+    });
   };
 
   that.getVoters = function (pollId, answer, skip) {

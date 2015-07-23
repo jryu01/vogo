@@ -55,8 +55,16 @@ function (User, $scope, $stateParams) {
     self.isMyProfile = (uid === User.getMe().id) ? true : false;
     self.profile = (self.isMyProfile) ? User.myProfile : {};
     self.profile.uid = uid;
-    self.profile.name = $stateParams.user.name;
-    self.profile.picture = $stateParams.user.picture;
+
+    if ($stateParams.user) {
+      self.profile.name = $stateParams.user.name;
+      self.profile.picture = $stateParams.user.picture;
+    } else {
+      User.get(uid).then(function (user) {
+        self.profile.name = user.name;
+        self.profile.picture = user.picture;
+      });
+    }
 
     User.getFollowInfo(uid).then(function (info) {
       self.profile.numFollowing = info.numFollowing;

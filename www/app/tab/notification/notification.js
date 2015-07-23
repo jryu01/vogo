@@ -28,11 +28,8 @@ function ($scope, User, Notification) {
 
   $scope.$on('$ionicView.beforeEnter', function () {
     if (Notification.hasNextNotificationStateInfo()) {
-      Notification.goNextNotificationState();
+      return Notification.goNextNotificationState();
     }
-  });
-
-  $scope.$on('$ionicView.enter', function () {
     if (Notification.count > 0 || once) {
       self.nextNotifications = [];
       Notification.clearNewNotification();
