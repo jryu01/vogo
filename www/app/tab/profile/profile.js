@@ -90,7 +90,7 @@ function (User, $scope, $stateParams) {
   self.selectTab = function (index) {
     $scope.$broadcast('voTabs.select', index);
   };
-  init();
+  $scope.$on('$ionicView.beforeEnter', init);
 }])
 
 .directive('profileInfo', [

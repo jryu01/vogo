@@ -9,7 +9,8 @@ angular.module('voteit.polls', [])
   '$q', 
   'config',
   '$http', 
-function (User, Restangular, $q, config, $http) {
+  '$timeout',
+function (User, Restangular, $q, config, $http, $timeout) {
 
   var that = {
     queue: [],
@@ -67,7 +68,9 @@ function (User, Restangular, $q, config, $http) {
     poll['answer' + answerNum].numVotes += 1;
     poll.isVotedByMe = true;
     poll.answerVotedByMe = answerNum;
-    that.findAndUpdatePollFromQueue(poll);
+    $timeout(function () {
+      that.findAndUpdatePollFromQueue(poll);
+    });
     return Polls.one(poll.id)
       .post('votes', { answer: answerNum })
       .catch(function () {

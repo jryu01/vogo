@@ -83,6 +83,9 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
     } else {
       // when enter from notification view
       Polls.getOne(pollId).then(function (poll) {
+        if (poll.isVotedByMe) {
+          updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
+        }
         $scope.poll = poll; 
         return poll;
       }).then(function (poll) {
@@ -118,7 +121,7 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
 
   $scope.$on('native.keyboardshow', self.scrollBottom);
   $scope.$on('native.keyboardhide', self.scrollBottom);
-  $scope.$on('$ionicView.enter', init);
+  $scope.$on('$ionicView.beforeEnter', init);
   $scope.$on('$ionicView.leave', function () {
     $scope.poll.comments = []; 
   });
