@@ -4,8 +4,8 @@
 angular.module('voteit.config', [])
 
 .constant('config', {
-  "version": "0.2.2",
-  "env": "test",
-  "baseUrl": "https://voteit-test.herokuapp.com/api",
-  "fbAppId": "794909633879347"
+  "version": "0.3.0",
+  "env": "development",
+  "baseUrl": "http://localhost:3000/api",
+  "fbAppId": "794909417212702"
 });
