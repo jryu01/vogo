@@ -41,46 +41,52 @@ function ($scope, $ionicHistory, $state, User, Notification, $interval, $ionicPl
   self.me = User.getMe();
   self.notification = Notification;
 
-  // register device token on controller init
-  if (ionic.Platform.isIOS()) {
-    User.registerDeviceToken();
-  }
+  User.registerDeviceToken();
 
   //fetch notification count and check every 30 seconds
-  var notifier;
-  var setNotifier = function () {
-    Notification.checkNewNotification().catch(console.error);
-    notifier = $interval(function () {
-      Notification.checkNewNotification().catch(console.error);
-    }, 30 * 1000);
-  };
-  setNotifier();
+  // var notifier;
+  // var setNotifier = function () {
+  //   Notification.checkNewNotification().catch(console.error);
+  //   notifier = $interval(function () {
+  //     Notification.checkNewNotification().catch(console.error);
+  //   }, 30 * 1000);
+  // };
+  // setNotifier();
 
-  $ionicPlatform.on('pause', function () {
-    $interval.cancel(notifier);
-    notifier = undefined;
-  });
+  // $ionicPlatform.on('pause', function () {
+  //   $interval.cancel(notifier);
+  //   notifier = undefined;
+  // });
+
+  Notification.checkNewNotification().catch(console.error);
 
   $ionicPlatform.on('resume', function () {
-    if (!notifier) {
-      setNotifier();
-    }
+    // if (!notifier) {
+    //   setNotifier();
+    // }
+    Notification.checkNewNotification().catch(console.error);
   });
 
-  $scope.$on('$destroy', function() {
-    $interval.cancel(notifier);
-    notifier = undefined;
-  });
+  // $scope.$on('$destroy', function() {
+  //   $interval.cancel(notifier);
+  //   notifier = undefined;
+  // });
   //////////////////////////////
 
   // register push notification event handler
   $scope.$on('$cordovaPush:notificationReceived', function (ev, notification) {
+    //on android register events
+    if (notification.event === 'registered' && notification.regid.length > 0) {
+      return User.postAndroidToken(notification.regid);
+    }
+
     var stateName, stateParams;
 
-    Notification.checkNewNotification().catch(console.error);
+    // notification is received and opened when app is non-foreground mode
+    // in which ios returns '0' and android returns false
+    if (notification.foreground === '0' || notification.foreground === false) {
+      notification = notification.payload || notification;
 
-    // notification is received when app is not in foreground mode
-    if (notification.foreground === '0') {
       if (notification.objectType === 'poll') {
         stateName = 'tab.tab-notification-polldetail';
         stateParams = { id: notification.objectId };
@@ -91,6 +97,10 @@ function ($scope, $ionicHistory, $state, User, Notification, $interval, $ionicPl
       if (!stateName) { return; }
 
       Notification.goNotificationTabWithNextState(stateName, stateParams); 
+    } else {
+      // when notification is recieved in foreground mode 
+      // just check for new notification count
+      Notification.checkNewNotification().catch(console.error);
     }
   });
 

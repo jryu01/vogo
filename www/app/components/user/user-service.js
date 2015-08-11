@@ -82,7 +82,6 @@ function (config, $http, $q, auth, $cordovaOauth, $cordovaPush, localStorageServ
   };
 
   that.signout = function () {
-    $cordovaPush.unregister();
     auth.logout(); 
   };
 
@@ -93,44 +92,58 @@ function (config, $http, $q, auth, $cordovaOauth, $cordovaPush, localStorageServ
   };
 
   that.registerDeviceToken = function () {
-    var doneOnTime = false;
-    var iosConfig = {
+    var doneOnTime = false,
+        registerConfig;
+
+    // either ios or android
+    registerConfig = ionic.Platform.isIOS() ? {
       "badge": true,
       "sound": true,
       "alert": true,
+
+    } : {
+      // "senderID": "100292842261", // google api project number for android
+      "senderID": config.googlePjNumber
     };
 
     return $ionicPlatform.ready().then(function () {
 
       //assumes if register doesn't finish within 2s, then push setting is off
       //(unless user first logged on)
-      $timeout(function () {
-        var user = that.getMe();
+      if (ionic.Platform.isIOS()) {
+        $timeout(function () {
+          if (doneOnTime) { return; }
+          
+          var user = that.getMe();
 
-        //first time user login (user doesn't have iosPushSuggested field)
-        if (user.iosPushSuggested === undefined) {
-          user.iosPushSuggested = false;
-          that.saveMe(user);
-          return;
-        }
+          //first time user login (user doesn't have iosPushSuggested field)
+          if (user.iosPushSuggested === undefined) {
+            user.iosPushSuggested = false;
+            that.saveMe(user);
+            return;
+          }
 
-        // suggest user to turn on push notification setting for this app
-        if (user.iosPushSuggested === false) {
-          $cordovaDialogs
-            .alert(
-              'Vogo works much better with push notifications turned on. ' +
-              'Go to Sttings -> Notifications -> Vogo and enable them.', 'Notifications!', 'OK'
-            ).then(function () {
-              user.iosPushSuggested = true;
-              that.saveMe(user);
-            });
-        }
+          // suggest user to turn on push notification setting for this app
+          if (user.iosPushSuggested === false) {
+            $cordovaDialogs
+              .alert('Vogo works much better with push notifications' + 
+                    ' turned on. Go to Sttings -> Notifications -> Vogo' +
+                    ' and enable them.',
+                    'Notifications!', 'OK')
+              .then(function () {
+                user.iosPushSuggested = true;
+                that.saveMe(user);
+              });
+          }
 
-      }, 2000);
+        }, 2000);
+      }
 
-      return $cordovaPush.register(iosConfig);
+      return $cordovaPush.register(registerConfig);
     }).then(function (dToken) {
-      return $http.post(url('deviceTokens'), { token: dToken });
+      if (ionic.Platform.isIOS()) {
+        return $http.post(url('deviceTokens'), { token: dToken, os: 'ios' });
+      }
     }).catch(function (e) {
       if (e === ' - remote notifications are not supported in the simulator') {
         return;
@@ -140,6 +153,10 @@ function (config, $http, $q, auth, $cordovaOauth, $cordovaPush, localStorageServ
       doneOnTime = true;
     });
 
+  };
+  
+  that.postAndroidToken = function (token) {
+    return $http.post(url('deviceTokens'), { token: token, os: 'android' });
   };
 
   that.getMe = function () {
