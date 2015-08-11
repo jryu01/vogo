@@ -43,45 +43,23 @@ function ($scope, $ionicHistory, $state, User, Notification, $interval, $ionicPl
 
   User.registerDeviceToken();
 
-  //fetch notification count and check every 30 seconds
-  // var notifier;
-  // var setNotifier = function () {
-  //   Notification.checkNewNotification().catch(console.error);
-  //   notifier = $interval(function () {
-  //     Notification.checkNewNotification().catch(console.error);
-  //   }, 30 * 1000);
-  // };
-  // setNotifier();
-
-  // $ionicPlatform.on('pause', function () {
-  //   $interval.cancel(notifier);
-  //   notifier = undefined;
-  // });
-
+  //fetch notification count
   Notification.checkNewNotification().catch(console.error);
 
   $ionicPlatform.on('resume', function () {
-    // if (!notifier) {
-    //   setNotifier();
-    // }
     Notification.checkNewNotification().catch(console.error);
   });
 
-  // $scope.$on('$destroy', function() {
-  //   $interval.cancel(notifier);
-  //   notifier = undefined;
-  // });
-  //////////////////////////////
-
   // register push notification event handler
   $scope.$on('$cordovaPush:notificationReceived', function (ev, notification) {
+
+    var stateName, stateParams;
+
     //on android register events
     if (notification.event === 'registered' && notification.regid.length > 0) {
       return User.postAndroidToken(notification.regid);
     }
-
-    var stateName, stateParams;
-
+    
     // notification is received and opened when app is non-foreground mode
     // in which ios returns '0' and android returns false
     if (notification.foreground === '0' || notification.foreground === false) {
