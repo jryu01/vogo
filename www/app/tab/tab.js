@@ -37,7 +37,6 @@ angular.module('voteit.tab', [
 function ($scope, $ionicHistory, $state, User, Notification, $interval, $ionicPlatform) {
   var self = this;  
 
-  self.hideTab = false;
   self.me = User.getMe();
   self.notification = Notification;
 
@@ -81,7 +80,8 @@ function ($scope, $ionicHistory, $state, User, Notification, $interval, $ionicPl
       Notification.checkNewNotification().catch(console.error);
     }
   });
-
+  
+  // top level nagivate function
   self.go = function (to, params, options) {
     // stateName in the form of tab.tab-name-toStateName
     var stateName = $ionicHistory.currentView().stateName,
@@ -90,11 +90,4 @@ function ($scope, $ionicHistory, $state, User, Notification, $interval, $ionicPl
     $state.go(to = 'tab.' + tabName + '-' + to, params, options);
   };
 
-  $scope.$on('tab.hide', function () {
-    self.hideTab = true;
-  });
-  $scope.$on('tab.show', function () {
-    self.hideTab = false;
-  });
-  
 }]);
