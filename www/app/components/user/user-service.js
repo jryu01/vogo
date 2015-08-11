@@ -102,7 +102,6 @@ function (config, $http, $q, auth, $cordovaOauth, $cordovaPush, localStorageServ
       "alert": true,
 
     } : {
-      // "senderID": "100292842261", // google api project number for android
       "senderID": config.googlePjNumber
     };
 
@@ -126,13 +125,15 @@ function (config, $http, $q, auth, $cordovaOauth, $cordovaPush, localStorageServ
           // suggest user to turn on push notification setting for this app
           if (user.iosPushSuggested === false) {
             $cordovaDialogs
-              .alert('Vogo works much better with push notifications' + 
-                    ' turned on. Go to Sttings -> Notifications -> Vogo' +
-                    ' and enable them.',
-                    'Notifications!', 'OK')
-              .then(function () {
+              .confirm('Vogo works much better with push notifications' + 
+                    ' turned on. Enable them now.',
+                    'Notifications!', ['Not Now', 'OK'])
+              .then(function (result) {
                 user.iosPushSuggested = true;
                 that.saveMe(user);
+                if (result === 2) {
+                  settings.openSettings();
+                }
               });
           }
 
