@@ -4,7 +4,7 @@
 angular.module('voteit.config', [])
 
 .constant('config', {
-  "version": "0.3.1",
+  "version": "0.4.0",
   "env": "development",
   "baseUrl": "http://localhost:3000/api",
   "googlePjNumber": "100292842261",
