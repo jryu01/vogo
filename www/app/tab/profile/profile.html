@@ -36,19 +36,21 @@
                   </vo-card-img>
                   <p>
                     <img class="img-avatar" ng-src="{{vote._poll.createdBy.picture}}">
-                    <span class="ft-orator name" ng-bind="vote._poll.createdBy.name"></span>
+                    <span class="name" ng-bind="vote._poll.createdBy.name"></span>
                   </p>
                   <p class="total-hits">
                     <i class="icon ion-checkmark-round"></i>
                     {{vote._poll.answer1.numVotes + vote._poll.answer2.numVotes}} 
-                    <span class="ft-orator">hits</span>
+                    <span 
+>hits</span>
                   </p> 
                   <div class="question">
                     <h3>{{ vote._poll.question }}</h3>
                   </div>
                   <p class="comment">
                     {{ vote._poll.numComments }}  
-                   <span class="ft-orator">comment</span> 
+                   <span 
+>comment</span> 
                   </p>
                 </a>
               </div>
@@ -91,19 +93,21 @@
                   </vo-card-img>
                   <p>
                     <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
-                    <span class="ft-orator name" ng-bind="poll.createdBy.name"></span>
+                    <span class="name" ng-bind="poll.createdBy.name"></span>
                   </p>
                   <p class="total-hits">
                     <i class="icon ion-checkmark-round"></i>
                     {{poll.answer1.numVotes + poll.answer2.numVotes}} 
-                    <span class="ft-orator">hits</span>
+                    <span 
+>hits</span>
                   </p> 
                   <div class="question">
                     <h3>{{ poll.question }}</h3>
                   </div>
                   <p class="comment">
                     {{ poll.numComments }}  
-                   <span class="ft-orator">comment</span> 
+                   <span 
+>comment</span> 
                   </p>
                 </a>
               </div>

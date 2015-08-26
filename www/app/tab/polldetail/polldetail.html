@@ -8,12 +8,13 @@
             class="user-name"
             ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
           <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
-          <span class="ft-orator name" ng-bind="poll.createdBy.name"></span>
+          <span class="name" ng-bind="poll.createdBy.name"></span>
         </a>
         <p class="hits-total">
           <i class="icon ion-checkmark-round"></i>
           {{poll.answer1.numVotes + poll.answer2.numVotes}} 
-          <span class="ft-orator">hits</span>
+          <span 
+>hits</span>
         </p>
       </div>
 
@@ -53,7 +54,8 @@
         <div class="row result">
           <p class="col text-center"
               ng-click="tabCtrl.go('userlist', { pollId: poll.id, answer: 1, type: 'voters' })">
-            {{poll.answer1.numVotes}} <span class="ft-orator">hits</span>
+            {{poll.answer1.numVotes}} <span 
+>hits</span>
           </p>
           <span class="col col-10 text-center">
             <div class="pie-container">
@@ -64,7 +66,8 @@
           </span>
           <p class="col text-center"
               ng-click="tabCtrl.go('userlist', { pollId: poll.id, answer: 2,type: 'voters' })">
-            {{poll.answer2.numVotes}} <span class="ft-orator">hits</span>
+            {{poll.answer2.numVotes}} <span 
+>hits</span>
           </p>
         </div>
       </div>
@@ -75,7 +78,8 @@
         <p> 
            <i class="ion-edit"></i> 
           {{ poll.numComments }} 
-          <span class="ft-orator">comment</span>
+          <span 
+>comment</span>
         </p> 
       </div>
 
@@ -85,7 +89,7 @@
           <img ng-src="{{ ::comment.createdBy.picture }}"
                 ng-click="tabCtrl.go('profile', { id: comment.createdBy.userId, user: comment.createdBy })">
           <p>
-            <a class="ft-orator name"
+            <a class="name"
                   ng-click="tabCtrl.go('profile', { id: comment.createdBy.userId, user: comment.createdBy })">
               {{ comment.createdBy.name }} 
             </a>

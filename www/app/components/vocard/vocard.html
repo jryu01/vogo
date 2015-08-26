@@ -2,7 +2,7 @@
   <div class="item pollcard-item-header">
     <a href="#" ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
       <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
-      <span class="ft-orator name" ng-bind="poll.createdBy.name"></span>
+      <span class="name" ng-bind="poll.createdBy.name"></span>
     </a>
 
     <div class="question"
@@ -16,7 +16,8 @@
     <p class="hits-total">
       <i class="icon ion-checkmark-round"></i>
       {{poll.answer1.numVotes + poll.answer2.numVotes}} 
-      <span class="ft-orator">hits</span>
+      <span 
+>hits</span>
     </p>
   </div>
 
@@ -50,7 +51,8 @@
     <div class="row result" ng-if="poll.isVotedByMe">
       <p class="col text-center"
           ng-click="tabCtrl.go('userlist', { pollId: poll.id, answer: 1, type: 'voters' })">
-        {{poll.answer1.numVotes}} <span class="ft-orator">hits</span>
+        {{poll.answer1.numVotes}} <span 
+>hits</span>
       </p>
       <span class="col col-10 text-center">
         <div class="pie-container">
@@ -61,7 +63,8 @@
       </span>
       <p class="col text-center"
         ng-click="tabCtrl.go('userlist', { pollId: poll.id, answer: 2, type: 'voters' })">
-        {{poll.answer2.numVotes}} <span class="ft-orator">hits</span>
+        {{poll.answer2.numVotes}} <span 
+>hits</span>
       </p>
     </div>
     <p>
@@ -70,7 +73,8 @@
           style="float: right; padding-right: 10px;"
           ng-click="tabCtrl.go('polldetail', { id: poll.id, poll: poll })">
           <i class="ion-edit"></i> {{ poll.numComments }} 
-          <span class="ft-orator">comment</span>
+          <span 
+>comment</span>
       </a>
     </p>
   </div>

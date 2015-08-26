@@ -41,14 +41,6 @@ $tabs-color: #000000;
 }
 
 @font-face {
-  font-family: 'OratorStd';
-  src: url('../fonts/oratorStd/OratorStd.woff') format('woff'),
-       url('../fonts/oratorStd/OratorStd.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'AmerTypewriterITCbyBT-Medium';
   src: url('../fonts/american-type-writer/AmerTypewriterITCbyBT-Medium.woff2') format('woff2'),
     url('../fonts/american-type-writer/AmerTypewriterITCbyBT-Medium.woff') format('woff');
@@ -58,7 +50,7 @@ $tabs-color: #000000;
 
 /** Overridding Ionic Defaults */
 body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divider {
-  font-family: 'AmerTypewriterITCbyBT-Medium', sans-serif;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
 }
 .app .bar .title {
   font-family: 'AmerTypewriterITCbyBT-Medium', sans-serif;
@@ -97,22 +89,11 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
 //=============================================================================
 //                             Common
 //=============================================================================
-.app p.ft-orator, 
-.app a.ft-orator,
-.app span.ft-orator {
-  line-height: 10px;
-  font-family: 'OratorStd';
-}
-.app .ft-orator {
-  p, a, span {
-    line-height: 10px;
-    font-family: 'OratorStd';
-  }
-}
-.app a.activated .ft-orator.name {
+
+.app a.activated .name {
   color: #888;
 }
-.app a.activated.ft-orator.name {
+.app a.activated.name {
   color: #888;
 }
 
