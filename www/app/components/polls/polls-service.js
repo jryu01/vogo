@@ -32,10 +32,14 @@ function (User, Restangular, $q, config, $http, $timeout) {
     return url;
   };
 
-  that.getNextPolls = function (exclude) {
+  that.getNextPolls = function (refresh) {
     var query = {};
-    if (exclude) {
-      query.exclude = exclude;
+    // if (exclude) {
+    //   query.exclude = exclude;
+    // }
+    if (refresh) {
+      that.queue = [];
+      that.currentPoll = null;
     }
     if (that.queue.length > 0) {
       var lastPoll = that.queue[that.queue.length - 1].id;

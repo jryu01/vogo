@@ -74,6 +74,10 @@ function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cord
     }
   };
 
+  // refresh button
+  self.refresh = function () {
+    $scope.$broadcast('HomeCtrl.refresh');
+  };
   //===========================================================================
   //                Create Poll Modal
   //===========================================================================
@@ -257,13 +261,12 @@ function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
 
   var self = this;
 
-  self.polls = [];
-  self.msgCards = [];
-  self.loading = false;
-
-  var init = function () {
+  var init = function (refresh) {
+    self.polls = [];
+    self.msgCards = [];
     self.loading = true;
-    Polls.getNextPolls().then(function () {
+
+    Polls.getNextPolls(refresh).then(function () {
       self.addCard();
       self.loading = false;
     });
@@ -301,6 +304,9 @@ function ($scope, $ionicSwipeCardDelegate, Polls, $timeout) {
     self.msgCards = [];
     self.polls = [];
     self.addCard();
+  });
+  $scope.$on('HomeCtrl.refresh', function () {
+    init(true);
   });
 
   init();
