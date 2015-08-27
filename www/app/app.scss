@@ -64,10 +64,10 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
 }
 
 .app .pane {
-  // background: -webkit-radial-gradient(#CDCCD0, #948F99);
-  // background: radial-gradient(#CDCCD0, #948F99);
   background: #E2DFE4
 }
+
+// Main Bar Theme 
 .bar.bar-royal {
   border-color: $royal;
   background-color: $royal;
@@ -103,9 +103,40 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
   background: none; 
 }
 
+// Main Button Theme
+.button.button-royal {
+  border-color: #81c5f0;
+  background-color: $royal;
+  color: #54575A; }
+  .button.button-royal:hover {
+    color: #54575A;
+    text-decoration: none; }
+  .button.button-royal.active, .button.button-royal.activated {
+    border-color: #81c5f0;
+    background-color: #81c5f0;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1); }
+  .button.button-royal.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: $royal; }
+  .button.button-royal.button-icon {
+    border-color: transparent;
+    background: none; }
+  .button.button-royal.button-outline {
+    border-color: $royal;
+    background: transparent;
+    color: $royal; }
+    .button.button-royal.button-outline.active, .button.button-royal.button-outline.activated {
+      background-color: $royal;
+      box-shadow: none;
+      color: #54575A; }
+
+
 .app .tabs-dark > .tabs {
   background-color: $tabs-color;
 }
+
 
 // .app ion-content {
 //   border-top: 8px solid white;

@@ -48,16 +48,22 @@
     height: 60vw;
     width: 100%;
     z-index: 10;
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0)), color-stop(0.5, rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.3)));
+    background: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+    background: -moz-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+    background: -o-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
     .vote-area {
       height: 100%;
-      padding: 0;
+      padding: 0;  
     }
     .answer-box {
       position: absolute;
       height: 42px;
       padding: 0;
       bottom: 0;
-      background: rgba(255, 255, 255, 0.8);
+      // background: rgba(255, 255, 255, 0.8);
+      background: transpare: ;nt;
       margin: 0;
       border: none;
     }
@@ -72,7 +78,7 @@
     .answer-box h3 {
       white-space: normal;
       -webkit-white-space: normal;
-      color: #888;
+      color: #fff;
     }
     .answer-box .my-vote h3 {
       font-weight: bold;
@@ -139,7 +145,6 @@
   }
   
   ion-footer-bar {
-    background-color: #fff;
     textarea {
       padding-top: 15px;
     }

@@ -19,9 +19,15 @@ vocard .item p {
 
 vocard .item.pollcard-item-header {
   text-align: center;
+  padding-top: 8px;
   padding-bottom: 8px;
   border-radius: inherit;
   height: 128px;
+  .hits-total {
+    margin-bottom: -5px;
+    text-align: left;
+    font-size: 12px;
+  }
   a {
     display: inline-block;
     text-decoration: none;
@@ -57,6 +63,11 @@ vocard .vote-area-wrapper {
   height: 180px;
   width: 100%;
   z-index: 10;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0)), color-stop(0.5, rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.3)));
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+  background: -moz-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+  background: -o-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
   .vote-area {
     height: 100%;
     padding: 0;
@@ -66,7 +77,8 @@ vocard .vote-area-wrapper {
     height: 42px;
     padding: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.8);
+    // background: rgba(255, 255, 255, 0.8);
+    background: transparent;
     margin: 0;
     border: none;
   }
@@ -81,7 +93,7 @@ vocard .vote-area-wrapper {
   .answer-box h3 {
     white-space: normal;
     -webkit-white-space: normal;
-    color: #888;
+    color: #fff;
   }
   .answer-box .my-vote h3 {
     font-weight: bold;

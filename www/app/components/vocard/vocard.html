@@ -1,5 +1,9 @@
 <div class="list">
   <div class="item pollcard-item-header">
+    <p class="hits-total">
+      <i class="icon ion-checkmark-round"></i>
+      {{poll.answer1.numVotes + poll.answer2.numVotes}} 
+    </p>
     <a href="#" ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
       <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
       <span class="name" ng-bind="poll.createdBy.name"></span>
@@ -13,12 +17,6 @@
           ws-normal-at="18"> 
       {{ poll.question }}
     </div>
-    <p class="hits-total">
-      <i class="icon ion-checkmark-round"></i>
-      {{poll.answer1.numVotes + poll.answer2.numVotes}} 
-      <span 
->HITS</span>
-    </p>
   </div>
 
   <div class="vote-area-wrapper">

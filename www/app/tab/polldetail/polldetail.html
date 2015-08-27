@@ -104,7 +104,8 @@
   </ion-content>
 
   <form name="sendCommentForm" ng-submit="ctrl.addComment(sendCommentForm)" novalidate>
-      <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+      <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach
+      style="background: #fff;">
         <label class="item-input-wrapper" style="padding:0">
           <textarea ng-model="ctrl.newComment" value="" placeholder="Add a comment..." required minlength="1" maxlength="1500" style="width: 100%"></textarea>
         </label>
