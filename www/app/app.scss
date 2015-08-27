@@ -69,9 +69,9 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
 .app .tabs-dark > .tabs {
   background-color: $tabs-color;
 }
-.app ion-content {
-  border-top: 8px solid white;
-}
+// .app ion-content {
+//   border-top: 8px solid white;
+// }
 
 // buttons 
 
@@ -89,6 +89,13 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
 //=============================================================================
 //                             Common
 //=============================================================================
+
+.platform-android .only-ios {
+  display: none !important;
+}
+.platform-ios .only-android {
+  display: none !important;
+}
 
 .app a.activated .name {
   color: #888;

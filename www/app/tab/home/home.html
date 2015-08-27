@@ -1,11 +1,16 @@
 <ion-view view-title="<div id='app-logo'>Vogo</div>" class="home">
   <ion-nav-buttons side="left">
-    <a class="button button-icon icon ion-android-refresh"
+    <a class="only-ios button button-icon icon ion-android-refresh"
       ng-click="home.refresh()"></a>
   </ion-nav-buttons>
   <ion-nav-buttons side="right">
+    <a class="only-android button button-icon icon ion-android-refresh"
+        style="padding-right: 10px;"
+        ng-click="home.refresh()"></a>
+    <div class="only-android" style="margin-top: 2px; margin-bottom: 2px; background-color: white; width: 1px"></div>
     <a class="button button-icon icon ion-plus-round"
-      ng-click="home.openModal()"></a>
+        style="padding-right: 10px;"
+        ng-click="home.openModal()"></a>
   </ion-nav-buttons>
 
   <ion-content ng-controller="CardsCtrl as cardsCtrl"
