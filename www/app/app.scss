@@ -16,7 +16,8 @@ $dark:                            #444 !default;
 */
 
 // our app theme color
-$royal:                           #28225c !default;
+// $royal:                           #28225c !default;
+$royal:                           #A5D5F4 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -63,12 +64,49 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
 }
 
 .app .pane {
-  background: -webkit-radial-gradient(#CDCCD0, #948F99);
-  background: radial-gradient(#CDCCD0, #948F99);
+  // background: -webkit-radial-gradient(#CDCCD0, #948F99);
+  // background: radial-gradient(#CDCCD0, #948F99);
+  background: #E2DFE4
 }
+.bar.bar-royal {
+  border-color: $royal;
+  background-color: $royal;
+  background-image: linear-gradient(0deg, $royal, $royal 50%, transparent 50%);
+  color: #54575A; 
+}
+.bar.bar-royal .title {
+  color: #54575A; 
+}
+.bar-royal .button {
+  border-color: $royal;
+  background-color: $royal;
+  color: #54575A; 
+}
+.bar-royal .button:hover {
+  color: #54575A;
+  text-decoration: none; 
+}
+.bar-royal .button.active, .bar-royal .button.activated {
+  border-color: $royal;
+  background-color: $royal;
+  // box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1); 
+}
+.bar-royal .button.button-clear {
+  border-color: transparent;
+  background: none;
+  box-shadow: none;
+  color: #54575A;
+  font-size: 17px; 
+}
+.bar-royal .button.button-icon {
+  border-color: transparent;
+  background: none; 
+}
+
 .app .tabs-dark > .tabs {
   background-color: $tabs-color;
 }
+
 // .app ion-content {
 //   border-top: 8px solid white;
 // }
