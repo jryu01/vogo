@@ -13,8 +13,7 @@
         <p class="hits-total">
           <i class="icon ion-checkmark-round"></i>
           {{poll.answer1.numVotes + poll.answer2.numVotes}} 
-          <span 
->hits</span>
+          <span>HITS</span>
         </p>
       </div>
 
@@ -54,8 +53,7 @@
         <div class="row result">
           <p class="col text-center"
               ng-click="tabCtrl.go('userlist', { pollId: poll.id, answer: 1, type: 'voters' })">
-            {{poll.answer1.numVotes}} <span 
->hits</span>
+            {{poll.answer1.numVotes}} <span>HITS</span>
           </p>
           <span class="col col-10 text-center">
             <div class="pie-container">
@@ -66,8 +64,7 @@
           </span>
           <p class="col text-center"
               ng-click="tabCtrl.go('userlist', { pollId: poll.id, answer: 2,type: 'voters' })">
-            {{poll.answer2.numVotes}} <span 
->hits</span>
+            {{poll.answer2.numVotes}} <span>HITS</span>
           </p>
         </div>
       </div>
@@ -78,8 +75,7 @@
         <p> 
            <i class="ion-edit"></i> 
           {{ poll.numComments }} 
-          <span 
->comment</span>
+          <span>comment</span>
         </p> 
       </div>
 

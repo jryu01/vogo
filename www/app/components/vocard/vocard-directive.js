@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('voteit.vocard', [
+  'utills',
   'n3-pie-chart'
 ])
 .directive('vocard', [
@@ -46,50 +47,4 @@ function (Polls, $timeout) {
       });
     }
   };
-}])
-.directive('textFill', function () {
-  return {
-    restrict: 'EAC',
-    compile: function ($element) {
-      var content = '<span class="text"' +
-                          ' style="word-wrap: break-word;">' +
-                       $element[0].innerHTML + 
-                    '</span>';
-      $element[0].innerHTML = content;
-      return function link($scope, $elem, $attr) {
-        var elem = $elem[0],
-            minFontSize = $attr.minFontSize || 6,
-            text = elem.querySelector('.text'),
-            maxWidth = elem.offsetWidth,
-            maxHeight = elem.offsetHeight;
-        
-
-
-        var resizeFont = function () {
-          var fontSize = parseInt($attr.maxFontSize, 10) || 30,
-              normalFS = parseInt($attr.wsNormalAt, 10) || fontSize,
-              textWidth,
-              textHeight,
-              overflow;
-          elem.classList.remove('vertical-center');
-          do {
-            elem.style.whiteSpace = (fontSize <= normalFS) ? 'normal' : '';
-            elem.style.lineHeight = (fontSize <= 13) ? '15px' : '';
-            text.style.fontSize = fontSize + 'px';
-            textWidth = text.offsetWidth;
-            textHeight = text.offsetHeight;
-            fontSize -= 1;
-            overflow = (fontSize > 18) ? 
-              (textWidth > maxWidth) :
-              (textHeight > maxHeight || textWidth > maxWidth);
-          } while (overflow && fontSize >= minFontSize);
-          elem.classList.add('vertical-center');
-        };
-        // resize font whenever text changes
-        $scope.$watch(function () {
-          return text.innerHTML;
-        }, resizeFont);
-      };
-    }
-  };
-});
+}]);

@@ -10,12 +10,10 @@
     </a>
 
     <div class="question"
-          ng-click="tabCtrl.go('polldetail', { id: poll.id, poll: poll })"
-          text-fill
-          max-font-size="28"
-          min-font-size="9"
-          ws-normal-at="18"> 
-      {{ poll.question }}
+          ng-click="tabCtrl.go('polldetail', { id: poll.id, poll: poll })">
+      <div class="text-center">
+        <h3 ng-bind="poll.question"></h3>
+      </div>
     </div>
   </div>
 

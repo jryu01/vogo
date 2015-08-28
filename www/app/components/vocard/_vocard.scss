@@ -46,6 +46,15 @@ vocard .item.pollcard-item-header {
   .question {
     height: 45px;
     margin: 0;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    h3 {
+      white-space: normal;
+    }
   }
 
   .question.vertical-center {
