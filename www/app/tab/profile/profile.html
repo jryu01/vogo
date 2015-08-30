@@ -25,33 +25,33 @@
             </ion-refresher>
 
             <div class="list">
-              <div class="item-container" 
-                    collection-repeat="vote in vctrl.votes">
-                <a class="item item-thumbnail-left" 
-                    href="#" 
-                    ng-click="tabCtrl.go('polldetail', { id: vote._poll.id, poll: vote._poll })">
-                  <vo-card-img class="thumbnail" 
-                                src1="{{vote._poll.answer1.picture}}"
-                                src2="{{vote._poll.answer2.picture}}">
-                  </vo-card-img>
-                  <p>
-                    <img class="img-avatar" ng-src="{{vote._poll.createdBy.picture}}">
-                    <span class="name" ng-bind="vote._poll.createdBy.name"></span>
-                  </p>
-                  <p class="total-hits">
+              <a class="item item-thumbnail-left" 
+                  href="#" 
+                  collection-repeat="vote in vctrl.votes"
+                  ng-click="tabCtrl.go('polldetail', { id: vote._poll.id, poll: vote._poll })">
+                <vo-card-img class="thumbnail" 
+                              src1="{{vote._poll.answer1.picture}}"
+                              src2="{{vote._poll.answer2.picture}}">
+                </vo-card-img>
+                <p>
+                  <img class="img-avatar" ng-src="{{vote._poll.createdBy.picture}}">
+                  <span class="name" ng-bind="vote._poll.createdBy.name"></span>
+                </p>
+                <div class="question">
+                  <h3>{{ vote._poll.question }}</h3>
+                </div>
+                <div class="hit-comment">
+                  <p class="hit">
                     <i class="icon ion-checkmark-round"></i>
                     {{vote._poll.answer1.numVotes + vote._poll.answer2.numVotes}} 
                   </p> 
-                  <div class="question">
-                    <h3>{{ vote._poll.question }}</h3>
-                  </div>
+                  <p class="line"></p>
                   <p class="comment">
                     {{ vote._poll.numComments }}  
-                   <span 
->comment</span> 
+                    comment
                   </p>
-                </a>
-              </div>
+                </div>
+              </a>
             </div>
 
             <ion-infinite-scroll
@@ -93,18 +93,20 @@
                     <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
                     <span class="name" ng-bind="poll.createdBy.name"></span>
                   </p>
-                  <p class="total-hits">
-                    <i class="icon ion-checkmark-round"></i>
-                    {{poll.answer1.numVotes + poll.answer2.numVotes}} 
-                  </p> 
                   <div class="question">
                     <h3>{{ poll.question }}</h3>
                   </div>
-                  <p class="comment">
-                    {{ poll.numComments }}  
-                   <span 
->comment</span> 
-                  </p>
+                  <div class="hit-comment">
+                    <p class="hit">
+                      <i class="icon ion-checkmark-round"></i>
+                      {{ poll.answer1.numVotes + poll.answer2.numVotes}} 
+                    </p> 
+                    <p class="line"></p>
+                    <p class="comment">
+                      {{ poll.numComments }}  
+                      comment
+                    </p>
+                  </div>
                 </a>
               </div>
             </div>

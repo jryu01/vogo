@@ -91,16 +91,16 @@ function ($urlRouterProvider, RestangularProvider, config) {
         'name': 'Test User1',
         'picture': 'http://lorempixel.com/100/100/',
         'id': '554be56e11a864e3832decd1',
-        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTRiZTU2ZTExYTg2NGUzODMyZGVjZDEiLCJleHAiOjE0NDA4MTIyMDk2NjZ9.KzmaipMziraJnX4A2Rgmkmb5rOStXzjoHdOFxiwQNxE'
+        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTRiZTU2ZTExYTg2NGUzODMyZGVjZDEiLCJleHAiOjE0NDYwOTE5MjYwNDB9.6wD4JGG8ntZPh-0apg3HTFcEBodAfnWyRSNVL51BhqA'
       };
       var user2 = {
         'email': 'jryu@vogo.com',
         'name': 'Jaehwan Coding Master Ryu',
         'picture': 'http://lorempixel.com/200/200/',
         'id': '5591effffb89836a6130430d',
-        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTkxZWZmZmZiODk4MzZhNjEzMDQzMGQiLCJleHAiOjE0NDA4MTE1NjEyNDF9.Lsts_MpUBsF1CNJSvleKMKMv7aiALv8aFNJe-pFoQIw'
+        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NTkxZWZmZmZiODk4MzZhNjEzMDQzMGQiLCJleHAiOjE0NDYwOTIwNzAzMjN9.atbgK1nFWdIcOGOOoxUBbnOW7tb-fKCS-Pr5kmt7-mY'
       };
-      var testUser = user1;
+      var testUser = user2;
 
       auth.authenticate(testUser, testUser.token);
 

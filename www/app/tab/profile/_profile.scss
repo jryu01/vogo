@@ -6,41 +6,53 @@
   background-color: transparent;
   position: relative;
   z-index: 1000;
-  height: 155px;
-  padding: 10px;
-  @media (min-width: 360px) {
-    padding: 15px;
-  } 
+  height: 177px;
 }
 
 .profile .profile-info-content {
-  height: 135px;
-  background-color: #C9C9CB;
-  border-radius: 5px;
+  height: 230px;
+  background-color: #FFF;
+  .container {
+    height: 123px;
+    text-align: center;
+    padding-top: 18px;
+  }
   .col-50 {
     padding-left: 15px;
     padding-right: 0px;
   }
-}
-
-.profile .profile-picture {
-  border-radius: 100px;
-  background-color: #DDD;
-  width: 68px;
-  height: 68px;
+  .profile-name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 10px;
+  }
+  .profile-picture {
+    border-radius: 100px;
+    background-color: #DDD;
+    width: 68px;
+    height: 68px;
+  }
 }
 
 .profile .profile-actions {
-  padding-left: 25px;
-  .button {
-    width: 100%;
-    margin-bottom: 2px;
+
+  a.f-link {
+    color: #000;
+    text-decoration: none;
+    line-height: 33px;
+    text-align: center;
+    font-size: 12px;
+  }  
+  a.f-link.activated {
+    color: #888;
   }
-  .button.has-number {
-    text-align: initial;
-    span {
-      float: right;
-    }
+  .button-container {
+    text-align: center;
+  }
+  .button {
+    border: solid 2px;
+    width: 75px;
   }
   .button-follow {
     color: #000020;
@@ -52,49 +64,71 @@
 
 .profile .button-row {
   padding: 0;
-  :first-child {
-    padding-left: 0;
-  }
-  :nth-child(2) {
-    padding-right: 0;
-  }
-  .button-dark {
-    box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.6);
-  }
-  .button-dark.activated {
-    box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0);
-  }
-  .button-dark.active {
-    border-color: #3F3353;
+  margin: 0;
+  height: 53px;
+  border-top: 1px solid $royal;
+  border-bottom: 1px solid $royal;
+  a {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    text-align: center;
     background-color: $royal;
+    opacity: 0.6;
+    font-family: 'AmerTypewriterITCbyBT-Medium', sans-serif;
+    font-size: 18px;
+    color: $title-color;
+  } 
+  a.active {
+    opacity: 1;
   }
-  .button-dark {
-    border-color: #7D788B;
-    background-color: #63607E;
-  }
+  // :first-child {
+  //   padding-left: 0;
+  // }
+  // :nth-child(2) {
+  //   padding-right: 0;
+  // }
+  // .button-dark {
+  //   box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.6);
+  // }
+  // .button-dark.activated {
+  //   box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0);
+  // }
+  // .button-dark.active {
+  //   border-color: #3F3353;
+  //   background-color: $royal;
+  // }
+  // .button-dark {
+  //   border-color: #7D788B;
+  //   background-color: #63607E;
+  // }
 }
 
 .profile ion-content.nested {
   bottom: 0;
   border: none;
   .padding {
-    height: 210px;
+    height: 230px;
   }
   .scroll-refresher {
-    top:  150px; // -60px(default) + 210px(padding)
+    top:  170px; // -60px(default) + 230px(padding)
   }
 }
 
-.profile ion-content.nested .item-container {
-  .item   {
-    padding-right: 10px;
-  }
+.profile ion-content.nested .item {
+  height: 120px;
+  padding-right: 10px;
+  padding-left: 126px;
+  padding-top: 16px;
   .thumbnail {
     position: absolute;
     top: 0px;
     left: 0px;
-    max-width: 98px;
-    max-height: 98px;
+    max-width: 120px;
+    max-height: 120px;
     width: 100%;
     height: 100%;
   }
@@ -114,13 +148,6 @@
   .name {
     color: black;
   }
-  .total-hits {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 8px 10px 0 0;
-    background-color: inherit;
-  }
   .question {
     margin: 0px;
     height: 50px;
@@ -137,9 +164,24 @@
     white-space: normal;
     -webkit-white-space: normal;
   }
-  .comment {
+  .hit-comment {
     position: absolute;
     right: 10px;
     bottom: 0;
+  }
+  .hit-comment p {
+    display: inline-block;
+    margin: 0;
+  }
+  .hit-comment .hit {
+    padding-right: 5px;
+  }
+  .hit-comment .line {
+    width: 1px;
+    background-color: #666;
+    height: 18px;
+  }
+  .hit-comment .comment {
+    padding-left: 5px;
   }
 }

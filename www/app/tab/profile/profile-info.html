@@ -1,49 +1,53 @@
-<div class="profile-info-content row">
-  <div class="col col-50">
-    <img class="profile-picture" ng-src="{{ctrl.profile.picture}}">
-    <p class="profile-name">
-      <span class="name">{{ ctrl.profile.name }}</span>
-    </p>
+<div class="profile-info-content">
+  <div class="container">
+    <div class="info-box">
+      <img class="profile-picture" ng-src="{{ctrl.profile.picture}}">
+      <p class="profile-name">
+        <span class="name">{{ ctrl.profile.name }}</span>
+      </p>
+    </div>
   </div>
-  <div class="profile-actions col">
-    <a class="button button-small has-number"
+
+  <hr style="margin: 0 10px; border-top: 1px solid #888">
+
+  <div class="row profile-actions">
+    <a class="col f-link"
         href="#"
         ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'following' })"> 
-      Following <span>{{ctrl.profile.numFollowing}}</span>
+      following <span>{{ctrl.profile.numFollowing}}</span>
     </a>
-    <a class="button button-small has-number"
+    <a class="col f-link"
         href="#"
         ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'followers' })"> 
-      Followers <span>{{ctrl.profile.numFollowers}}</span>
+      followers <span>{{ctrl.profile.numFollowers}}</span>
     </a>
-    <a class="button button-small button-balanced" 
-      href="#"
-      ng-click="ctrl.unfollow(ctrl.profile.uid)"
-      ng-if="!ctrl.isMyProfile && ctrl.profile.following === true">
-      Following
-    </a>
-    <a class="button button-small button-stable button-follow" 
-      href="#"
-      ng-click="ctrl.follow(ctrl.profile.uid)"
-      ng-if="!ctrl.isMyProfile && ctrl.profile.following === false">
-      <i class="ion-plus"></i> Follow
-    </a>
+    <div class="col button-container" ng-if="!ctrl.isMyProfile">
+      <a class="button button-small button-balanced" 
+        href="#"
+        ng-click="ctrl.unfollow(ctrl.profile.uid)"
+        ng-if="!ctrl.isMyProfile && ctrl.profile.following === true">
+        following
+      </a>
+      <a class="button button-small button-stable button-follow" 
+        href="#"
+        ng-click="ctrl.follow(ctrl.profile.uid)"
+        ng-if="!ctrl.isMyProfile && ctrl.profile.following === false">
+        <i class="ion-plus"></i> follow
+      </a>
+    </div>
   </div>
-</div>
 
-<div class="button-row row">
-  <div class="col">
-    <a class="button button-block button-small button-dark"
-        ng-class="{ active: active === 'vote' }"
-        ng-click="ctrl.selectTab(0)">
-      Vote
-    </a>
+  <div class="button-row row">
+      <a class="col"
+          ng-class="{ active: active === 'vote' }"
+          ng-click="ctrl.selectTab(0)">
+        VOTE
+      </a>
+      <a class="col"
+          ng-class="{ active: active === 'poll' }"
+          ng-click="ctrl.selectTab(1)">
+        POLL
+      </a>
   </div>
-  <div class="col">
-    <a class="button button-block button-small button-dark"
-        ng-class="{ active: active === 'poll' }"
-        ng-click="ctrl.selectTab(1)">
-      Poll
-    </a>
-  </div>
+
 </div>

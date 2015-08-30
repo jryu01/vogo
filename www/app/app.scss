@@ -32,7 +32,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 //=============================================================================
 //                             Themes
 //=============================================================================
-$tabs-color: #000000;
+$tabs-color: #54575A;
+$title-color: #54575A;
 
 @font-face {
   font-family: 'Bank Gothic Light BT';
@@ -72,18 +73,18 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
   border-color: $royal;
   background-color: $royal;
   background-image: linear-gradient(0deg, $royal, $royal 50%, transparent 50%);
-  color: #54575A; 
+  color: $title-color; 
 }
 .bar.bar-royal .title {
-  color: #54575A; 
+  color: $title-color; 
 }
 .bar-royal .button {
   border-color: $royal;
   background-color: $royal;
-  color: #54575A; 
+  color: $title-color; 
 }
 .bar-royal .button:hover {
-  color: #54575A;
+  color: $title-color;
   text-decoration: none; 
 }
 .bar-royal .button.active, .bar-royal .button.activated {
@@ -95,7 +96,7 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
   border-color: transparent;
   background: none;
   box-shadow: none;
-  color: #54575A;
+  color: $title-color;
   font-size: 17px; 
 }
 .bar-royal .button.button-icon {
@@ -107,9 +108,9 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
 .button.button-royal {
   border-color: #81c5f0;
   background-color: $royal;
-  color: #54575A; }
+  color: $title-color; }
   .button.button-royal:hover {
-    color: #54575A;
+    color: $title-color;
     text-decoration: none; }
   .button.button-royal.active, .button.button-royal.activated {
     border-color: #81c5f0;
@@ -130,11 +131,11 @@ body, h1, h2, h3, h4, h5, h6, p, .h1, .h2, .h3, .h4, .h5, .h6 .item, .item-divid
     .button.button-royal.button-outline.active, .button.button-royal.button-outline.activated {
       background-color: $royal;
       box-shadow: none;
-      color: #54575A; }
+      color: $title-color; }
 
 
 .app .tabs-dark > .tabs {
-  background-color: $tabs-color;
+  // background-color: $tabs-color;
 }
 
 
