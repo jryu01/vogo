@@ -1,32 +1,30 @@
 <ion-view class="userlist" view-title="{{userlist.title}}">
   <ion-content>
     <div class="list">
-      <div class="item-container"
+      <div class="item"
             collection-repeat="user in userlist.users">
-        <div class="item">
-          <a href="#" 
-              ng-click="tabCtrl.go('profile', { id: user.userId, user: user })">
-            <img class="img-avatar" ng-src="{{ user.picture }}">
-            <span class="name" 
-                  ng-bind="user.name">
-            </span>
-          </a>
+        <a href="#" 
+            ng-click="tabCtrl.go('profile', { id: user.userId, user: user })">
+          <img class="img-avatar" ng-src="{{ user.picture }}">
+          <span class="name" 
+                ng-bind="user.name">
+          </span>
+        </a>
 
-          <div class="btn-container"
-                ng-if="user.userId !== userlist.me.id">
-            <a class="button button-small button-balanced" 
-              href="#"
-              ng-click="userlist.unfollow(user)"
-              ng-if="user.following === true">
-              Following
-            </a>
-            <a class="button button-small" 
-              href="#"
-              ng-click="userlist.follow(user)"
-              ng-if="user.following === false">
-              + Follow
-            </a>
-          </div>
+        <div class="btn-container"
+              ng-if="user.userId !== userlist.me.id">
+          <a class="button button-small button-balanced" 
+            href="#"
+            ng-click="userlist.unfollow(user)"
+            ng-if="user.following === true">
+            Following
+          </a>
+          <a class="button button-small" 
+            href="#"
+            ng-click="userlist.follow(user)"
+            ng-if="user.following === false">
+            + Follow
+          </a>
         </div>
       </div> 
     </div>

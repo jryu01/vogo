@@ -5,79 +5,77 @@
     <div class="list">
       <div class="item-container"
             ng-repeat="notification in nCtrl.notifications">
-        <div style="item-container">
-          <div class="item" ng-if="notification.verb === 'follow'">
-            <img class="img-avatar" 
-                  ng-src="{{ notification.actor.picture }}"
-                  ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })"/>
-            <p>
-              <a href="#" 
-                  ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })">
-                <span class="name" 
-                      ng-bind="notification.actor.name">
-                </span>
-              </a>
-              is following You
-            </p>
-          </div>
-          <div class="item" ng-if="notification.verb === 'create'">
-            <img class="img-avatar" 
-                  ng-src="{{ notification.actor.picture }}"
-                  ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })"/>
-            <p>
-              <a href="#" 
-                  ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })">
-                <span class="name" 
-                      ng-bind="notification.actor.name">
-                </span>
-              </a>
-              asked <br>
-              Q:
-              <a href="#"
-                  ng-click="tabCtrl.go('polldetail', { id: notification.object.id })">
-                {{ notification.object.question }}
-              </a>
-            </p>
-          </div>
-          <div class="item" ng-if="notification.verb === 'vote'">
-            <img class="img-avatar" 
-                  ng-src="{{ notification.actor.picture }}"
-                  ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })"/>
-            <p>
-              <a href="#" 
-                  ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })">
-                <span class="name" 
-                      ng-bind="notification.actor.name">
-                </span>
-              </a>
+        <div class="item" ng-if="notification.verb === 'follow'">
+          <img class="img-avatar" 
+                ng-src="{{ notification.actor.picture }}"
+                ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })"/>
+          <p>
+            <a href="#" 
+                ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })">
+              <span class="name" 
+                    ng-bind="notification.actor.name">
+              </span>
+            </a>
+            is following You
+          </p>
+        </div>
+        <div class="item" ng-if="notification.verb === 'create'">
+          <img class="img-avatar" 
+                ng-src="{{ notification.actor.picture }}"
+                ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })"/>
+          <p>
+            <a href="#" 
+                ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })">
+              <span class="name" 
+                    ng-bind="notification.actor.name">
+              </span>
+            </a>
+            asked <br>
+            Q:
+            <a href="#"
+                ng-click="tabCtrl.go('polldetail', { id: notification.object.id })">
+              {{ notification.object.question }}
+            </a>
+          </p>
+        </div>
+        <div class="item" ng-if="notification.verb === 'vote'">
+          <img class="img-avatar" 
+                ng-src="{{ notification.actor.picture }}"
+                ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })"/>
+          <p>
+            <a href="#" 
+                ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })">
+              <span class="name" 
+                    ng-bind="notification.actor.name">
+              </span>
+            </a>
 
-              voted <b>{{ notification.object['answer' + notification.detail.answer].text }} </b> <br>
-              Q:
-              <a href="#"
-                  ng-click="tabCtrl.go('polldetail', { id: notification.object.id })">
-                {{ notification.object.question }}
-              </a>
-            </p>
-          </div>
-          <div class="item" ng-if="notification.verb === 'comment'">
-            <img class="img-avatar" 
-                  ng-src="{{ notification.actor.picture }}"
-                  ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })"/>
-            <p>
-              <a href="#" 
-                  ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })">
-                <span class="name" 
-                      ng-bind="notification.actor.name">
-                </span>
-              </a>
-              commented <br>
-              Q:
-              <a href="#"
-                  ng-click="tabCtrl.go('polldetail', { id: notification.object.id })">
-                {{ notification.object.question }}
-              </a>
-            </p>
-          </div>
+            voted <b>{{ notification.object['answer' + notification.detail.answer].text }} </b> <br>
+            Q:
+            <a href="#"
+                ng-click="tabCtrl.go('polldetail', { id: notification.object.id })">
+              {{ notification.object.question }}
+            </a>
+          </p>
+        </div>
+        <div class="item" ng-if="notification.verb === 'comment'">
+          <img class="img-avatar" 
+                ng-src="{{ notification.actor.picture }}"
+                ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })"/>
+          <p>
+            <a href="#" 
+                ng-click="tabCtrl.go('profile', { id: notification.actor.id, user: notification.actor })">
+              <span class="name" 
+                    ng-bind="notification.actor.name">
+              </span>
+            </a>
+            commented <br>
+            Q:
+            <a href="#"
+                ng-click="tabCtrl.go('polldetail', { id: notification.object.id })">
+              {{ notification.object.question }}
+            </a>
+          </p>
         </div>
       </div> 
     </div>
