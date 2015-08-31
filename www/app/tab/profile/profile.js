@@ -65,6 +65,7 @@ function (User, $scope, $stateParams) {
         self.profile.picture = user.picture;
       });
     }
+      console.log(self.profile.name);
 
     User.getFollowInfo(uid).then(function (info) {
       self.profile.numFollowing = info.numFollowing;
