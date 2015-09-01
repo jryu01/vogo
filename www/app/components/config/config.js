@@ -4,9 +4,9 @@
 angular.module('voteit.config', [])
 
 .constant('config', {
-  "version": "0.4.0",
-  "env": "development",
-  "baseUrl": "http://localhost:3000/api",
-  "googlePjNumber": "100292842261",
-  "fbAppId": "794909417212702"
+  "version": "0.5.0",
+  "env": "production",
+  "baseUrl": "http://vogo-api-production.elasticbeanstalk.com/api",
+  "googlePjNumber": "575724476904",
+  "fbAppId": "790356791001298"
 });
