@@ -36,7 +36,8 @@ function ($scope, User, $cordovaEmailComposer, $window) {
   };
   
   self.signout = function () {
-    User.signout();
-    $window.location.href = 'index.html';
+    User.signout().then(function () {
+      $window.location.href = 'index.html';
+    });
   };
 }]);

@@ -43,10 +43,18 @@
     "cordova-plugin-statusbar",
     "cordova-plugin-dialogs@r1.1.1",
     {
-      "locator": "https://github.com/phonegap-build/PushPlugin.git",
+      "locator": "https://github.com/Telerik-Verified-Plugins/PushNotification",
       "id": "com.phonegap.plugins.PushPlugin"
     },
-    "cordova-plugin-settings"
+    "cordova-plugin-settings",
+    {
+      "locator": "https://github.com/Telerik-Verified-Plugins/Facebook",
+      "id": "com.phonegap.plugins.facebookconnect",
+      "variables": {
+        "APP_ID": "790356791001298",
+        "APP_NAME": "Vogo"
+      }
+    }
   ],
   "cordovaPlatforms": [
     "ios",

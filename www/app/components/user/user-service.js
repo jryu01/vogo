@@ -8,13 +8,13 @@ angular.module('voteit.user', ['voteit.config'])
   '$http', 
   '$q',
   'auth',
-  '$cordovaOauth',
+  '$cordovaFacebook',
   '$cordovaPush',
   'localStorageService',
   '$ionicPlatform',
   '$timeout',
   '$cordovaDialogs',
-function (config, $http, $q, auth, $cordovaOauth, $cordovaPush, localStorageService, $ionicPlatform, $timeout, $cordovaDialogs) {
+function (config, $http, $q, auth, $cordovaFacebook, $cordovaPush, localStorageService, $ionicPlatform, $timeout, $cordovaDialogs) {
 
   var that = {};
 
@@ -67,22 +67,27 @@ function (config, $http, $q, auth, $cordovaOauth, $cordovaPush, localStorageServ
     var loginData;
 
     var loginWithFbToken = function (fbLoginResult) {
+      var token = fbLoginResult.authResponse && fbLoginResult.authResponse.accessToken;
+      if (!token) {
+        throw new Error('facebook login failed');
+      }
       return $http.post(url('login'), {
         grantType: 'facebook',
-        facebookAccessToken: fbLoginResult.access_token
+        facebookAccessToken: token
       }).then(function (res) {
         loginData = res.data;
         auth.authenticate(res.data.user, res.data.access_token);
       });
     };
 
-    return $cordovaOauth
-      .facebook(config.fbAppId, ['email','user_friends'])
+    return  $cordovaFacebook.login(["public_profile", "email", "user_friends"])
       .then(loginWithFbToken);
   };
 
   that.signout = function () {
-    auth.logout(); 
+    return $cordovaFacebook.logout().then(function () {
+      return auth.logout();
+    });
   };
 
   that.setS3Info = function () {
