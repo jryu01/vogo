@@ -31,7 +31,7 @@ function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cord
   var self = this;
 
   // render piegraph when entering home view
-  $scope.$on('$ionicView.beforeEnter', function () {
+  $scope.$on('$ionicView.afterEnter', function () {
     $scope.$broadcast('vocard:updatePie');
   });
 
