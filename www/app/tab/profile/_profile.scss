@@ -1,3 +1,5 @@
+$profile-info-content-height: 221px;
+
 .profile {
 
 }
@@ -10,7 +12,7 @@
 }
 
 .profile .profile-info-content {
-  height: 230px;
+  height: $profile-info-content-height;
   background-color: #FFF;
   .container {
     height: 123px;
@@ -65,7 +67,7 @@
 .profile .button-row {
   padding: 0;
   margin: 0;
-  height: 53px;
+  height: 44px;
   border-top: 1px solid $royal;
   border-bottom: 1px solid $royal;
   a {
@@ -111,7 +113,7 @@
   bottom: 0;
   border: none;
   .padding {
-    height: 230px;
+    height: $profile-info-content-height;
   }
   .scroll-refresher {
     top:  170px; // -60px(default) + 230px(padding)
