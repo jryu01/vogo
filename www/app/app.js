@@ -86,6 +86,7 @@ function ($urlRouterProvider, RestangularProvider, config) {
   if (config.env === 'development' && !ionic.Platform.isWebView()) {
     // overwrite signin function
     User.signin = function () {
+      /* jshint unused: false */
       var user1 = {
         'email': 'testuser1@test.com',
         'name': 'Test User1',

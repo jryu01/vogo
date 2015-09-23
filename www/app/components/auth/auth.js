@@ -13,8 +13,7 @@ angular.module('voteit.auth', ['voteit.auth.service'])
   'auth', 
 function ($rootScope, $window, $state, auth) {
   $rootScope.$on('$stateChangeStart', 
-    function (event, toState, toParams, fromState, fromParams) {
-
+    function (event, toState /* toParams, fromState, fromParams */) {
     if (toState.name === 'login' && auth.isAuthenticated()) {
       event.preventDefault();
       $state.go('tab.tab-home-home');

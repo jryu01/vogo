@@ -1,5 +1,6 @@
 'use strict';
 /* jshint quotmark: false */
+/* globals settings: false */
 
 angular.module('voteit.user', ['voteit.config'])
 
@@ -137,6 +138,7 @@ function (config, $http, $q, auth, $cordovaFacebook, $cordovaPush, localStorageS
                 user.iosPushSuggested = true;
                 that.saveMe(user);
                 if (result === 2) {
+                  // cordova-plugin-settings
                   settings.openSettings();
                 }
               });

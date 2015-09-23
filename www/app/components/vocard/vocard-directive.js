@@ -6,13 +6,12 @@ angular.module('voteit.vocard', [
 ])
 .directive('vocard', [
   'Polls',
-  '$timeout',
-function (Polls, $timeout) {
+function (Polls) {
   return {
     restrict: 'E',
     scope: true,
     templateUrl: 'app/components/vocard/vocard.html',
-    link: function ($scope, $element, $attr) {
+    link: function ($scope) {
       var poll = $scope.poll;
 
       var updatePie = function (answer1, answer2, duration) {
