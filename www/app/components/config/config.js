@@ -4,7 +4,7 @@
 angular.module('voteit.config', [])
 
 .constant('config', {
-  "version": "0.6.0",
+  "version": "0.6.1",
   "env": "production",
   "baseUrl": "http://vogo-api-production.elasticbeanstalk.com/api",
   "googlePjNumber": "575724476904",

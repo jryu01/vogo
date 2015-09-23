@@ -1,7 +1,7 @@
 {
   "configModuleName": "voteit.config",
   "common": {
-    "version": "0.6.0"
+    "version": "0.6.1"
   },
   "development": {
     "env": "development",
