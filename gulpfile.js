@@ -8,6 +8,7 @@ var _ = require('lodash'),
     sass = require('gulp-sass'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
+    shell = require('gulp-shell'),
     bower = require('bower'),
     jshint = require('gulp-jshint'),
     rename = require('gulp-rename'),
@@ -23,19 +24,13 @@ var paths = {
     app: ['./www/app/**/*.js', '!./www/app/**/*.spec.js']
   }
 };
-
-gulp.task('default',['build']);
-
-gulp.task('build', function (done) {
-  runSequence('config', ['sass', 'index'], 'lint', done);
-});
-
-gulp.task('config', function (done) {
-  var env = (argv.production && 'production') || (argv.test && 'test'),
-      config = require('./www/app/config.json'),
+var configure = function (env) {
+  var config = require('./www/app/config.json'),
       configObj,
       newFile,
       compiled;
+
+  env = env || (argv.production && 'production') || (argv.test && 'test');
 
   compiled = _.template(
     '\'use strict\';\n' +
@@ -49,13 +44,34 @@ gulp.task('config', function (done) {
     'moduleName': config.configModuleName
   });
   
-  fs.writeFile('./www/app/components/config/config.js', newFile, function () {
-    gutil.log('Running  \'' + 
-      gutil.colors.cyan('config') +'\' with ' + 
-      gutil.colors.magenta(env || 'development')
-      );
-    done();
-  });
+  fs.writeFileSync('./www/app/components/config/config.js', newFile);
+  gutil.log('Running  \'' + 
+    gutil.colors.cyan('config') +'\' with ' + 
+    gutil.colors.magenta(env || 'development')
+    );
+};
+
+gulp.task('default',['build']);
+
+gulp.task('build', function (done) {
+  runSequence('config', ['sass', 'index'], 'lint', done);
+});
+
+gulp.task('pkgandroid', function () {
+  configure((argv.test && 'test') || 'production');
+  return runSequence('pkgandroidapp');
+});
+gulp.task('pkgandroidapp', shell.task([
+  'rm -f VoteIt-*.apk',
+  'cordova build --release android',
+  'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore voteit-release-key.keystore platforms/android/build/outputs/apk/android-x86-release-unsigned.apk voteit -storepass voteit2015',
+  'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore voteit-release-key.keystore platforms/android/build/outputs/apk/android-armv7-release-unsigned.apk voteit -storepass voteit2015',
+  'zipalign -v 4 platforms/android/build/outputs/apk/android-x86-release-unsigned.apk VoteIt-x86.apk',
+  'zipalign -v 4 platforms/android/build/outputs/apk/android-armv7-release-unsigned.apk VoteIt-armv7.apk'
+]));
+
+gulp.task('config', function () {
+  configure();
 });
 
 gulp.task('sass', function () {
