@@ -37,7 +37,8 @@ function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cord
 
   var showLoading = function () {
     $ionicLoading.show({
-      template: '<ion-spinner></ion-spinner>'
+      template: '<ion-spinner></ion-spinner>',
+      duration: 5000
     });
   };
   var hideLoading = function () {

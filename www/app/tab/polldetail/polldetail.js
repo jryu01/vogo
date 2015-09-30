@@ -44,7 +44,9 @@ angular.module('voteit.tab.polldetail', [
   '$stateParams', 
   'Polls',
   '$ionicScrollDelegate',
-function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
+  '$ionicLoading',
+  '$q',
+function ($scope, $stateParams, Polls, $ionicScrollDelegate, $ionicLoading, $q) {
   var self = this;
 
   $scope.poll = $stateParams.poll;
@@ -70,9 +72,34 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
     $scope.pieData = [a2Data, a1Data];
   };
 
+  var getPollDetail = function (pollId, loading) {
+    $scope.poll = {};
+    if (loading) {
+      $ionicLoading.show({
+        template: '<ion-spinner></ion-spinner>',
+        duration: 5000
+      });
+    }
+    var getPoll = Polls.getOne(pollId).then(function (poll) {
+      if (poll.isVotedByMe) {
+        updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
+      }
+      _.assign($scope.poll, poll);
+    });
+    var getComments = Polls.getComments(pollId, 0, 99999)
+      .then(function (comments) {
+        $scope.poll.comments = comments;
+      });
+    return $q.all([getPoll, getComments]).finally(function () {
+      $ionicLoading.hide();
+      $scope.$broadcast('scroll.refreshComplete');
+    });  
+  };
+
   var init = function () {
     var poll = $scope.poll,
         pollId = $stateParams.id;
+    // if entered from notification tab, poll is null
     if (poll) {
       if (poll.isVotedByMe) {
         updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
@@ -82,19 +109,11 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate) {
       });
     } else {
       // when enter from notification view
-      Polls.getOne(pollId).then(function (poll) {
-        if (poll.isVotedByMe) {
-          updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
-        }
-        $scope.poll = poll; 
-        return poll;
-      }).then(function (poll) {
-        return Polls.getComments(poll, 0, 99999).then(function (comments) {
-          poll.comments = comments;
-        });  
-      });
+      getPollDetail(pollId, true);
     }
   };
+
+  self.refresh = getPollDetail.bind(null, $stateParams.id);
 
   self.vote = function (poll, answerNum) {
     Polls.vote(poll, answerNum).then(function () {

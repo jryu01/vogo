@@ -132,8 +132,8 @@ function (User, Restangular, $q, config, $http, $timeout) {
     return Polls.one(poll.id).post('comments', { text: text });
   };
 
-  that.getComments = function (poll, skip, limit) {
-    return Polls.one(poll.id).getList('comments', {skip: skip, limit: limit});
+  that.getComments = function (pollId, skip, limit) {
+    return Polls.one(pollId).getList('comments', {skip: skip, limit: limit});
   };
 
   return that;

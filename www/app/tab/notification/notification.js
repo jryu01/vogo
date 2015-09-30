@@ -18,10 +18,11 @@ angular.module('voteit.tab.notification', [])
   '$scope',
   'User',
   'Notification',
-function ($scope, User, Notification) {
+  '$ionicLoading',
+function ($scope, User, Notification, $ionicLoading) {
 
   var self = this,
-      once = true;
+      enteredFirstTime = true;
 
   self.notifications = [];
   self.nextNotifications = [];
@@ -30,17 +31,21 @@ function ($scope, User, Notification) {
     if (Notification.hasNextNotificationStateInfo()) {
       return Notification.goNextNotificationState();
     }
-    if (Notification.count > 0 || once) {
+    if (Notification.count > 0 || enteredFirstTime) {
+      $ionicLoading.show({
+        template: '<ion-spinner></ion-spinner>',
+        duration: 5000
+      });
       self.nextNotifications = [];
       Notification.clearNewNotification();
-      self.fetchNotification();
+      self.fetchNotification().finally($ionicLoading.hide);
     }
-    once = false;
+    enteredFirstTime = false;
   });
 
   self.fetchNotification = function () {
     Notification.clearNewNotification();
-    Notification.get()
+    return Notification.get()
       .then(function (result) {
         self.notifications = result.splice(0, 20);
         self.nextNotifications = result;
