@@ -123,6 +123,7 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate, $ionicLoading, $q) 
 
   self.addComment = function () {
     var poll = $scope.poll;
+    if (!poll.comments) { poll.comments = []; }
     if (self.newComment) {
       Polls.comment(poll, self.newComment).then(function (c) {
         poll.numComments += 1;
