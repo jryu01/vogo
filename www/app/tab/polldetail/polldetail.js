@@ -104,7 +104,7 @@ function ($scope, $stateParams, Polls, $ionicScrollDelegate, $ionicLoading, $q) 
       if (poll.isVotedByMe) {
         updatePie(poll.answer1.numVotes, poll.answer2.numVotes);
       }
-      Polls.getComments(poll, 0, 99999).then(function (comments) {
+      Polls.getComments(poll.id, 0, 99999).then(function (comments) {
         poll.comments = comments;
       });
     } else {
