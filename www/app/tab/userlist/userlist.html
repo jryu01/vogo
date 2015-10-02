@@ -3,7 +3,7 @@
     <div class="list">
       <div class="item"
             collection-repeat="user in userlist.users">
-        <a href="#" 
+        <a href 
             ng-click="tabCtrl.go('profile', { id: user.userId, user: user })">
           <img class="img-avatar" ng-src="{{ user.picture }}">
           <span class="name" 
@@ -14,13 +14,13 @@
         <div class="btn-container"
               ng-if="user.userId !== userlist.me.id">
           <a class="button button-small button-balanced" 
-            href="#"
+            href
             ng-click="userlist.unfollow(user)"
             ng-if="user.following === true">
             Following
           </a>
           <a class="button button-small" 
-            href="#"
+            href
             ng-click="userlist.follow(user)"
             ng-if="user.following === false">
             + Follow

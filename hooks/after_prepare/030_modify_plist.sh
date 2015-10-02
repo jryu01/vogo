@@ -50,6 +50,7 @@ Add :LSApplicationQueriesSchemes:9 string "fbapi20150629"
 Add :LSApplicationQueriesSchemes:10 string "fbauth"
 Add :LSApplicationQueriesSchemes:11 string "fbauth2"
 Add :LSApplicationQueriesSchemes:12 string "fb-messenger-api20140430"
+Add :LSApplicationQueriesSchemes:13 string "mailto"
 EOF
 while read line
 do

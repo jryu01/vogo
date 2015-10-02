@@ -2,7 +2,7 @@
   <ion-nav-buttons side="right">
     <a class="button button-icon icon ion-gear-a"
         ng-if="ctrl.showSetting"
-        href="#"
+        href
         ng-click="tabCtrl.go('settings')">
     </a>
   </ion-nav-buttons>
@@ -26,7 +26,7 @@
 
             <div class="list">
               <a class="item item-thumbnail-left" 
-                  href="#" 
+                  href 
                   collection-repeat="vote in vctrl.votes"
                   ng-click="tabCtrl.go('polldetail', { id: vote._poll.id, poll: vote._poll })">
                 <vo-card-img class="thumbnail" 
@@ -83,7 +83,7 @@
               <div class="item-container" 
                     collection-repeat="poll in pctrl.polls">
                 <a class="item item-thumbnail-left" 
-                    href="#" 
+                    href 
                     ng-click="tabCtrl.go('polldetail', { id: poll.id, poll: poll })">
                   <vo-card-img class="thumbnail" 
                                 src1="{{poll.answer1.picture}}"

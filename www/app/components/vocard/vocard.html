@@ -4,7 +4,7 @@
       <i class="icon ion-checkmark-round"></i>
       {{poll.answer1.numVotes + poll.answer2.numVotes}} 
     </p>
-    <a href="#" ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
+    <a ng-click="tabCtrl.go('profile', { id: poll.createdBy.userId, user: poll.createdBy })">
       <img class="img-avatar" ng-src="{{poll.createdBy.picture}}">
       <span class="name" ng-bind="poll.createdBy.name"></span>
     </a>
@@ -64,8 +64,7 @@
       </p>
     </div>
     <p>
-      <a href="#" 
-          class="subdued" 
+      <a class="subdued" 
           style="float: right; padding-right: 10px;"
           ng-click="tabCtrl.go('polldetail', { id: poll.id, poll: poll })">
           <i class="ion-edit"></i> {{ poll.numComments }} 

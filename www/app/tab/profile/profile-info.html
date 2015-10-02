@@ -12,24 +12,24 @@
 
   <div class="row profile-actions">
     <a class="col f-link"
-        href="#"
+        href
         ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'following' })"> 
       following <span>{{ctrl.profile.numFollowing}}</span>
     </a>
     <a class="col f-link"
-        href="#"
+        href
         ng-click="tabCtrl.go('userlist', { userId: ctrl.profile.uid, type: 'followers' })"> 
       followers <span>{{ctrl.profile.numFollowers}}</span>
     </a>
     <div class="col button-container" ng-if="!ctrl.isMyProfile">
       <a class="button button-small button-balanced" 
-        href="#"
+        href
         ng-click="ctrl.unfollow(ctrl.profile.uid)"
         ng-if="!ctrl.isMyProfile && ctrl.profile.following === true">
         following
       </a>
       <a class="button button-small button-stable button-follow" 
-        href="#"
+        href
         ng-click="ctrl.follow(ctrl.profile.uid)"
         ng-if="!ctrl.isMyProfile && ctrl.profile.following === false">
         <i class="ion-plus"></i> follow

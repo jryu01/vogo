@@ -4,6 +4,7 @@ angular.module('voteit', [
   'ionic',
   'ngCordova',
   'restangular',
+  'ngIOS9UIWebViewPatch',
 
   //components
   'utills',
