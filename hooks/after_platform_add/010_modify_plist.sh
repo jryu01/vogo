@@ -4,7 +4,7 @@
 # reference: https://developers.facebook.com/docs/ios/ios9
 # https://developer.apple.com/library/prerelease/ios/technotes/App-Transport-Security-Technote/index.html
 
-## whitelist api server, facebook, bing, and aws s3
+# whitelist api server, facebook, bing, and aws s3
 
 PLIST=platforms/ios/*/*-Info.plist
 
