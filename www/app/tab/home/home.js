@@ -117,18 +117,18 @@ function ($scope, $ionicModal, Polls, User, $ionicLoading, $cordovaCamera, $cord
   self.getPhoto = function (sourceType) {
     // sourcetype PHOTOLIBRARY or CAMERA 
     var options = {
-      quality: 50,
+      quality: 30,
       destinationType: window.Camera.DestinationType.FILE_URI,
       sourceType: window.Camera.PictureSourceType[sourceType],
       allowEdit: true,
       encodingType: window.Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 300,
+      targetWidth: 600,
+      targetHeight: 600,
       popoverOptions: window.CameraPopoverOptions,
       saveToPhotoAlbum: false
     };
-    showLoading();
     $cordovaCamera.getPicture(options)
+      .then(function (imgUri) { showLoading(); return imgUri; })
       .then(uploadImgToS3)
       .then(setPicture)
       .catch(function () {})
