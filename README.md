@@ -1,5 +1,5 @@
-# voteit
-VoteIt client side ionic application
+# vogo
+Vogo client ionic application
 
 Notes: 
 
