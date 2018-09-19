@@ -1,3 +1,5 @@
+*** This project is retired ***
+
 # vogo
 Vogo client ionic application
 
